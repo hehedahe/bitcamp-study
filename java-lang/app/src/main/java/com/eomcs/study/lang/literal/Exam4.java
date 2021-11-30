@@ -21,7 +21,6 @@ public class Exam4 {
   @GetMapping("/test2")
   public String test2() {
     double value = 987.654321; // 8바이트 메모리 사용
-    System.out.println("울라불라");
     return "부동소수점: " + value;
   }
 }
