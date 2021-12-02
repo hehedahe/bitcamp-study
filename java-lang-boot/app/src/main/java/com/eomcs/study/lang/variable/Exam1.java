@@ -14,5 +14,4 @@ public class Exam1 {
     return "클라이언트에서 받은 값 = " + name + "," + tel + "," + gender;
   }
 
-
 }
