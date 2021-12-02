@@ -12,7 +12,6 @@ package com.eomcs.lang.ex03;
  * \' - Single Quote, 0x27 
  * \" - Double Quote, 0x22 
  * \\ - Backslash, 0x5c
- * 
  */
 
 public class Exam0700 {
@@ -28,7 +27,7 @@ public class Exam0700 {
     System.out.println("Hello,\fworld!"); // 프린트 출력시, 현재 페이지를 마치고 다음페이지로 넘기기 위해 사용
     System.out.println("Hello,\"w\"orld!"); // " 문자를 출력시키는 문자
     System.out.println("Hello,'w'orld!"); // "" 안에서 ' 문자는 그냥 적는다.
-    System.out.println('\''); // ' 문자를 출력시키는 문자
+    System.out.println('\''); // '' 안에서 ' 문자를 출력시키는 문자
     System.out.println('"'); // '' 안에서 " 문자는 그냥 적는다.
     System.out.println("c:\\Users\\user\\git"); // \ 문자를 출력시키는 문자
   }
