@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex04;
 
 //# 정수 변수 - 크기가 다른 변수끼리 값 할당
-//
+
 public class Exam0413 {  
   public static void main(String[] args) {
     long l = 100;
@@ -21,7 +21,7 @@ public class Exam0413 {
 
     // long ===> long 이상
     l2 = l;
-    //i2 = l; // 컴파일 오류
+    //    i2 = l; // 컴파일 오류
     //s2 = l; // 컴파일 오류
     //b2 = l; // 컴파일 오류!
     //c2 = l; // 컴파일 오류!
@@ -32,14 +32,14 @@ public class Exam0413 {
     //s2 = i; // 컴파일 오류!
     //b2 = i; // 컴파일 오류!
     //c2 = i;  // 컴파일 오류!
-    
+
     // short ===> short 이상
     l2 = s;
     i2 = s;
     s2 = s;
     //b2 = s; // 컴파일 오류!
     //c2 = s; // 컴파일 오류! char(0 ~ 65535) | short(-32768 ~ 32767)
-    
+
     // byte ===> byte 이상
     l2 = b;
     i2 = b;

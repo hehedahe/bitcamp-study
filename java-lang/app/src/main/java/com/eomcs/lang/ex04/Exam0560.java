@@ -16,7 +16,6 @@ public class Exam0560 {
     // - 논리 배열(boolean[]) : false 
     // - 문자 배열(char[]) : '\u0000'
     // - 주소 변수(Object[]) : null
-    //
 
     int[] arr1 = new int[5];
     float[] arr2 = new float[5];

@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex04;
 
 //# 변수 선언 오류
-//
+
 public class Exam0220 {
   
   public static void main(String[] args) {
