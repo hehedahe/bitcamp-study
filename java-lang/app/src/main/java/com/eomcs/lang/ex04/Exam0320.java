@@ -20,7 +20,8 @@ public class Exam0320 {
     age1 = 30;
 
     System.out.println(age1);
-    System.out.println(age2); // age1의 값이 30으로 바뀌었다해서 위에 적은 age2 = age1에 적용되는게 아니야!
+    System.out.println(age2); 
+    // age1의 값이 30으로 바뀌었다해서 위에 적은 age2 = age1에 적용되는게 아니야!
     // age2 = age1 에서 age1은 바로 위에 할당된 값이 담긴거야(20)
   }
 }
