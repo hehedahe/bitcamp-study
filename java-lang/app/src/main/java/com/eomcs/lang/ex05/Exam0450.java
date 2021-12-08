@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 비트 연산자 : 응용 II
-//
+
 public class Exam0450 {
   public static void main(String[] args) {
     // Yes/No 또는 true/false 값을 저장할 때

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>변수 활용</title>
+</head>
+<body>
+
+<h1>배열 다루기 - fetch와 for of문</h1>
+
+<button type="button" id="x-btn">배열 가져오기</button> 
+<ul id="x-namelist">
+</ul>
+
+<script>
+var xBtn = document.querySelector("#x-btn");
+var xNamelist = document.querySelector("#x-namelist");
+
+xBtn.addEventListener("click", function() {
+	fetch("/lang/variable/exam4/test3")
+   .then(function(response) {
+	   //console.log(response.json());
+     return response.json();
+   })
+   .then(function(jsonData) {
+     console.log(jsonData)
+     for(var name of jsonData) {
+       var li = document.createElement("li");
+       li.innerHTML = name;
+       xNamelist.appendChild(li);
+     }
+	 });
+});
+
+</script>
+
+</body>
+</html>

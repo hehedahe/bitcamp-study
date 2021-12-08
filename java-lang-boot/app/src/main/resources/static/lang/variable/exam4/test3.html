@@ -6,11 +6,10 @@
 </head>
 <body>
 
-<h1>배열 다루기</h1>
+<h1>배열 다루기 - xhr, JSON.parse</h1>
 
 <button type="button" id="x-btn">배열 가져오기</button> 
 <ul id="x-namelist">
-
 </ul>
 
 <script>
@@ -24,13 +23,13 @@ xBtn.addEventListener("click", function() {
 	  // 서버에서 받은 JSON 형식의 배열을 자바 스크립트 배열로 변환한다.
     var names = JSON.parse(xhr.responseText);
     for(var name of names) {
-    	var li = document.createElement("li"); // <li></li>
-    	li.innerHTML = name; // <li>홍길동</li>
-    	xNamelist.appendChild(li);
+    	var li = document.createElement("li"); // <li></li> 태그 생성
+    	li.innerHTML = name; // <li>홍길동</li> 각 배열 요소를 <li>태그 안에 삽입
+    	xNamelist.appendChild(li); // <ul><li>홍길동</li><ul> <li>태그를 <ul>태그 아래 자식태그로 삽입
     }
   };
 
-  xhr.open("GET", "/lang/variable/exam4/test3", true);  
+  xhr.open("GET", "/lang/variable/exam4/test3", true); // exma4.java에 있는 test3()메소드를 호출!!  
 
   xhr.send();
 

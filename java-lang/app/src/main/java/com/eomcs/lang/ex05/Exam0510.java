@@ -25,6 +25,9 @@ public class Exam0510 {
 
     String message = (age > 18) ? "성년" : "미성년";
     System.out.printf("나이 %d는(은) %s이다.\n", age, message);
+
+    // 조건 연산자에서 ":" 좌우의 값은 반드시 포현식(expression)이어야 한다.
+    // 그리고 왼쪽은 그 값을 받는 
   }
 }
 
