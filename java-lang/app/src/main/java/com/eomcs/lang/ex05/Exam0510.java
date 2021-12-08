@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 조건 연산자 => ? :
-//
+
 public class Exam0510 {
   public static void main(String[] args) {
     // 조건연산자

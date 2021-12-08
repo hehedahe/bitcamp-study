@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 산술 연산자 : 연산의 결과 타입
-//
+
 public class Exam0143 {
   public static void main(String[] args) {
 

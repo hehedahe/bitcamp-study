@@ -9,20 +9,25 @@
 <h1>배열 다루기</h1>
 
 <button type="button" id="x-btn">배열 가져오기</button> 
-<ul>
-<li>홍길동</li>
-<li>임꺽정</li>
-<li>유관순</li>
+<ul id="x-namelist">
+
 </ul>
 
 <script>
 var xBtn = document.querySelector("#x-btn");
+var xNamelist = document.querySelector("#x-namelist");
 
 xBtn.addEventListener("click", function() {
 	var xhr = new XMLHttpRequest();
 
   xhr.onload = function() {
-    var names = JSON.parse(xhr.responseText); 
+	  // 서버에서 받은 JSON 형식의 배열을 자바 스크립트 배열로 변환한다.
+    var names = JSON.parse(xhr.responseText);
+    for(var name of names) {
+    	var li = document.createElement("li"); // <li></li>
+    	li.innerHTML = name; // <li>홍길동</li>
+    	xNamelist.appendChild(li);
+    }
   };
 
   xhr.open("GET", "/lang/variable/exam4/test3", true);  

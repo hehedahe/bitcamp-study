@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 논리 연산자 : &&, ||, !(not), ^(XOR; exclusive-OR)
-//
+
 public class Exam0310 {
   public static void main(String[] args) {
     // AND 연산자 

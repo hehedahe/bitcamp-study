@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 산술 연산자 : 기본 연산 단위
-//
+
 public class Exam0130 {
   public static void main(String[] args) {
 
@@ -9,7 +9,7 @@ public class Exam0130 {
     b = 5; // OK!
     b = 6; // OK!
     // - 리터럴 5, 6은 4바이트 정수 값이다.
-    // - 정수 리터럴은 기본이 4바이트 크기이지만,
+    // - 정수 리터럴은 기본이 4바이트 크기이지만, (정수 리터럴은 4바이트 리터럴과 8바이트 리터럴만 있음)
     // - byte 변수에 저장할 수 있다면 허락한다!
 
     b = 5 + 6; // OK!
@@ -24,9 +24,9 @@ public class Exam0130 {
     z = x; // OK!
     z = y; // OK!
 
-    //    z = x + y; // 컴파일 오류!
-    //
-    // "자바의 정수 연산은 최소 단위가 4바이트이다."
+    //z = x + y; // 컴파일 오류!
+
+    // "자바의 정수 연산은 최소 단위가 4바이트(int)이다."
     // "그래서 byte나 short의 연산 단위가 기본으로 4바이트이다."
     //
     // - 자바는 정수 변수에 대해 산술 연산을 수행할 때,
@@ -47,7 +47,7 @@ public class Exam0130 {
     short s3;
     s3 = s1; // OK!
     s3 = s2; // OK!
-    //    s3 = s1 + s2; // 컴파일 오류!
+    //s3 = s1 + s2; // 컴파일 오류!
 
     int s4 = s1 + s2;
     System.out.println(s4);
