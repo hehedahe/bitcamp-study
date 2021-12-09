@@ -30,7 +30,7 @@ public class Exam0230 {
     }
 
     char c = 'A'; // A 문자에 부여된 유니코드 번호(UTF-16) 0x41(65)을 c에 저장한다.
-    // char c = 65; 다른 개발자가 봤을 때, 65가 무슨 문자인지 모르기 때문에 'A'로 적어주는거야
+    // => char c = 65; -> 다른 개발자가 봤을 때, 65가 무슨 문자인지 모르기 때문에 'A'로 적어주는거야
     switch (c) {
       // case 의 값도 int 값이면 무엇이든 된다.
       case 'A': // 0x41 = 65
@@ -42,7 +42,6 @@ public class Exam0230 {
     // String 값을 switch와 case의 값으로 사용할 수 있다.
     String str = "hello";
     switch (str) {
-      // case 의 값으로 String 가능하다.
       case "hello":
       case "ohora":
       case "hul":
