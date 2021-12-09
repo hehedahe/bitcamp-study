@@ -17,18 +17,18 @@ var xBtn = document.querySelector("#x-btn");
 var xNamelist = document.querySelector("#x-namelist");
 
 xBtn.addEventListener("click", function() {
-	fetch("/lang/variable/exam4/test3")
+  fetch("/lang/variable/exam4/test3")
    .then(function(response) {
      return response.json();
    })
    .then(function(jsonData) {
-	   jsonData.forEach(function(name) {
-		   //console.log(name);
-	     var li = document.createElement("li");
-	     li.innerHTML = name;
-	     xNamelist.appendChild(li);
-	   });
-	 });
+     jsonData.forEach(function(name) {
+       //console.log(name);
+       var li = document.createElement("li");
+       li.innerHTML = name;
+       xNamelist.appendChild(li);
+     })
+   });
 });
 
 </script>

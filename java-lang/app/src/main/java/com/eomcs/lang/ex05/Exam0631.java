@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 증감 연산자 : 후위(post-fix) 증감 연산자 응용 I
-//
+
 public class Exam0631 {
   public static void main(String[] args) {
     int i = 7;
@@ -11,7 +11,7 @@ public class Exam0631 {
     //int temp = i;
     //i = i + 1;
     //i = temp;
-    //
+
     // 1) i 값을 그자리에 놓는다.
     //    => i = 7;
     //    => 7 값을 i에 저장할 수 없다.

@@ -43,7 +43,7 @@ xBtn.onclick = function() {
   // 서버에서 응답을 받았을 때(load 이벤트 발생) 호출될 함수를 등록한다. => .addEventListener
   // xhr.addEventListener(이벤트명, 호출될 함수);
   xhr.addEventListener("load", function() {
-	  xResult.value = xhr.responseText; // 콘솔창이 아니라 웹브라우저 페이지에 나옴
+    xResult.value = xhr.responseText; // 콘솔창이 아니라 웹브라우저 페이지에 나옴
   });
   
   // 서버와 연결한다.

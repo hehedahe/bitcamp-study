@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 증감 연산자 : 전위(pre-fix) 증감 연산자 응용 II
-//
+
 public class Exam0681 {
   public static void main(String[] args) {
     int a = 5;
@@ -11,7 +11,7 @@ public class Exam0681 {
     // r = 4 + --a / --a;
     // r = 4 + 3 / --a;
     // r = 4 + 3 / 2;
-    // r = 4 + 1;
+    // r = 4 + 1; -> int기 때문에 1.5가 아니라 1이됨
     // r = 5;
   }
 }

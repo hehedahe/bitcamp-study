@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex05;
 
 //# 증감 연산자 : 후위(post-fix) 증감 연산자 응용 II
-//
+
 public class Exam0640 {
   public static void main(String[] args) {
     int i = 2;
@@ -11,7 +11,7 @@ public class Exam0640 {
     // 2) *, /, %
     // 3) +, -
     // 4) =
-    // 
+
     // int result = 2 + i++ * i++;  => i = 3
     // int result = 2 + 3 * i++; => i = 4
     // int result = 2 + 3 * 4; => i = 5

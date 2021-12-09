@@ -1,10 +1,11 @@
 package com.eomcs.lang.ex05;
 
 //# 증감 연산자 : 후위(post-fix) 증가 연산자
-//
+
 public class Exam0610 {
   public static void main(String[] args) {
     int i = 2;
+    System.out.println("i => " + i);
 
     // 증감 연산자가 없다면,
     // 기존 변수의 값을 1증가시키기 위해 다음과 같이 코딩해야 한다.
@@ -14,6 +15,7 @@ public class Exam0610 {
     i++; // i => 3
     // 현재 위치에 i 메모리에 들어 있는 값(2)을 꺼내 놓는다.
     // 그런 다음에 i 메모리의 값을 1 증가시킨다.
+    System.out.println("i => " + i);
 
     i++; // i => 4
 
@@ -21,9 +23,9 @@ public class Exam0610 {
 
     System.out.println(i++); // 4
     // 위의 코드는 컴파일 할 때 다음의 코드로 바뀐다.
-    //
+
     //    int temp = i; //<-- 임시 변수를 만들어 현재 i 값을 저장한다.
-    //    i = i + 1;
+    //    i = i + 1; => i = 5
     //    System.out.println(temp);
 
     System.out.println(i); // 5

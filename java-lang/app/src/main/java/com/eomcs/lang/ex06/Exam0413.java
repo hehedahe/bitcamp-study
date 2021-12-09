@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex06;
 
 //# 흐름 제어문 - for 반복문
-//
+
 public class Exam0413 {
   public static void main(String[] args) {
     // for (변수선언 및 초기화; 조건; 증감문) 문장;
@@ -15,6 +15,7 @@ public class Exam0413 {
       System.out.println(i);
       i++;
     }
+    // 이렇게 코드 짤거면 while문 쓰자,,,
 
   }
 }

@@ -3,7 +3,7 @@ package com.eomcs.lang.ex06;
 import java.util.Scanner;
 
 //# 흐름 제어문 - if ~ else if ~ else if ~ else
-//
+
 public class Exam0162 {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
@@ -12,6 +12,7 @@ public class Exam0162 {
 
     // if ~ else 를 보기 좋게 정렬하자!
     // 실무에서는 다음과 같이 정렬한다.
+
     // 주의!
     // else if 라는 문법은 없다.
     // 그냥 다음과 같이 정렬한 것이다.

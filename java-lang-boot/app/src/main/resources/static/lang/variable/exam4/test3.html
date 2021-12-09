@@ -17,11 +17,11 @@ var xBtn = document.querySelector("#x-btn");
 var xNamelist = document.querySelector("#x-namelist");
 
 xBtn.addEventListener("click", function() {
-	// 별도의 요청 작업을 실행한다.
-	var xhr = new XMLHttpRequest();
+  // 별도의 요청 작업을 실행한다.
+  var xhr = new XMLHttpRequest();
 
   xhr.onload = function() {
-	  // 서버에서 받은 JSON 형식의 배열을 자바 스크립트 배열로 변환한다.
+    // 서버에서 받은 JSON 형식의 배열을 자바 스크립트 배열로 변환한다.
     var names = JSON.parse(xhr.responseText);
     for(var name of names) {
     	var li = document.createElement("li"); // <li></li> 태그 생성

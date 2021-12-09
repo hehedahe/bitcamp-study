@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex99;
 
 //# 키보드 입력 받기 - 토큰 단위로 문자열 읽기
-//
+
 public class Exam0260 {
   public static void main(String[] args) { 
     java.util.Scanner keyboardScanner = new java.util.Scanner(System.in);

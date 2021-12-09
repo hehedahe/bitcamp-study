@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex06;
 
 //# 흐름 제어문 - break와 continue 활용
-//
+
 public class Exam0320 {
   public static void main(String[] args) {
     int count = 0;
@@ -11,7 +11,7 @@ public class Exam0320 {
     while (count < 100) {
       //count++;
       //sum += count; // sum = sum + count;
-      sum += ++count;
+      sum += ++count; // 위 코드보다 이 코드를 실무에서 사용함
     }
     System.out.printf("count=%d, sum=%d\n", count, sum);
   }

@@ -3,7 +3,7 @@ package com.eomcs.lang.ex06;
 import java.util.Scanner;
 
 //# 흐름 제어문 - switch 사용 후
-//
+
 public class Exam0221 {
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
@@ -31,6 +31,7 @@ public class Exam0221 {
       default:
         System.out.println("올바른 번호를 입력하세요!");
     }
+
     keyScan.close();
   }
 }

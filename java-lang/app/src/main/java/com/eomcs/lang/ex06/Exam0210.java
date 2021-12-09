@@ -3,7 +3,7 @@ package com.eomcs.lang.ex06;
 import java.util.Scanner;
 
 //# 흐름 제어문 - switch 사용 전
-//
+
 public class Exam0210 {
   public static void main(String[] args) {
 
