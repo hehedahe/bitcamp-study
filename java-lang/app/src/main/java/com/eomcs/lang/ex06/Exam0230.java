@@ -34,13 +34,13 @@ public class Exam0230 {
     switch (c) {
       // case 의 값도 int 값이면 무엇이든 된다.
       case 'A': // 0x41 = 65
-      case 66:
+      case 66: 
       case 0x43: // 8진수, 16진수 사용해도 상관없다.
-      default:
+      default: 
     }
 
     // String 값을 switch와 case의 값으로 사용할 수 있다.
-    String str = "hello";
+    String str = "ohora";
     switch (str) {
       case "hello":
       case "ohora":

@@ -13,7 +13,7 @@ public class Exam0322 {
     sum = 0;
     while (count < 100) {
       count++;
-      if (count > 50) // 50을 넘어가면 합을 수행하지 않고 조건문으로 돌아가 while문의 조건이 false일 때(100)까지 계속 반복한다.
+      if (count > 50) // 50을 넘어가면 합을 수행하지 않고 다시 조건문으로 돌아가 while문의 조건이 false일 때(100)까지 계속 반복한다.
         continue;
       sum += count;
     }
