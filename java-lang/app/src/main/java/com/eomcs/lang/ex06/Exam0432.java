@@ -4,7 +4,9 @@ package com.eomcs.lang.ex06;
 
 public class Exam0432 {
   public static void main(String[] args) {
+
     // break 라벨명;
+    // => 라벨을 가진 반복문을 빠져나간다!
     loop1: {
       for (int i = 1; i <= 10; i++) {
         for (int j = 1; j <= i; j++) {
@@ -14,9 +16,8 @@ public class Exam0432 {
         }
         System.out.println();
       }
-      System.out.println("-------------------------");
+      System.out.println("-------------------------loop1 안!");
     }
+    System.out.println("loop1 밖!");
   }
 }
-
-

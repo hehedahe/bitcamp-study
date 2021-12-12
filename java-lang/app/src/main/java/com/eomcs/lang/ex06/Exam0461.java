@@ -3,7 +3,7 @@ package com.eomcs.lang.ex06;
 import java.util.ArrayList;
 
 // # 흐름 제어문 - for 반복문과 컬렉션
-//
+
 public class Exam0461 {
   public static void main(String[] args) {
     ArrayList list = new ArrayList();
@@ -18,5 +18,3 @@ public class Exam0461 {
       System.out.println(value);
   }
 }
-
-

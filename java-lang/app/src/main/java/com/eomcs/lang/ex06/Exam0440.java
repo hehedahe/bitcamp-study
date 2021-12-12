@@ -1,7 +1,7 @@
 package com.eomcs.lang.ex06;
 
 // # 흐름 제어문 - for(;;) 와 배열
-//
+
 public class Exam0440 {
   public static void main(String[] args) {
 
@@ -20,6 +20,6 @@ public class Exam0440 {
 
     for (int i = 0; i < names.length; i++)
       System.out.println(names[i]);
-
+    // => names.length = 5, 안중근 데이터의 index 번호는 [4]
   }
 }
