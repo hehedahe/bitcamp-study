@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>다해의 연락처</h1>
-<table border=1>
+<table id=x-contact-tbl border=1>
   <thead>
     <tr>
       <th>이름</th>
@@ -17,13 +17,34 @@
   </thead>
   <tbody>
     <tr>
-      <td>채다해</td>
-      <td>smyegko@gmail.com</td>
-      <td>010-9399-5990</td>
-      <td>비트캠프</td>
+
     </tr>
   </tbody>
 </table>
+
+<script>
+
+var contacts = [
+  "홍길동1, hong1@test.com, 010-2222-3333, 비트",
+  "홍길동2, hong1@test.com, 010-2222-3333, 캠프",
+  "홍길동3, hong1@test.com, 010-2222-3333, 멀어요!"
+];
+
+var tbody = document.querySelector("#x-contact-tbl tbody");
+
+for(var contact of contacts){
+  //console.log(contact);
+  var info = contact.split(",")
+  var tr = document.createElement("tr");
+  tr.innerHTML = `<td>${info[0]}</td>
+  <td>${info[1]}</td>
+  <td>${info[2]}</td>
+  <td>${info[3]}</td>`
+  tbody.appendChild(tr);
+};
+
+
+</script>
 
 </body>
 </html>
