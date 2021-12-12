@@ -34,7 +34,7 @@ fetch("/test/list").then(function(response) {
       console.log(str);
       var contact = str.split(",")
       var tr = document.createElement("tr");
-      tr.innerHTML = `<td>${contact[0]}</td>
+      tr.innerHTML = `<td><a href="view.html?email=${contact[1]}">${contact[0]}</a></td>
       <td>${contact[1]}</td>
       <td>${contact[2]}</td>
       <td>${contact[3]}</td>`
