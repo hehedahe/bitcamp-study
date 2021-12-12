@@ -16,7 +16,12 @@
 </form>
 
 <script>
-// 요청 유효성 검사
+var xName = document.querySelector("#x-name");
+var xEmail = document.querySelector("#x-email");
+var xTel = document.querySelector("#x-tel");
+var xCompany = document.querySelector("#x-company");
+
+
 //console.log(location.href.indexOf("?"));
 if (location.href.indexOf("?") == -1) {
   window.alert("요청이 올바르지 않습니다.")
@@ -24,13 +29,24 @@ if (location.href.indexOf("?") == -1) {
 }
 //console.log("ok!");
 
+console.log(location.href.split("?")); // 배열
+console.log(location.href.split("?")[1]);
+var params = new URLSearchParams(location.href.split("?")[1]);
+//console.log(params.get("email"));
+var email = params.get("email");
 
+if(email == null) {
+  window.alert("이메일이 없습니다.")
+  location.href = "index.html";
+};
 
+var result = "홍길동, hong@test.com, 010-1111-2222, bitcamp"; // test
+var contact = result.split(","); // 배열
+xName.value = contact[0];
+xEmail.value = contact[1];
+xTel.value = contact[2];
+xCompany.value = contact[3];
 
-var xName = document.querySelector("#x-name");
-var xEmail = document.querySelector("#x-email");
-var xTel = document.querySelector("#x-tel");
-var xCompany = document.querySelector("#x-company");
 
 
 document.querySelector("#x-update-btn").onclick = function() {
