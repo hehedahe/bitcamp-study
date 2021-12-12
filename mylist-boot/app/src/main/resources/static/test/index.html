@@ -30,15 +30,15 @@ var tbody = document.querySelector("#x-contact-tbl tbody");
 fetch("/test/list").then(function(response) {
     return response.json();
   }).then(function(arr) {
-		for(var str of arr){
-		  console.log(str);
-		   var contact = str.split(",")
-		   var tr = document.createElement("tr");
-		   tr.innerHTML = `<td>${contact[0]}</td>
-		   <td>${contact[1]}</td>
-		   <td>${contact[2]}</td>
-		   <td>${contact[3]}</td>`
-		   tbody.appendChild(tr);
+    for(var str of arr){
+      console.log(str);
+      var contact = str.split(",")
+      var tr = document.createElement("tr");
+      tr.innerHTML = `<td>${contact[0]}</td>
+      <td>${contact[1]}</td>
+      <td>${contact[2]}</td>
+      <td>${contact[3]}</td>`
+      tbody.appendChild(tr);
     };
   });
 
