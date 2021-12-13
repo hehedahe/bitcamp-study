@@ -11,17 +11,24 @@
   영화*: <input id="x-name" type="text"><br>
   발매일: <input id="x-date" type="date"><br>
   중고 가격: <input id="x-price" type="text"><br>
+  티켓: <input type="file" onchange="previewFile()"><br>
+  <img src="" height="200" alt="이미지 미리보기..."><br>
   별표 항목(*)은 필수 항목입니다.<br>
   <button id="x-update-btn" type="button">변경</button>
   <button id="x-delete-btn" type="button">삭제</button>
   <button id="x-cxl-btn" type="button">취소</button>
 </form>
+<h3>티켓 사진</h3>
+<ul>
+
+</ul>
 
 <script type="text/javascript">
 var xNo = document.querySelector("#x-no");
 var xName = document.querySelector("#x-name");
 var xDate = document.querySelector("#x-date");
 var xPrice = document.querySelector("#x-price");
+console.log(xName.value);
 
 var arr = location.href.split("?");
 console.log(arr);
@@ -65,6 +72,12 @@ fetch(`/my1/get?no=${no}`)
     xName.value = values[1];
     xDate.value = values[2];
     xPrice.value = values[3];
+
+    var ul = document.querySelector("ul");
+    //console.log(ul);
+    var li = document.createElement("li");
+    li.innerHTML = `<img src="img/${xName.value}.jpg" alt="">`;
+    ul.appendChild(li);
   });
 
 // x-update-btn onclick
@@ -100,6 +113,21 @@ document.querySelector("#x-delete-btn").onclick = function() {
       window.location.href = "index.html";
     });
 };
+
+//이미지 삽입
+function previewFile() {
+  var preview = document.querySelector('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.addEventListener("load", function () {
+    preview.src = reader.result;
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+}
 
 
 </script>
