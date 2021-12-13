@@ -1,44 +1,71 @@
 package com.eomcs.mylist;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // 클라이언트 요청을 처리하는 역할
+@RestController
+// 이 클래스가 클라이언트 요청 처리 담당자임을 표시한다.
+// 이 표시(애노테이션)가 붙어 있어야만 스프링부트가 이 클래스를 인식한다.
 public class ContactController {
 
-  // 인스턴스 변수: 클래스에 선언한 변수
-  // => 모든 인스턴스 메서드가 공유한다.
-  String[] contacts = new String[10];
-  int size = 0; // index번호는 0부터 시작
+  String[] contacts = new String[5];
+  int size = 0; // 배열에 집어넣은 연락처 갯수
 
-  @GetMapping("/contact/list")
+  @RequestMapping("/contact/list")
   public Object list() {
-    String[] records = new String[size];
-    for (int i =0; i < size; i++) {
-      records[i] = contacts[i]; // add()에서 추가된 배열을 새 배열 records에 담아줘!
-    };
-    return records;
-  };
-
-  @GetMapping("/contact/add")
-  public Object add(String name, String email, String tel, String company) {
-    contacts[size++] = name + "," + email + "," + tel + "," + company; // size번방에 문자열을 넣음
-    //int temp = size;
-    //size = size +1;
-    //contacts[temp] = ~;
-
-    return size; // 그 다음 방인 size+1번방을 리턴
-  };
-
-  //클라이언트가 요청한 이메일 정보에 대한 상세정보 가져오기
-  @GetMapping("/contact/get")
-  public Object get(String email) {
-    // 배열 전체 반복이 아니라 배열에 입력된 갯수만큼만 반복해야해
+    String[] arr = new String[size]; // 배열에 저장된 값만 복사할 새 배열을 만든다.
     for (int i = 0; i < size; i++) {
-      if (email.equals(contacts[i].split(",")[1])) { // Java에서는 ==로 문자열 비교 못함 -> equals() 메서드 사용
+      arr[i]= contacts[i]; // 전체 배열에서 값이 들어있는 항목만 복사한다.
+    }
+    return arr; // 복사한 항목들을 담고있는 새 배열을 리턴한다.
+  }
+
+  @RequestMapping("/contact/add")
+  public Object add(String name, String email, String tel, String company) {
+    String contact = name + "," + email + "," + tel + "," + company;
+    contacts[size++] = contact;
+    return size;
+  }
+
+  @RequestMapping("/contact/get")
+  public Object get(String email) {
+    for (int i = 0; i < size ; i++) {
+      //학습용
+      //String contact = contacts[i]; // "u1,u1@test.com,1111,비트캠프"
+      //String[] arr = contact.split(",");
+
+      //현업에서 사용하는 방식
+      if (contacts[i].split(",")[1].equals(email)) {  // 예) "u1@test.com"
         return contacts[i];
       }
     }
     return "";
+  };
+
+  @RequestMapping("contact/update")
+  public Object update(String name, String email, String tel, String company) {
+    String contact = name + "," + email + "," + tel + "," + company;
+    for (int i = 0; i < size ; i++) {
+      if (contacts[i].split(",")[1].equals(email)) {
+        contacts[i] = contact;
+        return 1; // 1이면 update됐다!
+      } 
+    }
+    return 0; 
+  };
+
+  @RequestMapping("/contact/delete")
+  public Object delete(String email) {
+    for (int i = 0; i < size ; i++) {
+      if (contacts[i].split(",")[1].equals(email)) { // 예) "u1@test.com"
+        //현재 위치의 다음 항목에서 배열 끝까지 반복하며 앞으로 값을 당겨온다.
+        for (int j = i + 1; j < size ; j++) {
+          contacts[j -1] = contacts[j];
+        }
+        size--;
+        return 1;
+      } 
+    }
+    return 0;
   };
 };
