@@ -2,9 +2,47 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title></title>
+  <title>메가박스 오리지널 티켓</title>
 </head>
 <body>
-<h1>메가박스 오리지널 티켓</h1>
+<h1>메가박스 오리지널 티켓 목록</h1>
+<a href="form.html">새 티켓</a>
+<table id=x-tkt-tbl border=1 >
+  <thead>
+    <tr>
+      <th>번호</th>
+      <th>영화</th>
+      <th>발매일</th>
+      <th>중고 가격</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>
+
+<script type="text/javascript">
+var tbody = document.querySelector("#x-tkt-tbl tbody");
+
+fetch("/my1/list")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(movies) {
+    console.log(movies);
+    for (var movie of movies) {
+      //console.log(movie);
+      var value = movie.split(",");
+      //console.log(values[0], values[1], values[2], values[3]);
+      var tr = document.createElement("tr");
+      tr.innerHTML = `<td><a href="view.html?no=${value[0]}">${value[0]}</a></td>
+      <td>${value[1]}</td>
+      <td>${value[2]}</td>
+      <td>${value[3]}</td>`;
+      tbody.appendChild(tr);
+    };
+  });
+
+</script>
 </body>
 </html>

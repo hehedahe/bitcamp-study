@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>메가박스 오리지널 티켓</title>
+</head>
+<body>
+<h1>오리지널 티켓 상세 정보</h1>
+<form>
+  번호*: <input id="x-no" type="text" readonly><br>
+  영화*: <input id="x-name" type="text"><br>
+  발매일: <input id="x-date" type="date"><br>
+  중고 가격: <input id="x-price" type="text"><br>
+  별표 항목(*)은 필수 항목입니다.<br>
+  <button id="x-update-btn" type="button">변경</button>
+  <button id="x-delete-btn" type="button">삭제</button>
+  <button id="x-cxl-btn" type="button">취소</button>
+</form>
+
+<script type="text/javascript">
+var xNo = document.querySelector("#x-no");
+var xName = document.querySelector("#x-name");
+var xDate = document.querySelector("#x-date");
+var xPrice = document.querySelector("#x-price");
+
+var arr = location.href.split("?");
+console.log(arr);
+
+if (arr.length == 1) {
+//if (arr == "") {
+  alert("요청 형식이 옳바르지 않습니다.");
+  throw "url 형식 오류!";
+};
+
+var qs = arr[1]; // no=2
+console.log(qs);
+
+// var no = null;
+// var values = qs.split("&");
+// console.log(values);
+// for (var value of values) {
+//   if (value.startsWith("no=")) {
+//     no = value.split("=")[1];
+//     break;
+//   }
+// }
+// => URLSearchParams로 사용
+var params = new URLSearchParams(qs);
+var no = params.get("no")
+console.log(no);
+
+if (no == null) {
+  alert("번호 값이 없습니다.");
+  throw "파라미터 오류!";
+}
+
+fetch(`/my1/get?no=${no}`)
+  .then(function(response) {
+    return response.text();
+  })
+  .then(function(result) {
+    //console.log(result);
+    var values = result.split(",");
+    xNo.value = values[0];
+    xName.value = values[1];
+    xDate.value = values[2];
+    xPrice.value = values[3];
+  });
+
+// x-update-btn onclick
+document.querySelector("#x-update-btn").onclick = function() {
+  if (xName.value == "") { // xNo.value 는 데이터를 찾는 키값이기 때문에 readonly로 지정했고, 비어있을리가 없으니 지워줘
+    window.alert("필수 항목을 입력하세요!");
+    return;
+  }
+
+  fetch(`/my1/update?no=${xNo.value}&name=${xName.value}&date=${xDate.value}&price=${xPrice.value}`)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      console.log(text);
+      location.href = "index.html"
+    });
+};
+
+// x-cxl-btn onclick
+document.querySelector("#x-cxl-btn").onclick = function() {
+  window.location.href = "index.html";
+};
+
+// x-delete-btn onclick
+document.querySelector("#x-delete-btn").onclick = function() {
+  fetch(`/my1/delete?no=${no}`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(result) {
+      console.log(result);
+      window.location.href = "index.html";
+    });
+};
+
+
+</script>
+</body>
+</html>

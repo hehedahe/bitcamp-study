@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>메가박스 오리지널 티켓</title>
+</head>
+<body>
+<h1>오리지널 티켓 추가</h1>
+<form>
+  번호*: <input id="x-no" type="text"><br>
+  영화*: <input id="x-name" type="text"><br>
+  발매일: <input id="x-date" type="date"><br>
+  중고 가격: <input id="x-price" type="text"><br>
+  별표 항목(*)은 필수 항목입니다.<br>
+  <button id="x-add-btn" type="button">추가</button>
+  <button id="x-cxl-btn" type="button">취소</button>
+</form>
+<script type="text/javascript">
+var xNo = document.querySelector("#x-no");
+var xName = document.querySelector("#x-name");
+var xDate = document.querySelector("#x-date");
+var xPrice = document.querySelector("#x-price");
+
+document.querySelector("#x-add-btn").onclick = function() {
+  if (xNo.value == "" || xName.value == "") {
+    window.alert("필수 항목을 입력하세요!");
+    return;
+  }
+
+  fetch(`/my1/add?no=${xNo.value}&name=${xName.value}&date=${xDate.value}&price=${xPrice.value}`)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(text) {
+      console.log(text);
+      location.href = "index.html"
+    });
+};
+
+document.querySelector("#x-cxl-btn").onclick = function() {
+  window.location.href = "index.html";
+};
+</script>
+</body>
+</html>
