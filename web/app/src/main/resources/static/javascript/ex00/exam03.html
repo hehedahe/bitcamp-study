@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>exam</title>
+</head>
+<body>
+  <h1>요점 정리 - 3.함수 정의와 호출</h1>
+
+<script>
+function plus(a, b) { // a와 b는 파라미터
+  return a + b;
+}
+console.log(plus(10, 20)); // 10과 20은 아규먼트
+
+var ok;
+console.log(ok); // undefined -> 아직 변수에 값을 넣지 않아 변수의 타입을 알 수 없다
+
+ok = plus; // 같은 함수 객체를 가리킨다. (함수 객체의 주소(번호)를 갖고있는 레퍼런스다!)
+console.log(ok(100, 200));
+
+var haha = ok;
+console.log(haha(1000, 2000));
+
+ok = "Hello";
+ok(100, 200); // Err: ok is not a function
+
+
+
+</script>
+</body>
+</html>

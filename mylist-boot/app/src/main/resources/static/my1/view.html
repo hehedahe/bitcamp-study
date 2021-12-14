@@ -76,7 +76,7 @@ fetch(`/my1/get?no=${no}`)
     var ul = document.querySelector("ul");
     //console.log(ul);
     var li = document.createElement("li");
-    li.innerHTML = `<img src="img/${xName.value}.jpg" alt="">`;
+    li.innerHTML = `<img src="img/${xName.value}.jpg">`;
     ul.appendChild(li);
   });
 
@@ -97,10 +97,6 @@ document.querySelector("#x-update-btn").onclick = function() {
     });
 };
 
-// x-cxl-btn onclick
-document.querySelector("#x-cxl-btn").onclick = function() {
-  window.location.href = "index.html";
-};
 
 // x-delete-btn onclick
 document.querySelector("#x-delete-btn").onclick = function() {
@@ -128,8 +124,12 @@ function previewFile() {
     reader.readAsDataURL(file);
   }
 }
-
-
+</script>
+<script>
+// x-cxl-btn onclick
+document.querySelector("#x-cxl-btn").onclick = function() {
+  window.location.href = "index.html";
+};
 </script>
 </body>
 </html>
