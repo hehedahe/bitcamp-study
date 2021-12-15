@@ -21,14 +21,12 @@ function f1() {
     // 그런데 로컬 변수와 이름이 같은 글로벌 변수를 사용하고 싶다면?
     // window를 생략하지 말라!
     console.log(window.v1); // 글로벌 변수의 값 변경 전
-    window.v1 = "임꺽정"; // 글로벌 변수 v1 가리킴
+    window.v1 = "임꺽정"; // 글로벌 변수 v1의 값 변경
     console.log("f1():", v1, window.v1); // 변경 후
 }
 
 f1();
 console.log(v1);
-
-
 </script>
 </body>
 </html>
