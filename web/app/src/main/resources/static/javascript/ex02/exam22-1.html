@@ -20,10 +20,10 @@ console.log("--------------------");
 var v3 = "홍길동";
 {
   // let으로 선언한 변수는 사용 범위가 블록으로 한정(block-scoped)된다.
-  let v3 = "임꺽정"; // 새 로컬 변수이다. 글로벌 변수가 아니다.
+  let v3 = "임꺽정"; // 새 로컬 변수이다. 글로벌 변수 v3가 아니다.
   let v4 = 30; // 새 로컬 변수이다. 글로벌 변수가 아니다.
   console.log(v3, v4);
-  
+
 }
 console.log(v3); // OK
 //console.log(v4); // let으로 선언한 변수는 그 블록을 벗어나면 사용할 수 없다.
@@ -31,23 +31,8 @@ console.log("--------------------");
 
 let v4 = "오호라";
 
-console.log(v4); 
+console.log(v4);
 console.log(window.v4); // let 으로 선언한 변수는 window 객체에 보관되지 않는다.
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
