@@ -22,53 +22,65 @@ public class ContactController {
 
   @RequestMapping("/contact/add")
   public Object add(String name, String email, String tel, String company) {
-    String contact = name + "," + email + "," + tel + "," + company;
-    contacts[size++] = contact;
+    contacts[size++] = createCSV(name, email, tel, company);
     return size;
   }
 
   @RequestMapping("/contact/get")
   public Object get(String email) {
-    for (int i = 0; i < size ; i++) {
-      // 학습용
-      //String contact = contacts[i]; // "u1,u1@test.com,1111,비트캠프"
-      //String[] values = contact.split(","); // {"u1", "u1@test.com", "1111", "비트캠프"}
-      //if (values[1].equals(email)) { // "u1@test.com"
-      //  return contacts[i];
-      //}
-      // 현업에서 사용하는 방식
-      if (contacts[i].split(",")[1].equals(email)) {  // 예) "u1@test.com"
-        return contacts[i];
-      }
-    }
-    return "";
+    int index = indexOf(email);
+    if(index == -1) {
+      return "";
+    } // else {} 생략
+    return contacts[index];
   };
 
   @RequestMapping("contact/update")
   public Object update(String name, String email, String tel, String company) {
-    String contact = name + "," + email + "," + tel + "," + company; // 사용자가 새로 입력하여 보낸 데이터
-    for (int i = 0; i < size ; i++) {
-      if (contacts[i].split(",")[1].equals(email)) { // 새 데이터(문자열)을 어디에 저장할지? email과 같은 문자열 찾기
-        contacts[i] = contact; // 그 자리에 새 값으로 덮어쓰기
-        return 1; // 1이면 update됐다!
-      } 
+    int index = indexOf(email);
+    if(index == -1) {
+      return 0;
     }
-    return 0; //반복문을 다 돌았는데 같은 문자열을 못 찾았을 때 리턴 (다른 사용자가 이미 값을 변경,삭제 했을 경우 등)
+    contacts[index] = createCSV(name, email, tel, company);
+    return 1;
   };
 
   @RequestMapping("/contact/delete")
   public Object delete(String email) {
+    int index = indexOf(email);
+    if (index == -1) {
+      return 0;
+    }
+    remove(index); // 예전 값을 리턴해주긴 하지만 필요없어서 안받음
+    return 1;
+  }
+
+  // 기능: 
+  // - 입력 받은 파라미터 값을 가지고 CSV 형식으로 문자열을 만들어 준다.
+  String createCSV(String name, String email, String tel, String company) {
+    return name + "," + email + "," + tel + "," + company;
+  } // 메서드 문법 정의 => 한줄이라도 무엇을 하는 코드인지 설명이 된다!
+
+  // 기능:
+  // - 이메일로 연락처 정보를 찾는다.
+  // - 찾은 연락처의 배열 인덱스를 리턴한다.
+  int indexOf(String email) {
     for (int i = 0; i < size ; i++) {
-      if (contacts[i].split(",")[1].equals(email)) { // 예) "u1@test.com"
-        // 현재 위치의 다음 항목에서 배열 끝까지 반복하며 앞으로 값을 당겨온다.
-        // 뒤에 있는 칭구들을 앞으로 땡겨와야하니 j는 삭제하는 다음 인덱스 기준 => i+1
-        for (int j = i + 1; j < size ; j++) {
-          contacts[j -1] = contacts[j];
-        }
-        size--;
-        return 1;
+      if (contacts[i].split(",")[1].equals(email)) {
+        return i;
       } 
     }
-    return 0;
-  };
-};
+    return -1;
+  }
+
+  // 기능:
+  // - 배열에서 지정한 항목을 삭제한다.
+  String remove(int index) {
+    String old = contacts[index];
+    for (int i = index + 1; i < size ; i++) {
+      contacts[i - 1] = contacts[i];
+    }
+    size--;
+    return old; // 삭제할 항목이긴 하지만, Java API에 나온 것처럼 쓰든 말든 return 해주더라고
+  }
+}
