@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex03</title>
+</head>
+<body>
+<h1>함수 - 애로우(arrow) 함수</h1>
+<script>
+"use strict"
+// 익명 함수를 정의할 때 arrow function 문법을 사용할 수 있다.
+// 문법:
+//    (파라미터,파라미터,...) => 문장
+//    (파라미터,파라미터,...) => {문장1; 문장2;}
+
+// 함수 정의
+function f0() {
+	console.log("값을 리턴하지 않는다.0");
+}
+f0();
+
+var f1 = function() {
+	console.log("값을 리턴하지 않는다.1");
+};
+f1();
+
+var f2 = () => {
+	console.log("값을 리턴하지 않는다.2");
+};
+f2();
+
+var f3 = () => console.log("값을 리턴하지 않는다.3"); // 값을 리턴하는게 아니야!
+f3(); // OK!
+
+console.log("----------------");
+
+// 만약에 arrow 함수가 값을 리턴하지 않는다면?
+console.log(f3()); // 값을 리턴하지 않는 함수에 대해 리턴 값을 출력하려고 한다면 undefined가 된다.
+// => 우선 함수(f3())을 먼저 실행 -> 값을 리턴하지 않는다.3 출력
+// => 그 다음 console.log(f3()) 출력하는데, 함수가 리턴 값이 없으니 undefined가 된다.
+</script>
+
+</body>
+</html>

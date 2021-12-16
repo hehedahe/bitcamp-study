@@ -8,18 +8,18 @@
 <h1>함수 - 애로우(arrow) 함수를 리턴하기</h1>
 <script>
 "use strict"
-// arrow function이나 익명 함수나 같다. 
-// 
-function closureMaker(fnType, count) { 
+// arrow function이나 익명 함수나 같다.
+
+function closureMaker(fnType, count) {
 	switch (fnType) {
 	case "sum":
-	    return () => { 
-	        var sum = 0;     
+	    return () => { // <= return function() {}
+	        var sum = 0;
 	        for (var i = 1; i <= count; i++) {
 	            sum += i;
 	        }
 	        console.log("합계 =", sum);
-	    };
+	    };// 실행X, 함수 정의
 	case "factorial":
         return () => {
 	        var sum = 1;
@@ -45,8 +45,3 @@ fn2();
 
 </body>
 </html>
-
-
-
-
-

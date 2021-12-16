@@ -8,11 +8,10 @@
 <h1>함수 - 애로우(arrow) 함수를 아규먼트로 전달하기</h1>
 <script>
 "use strict"
-// arrow 함수이든 일반 함수이든 결국 같은 함수이다. 
-//
-// 
+// arrow 함수이든 일반 함수이든 결국 같은 함수이다.
+// -> 그냥 표기법이 간단한 함수
 
-function play(fn) {
+function play(fn) { // fn 자리에 함수 주소를 넣는다.
 	console.log("함수가 리턴한 값 =", fn(100, 200));
 }
 
@@ -20,15 +19,22 @@ function plus(a, b) {
 	return a + b;
 }
 
-//이렇게 정식으로 정의된 함수의 주소를 아규먼트로 넘길 수 있다.
-//그러면 play()는 그 함수를 호출하여 리턴 값을 출력할 것이다.
-play(plus);
+// 이렇게 정식으로 정의된 함수의 주소를 아규먼트로 넘길 수 있다.
+// 그러면 play()는 그 함수를 호출하여 리턴 값을 출력할 것이다.
+play(plus); // 실무에서 이런 방식은 안쓰긴 함... => 함수 주소를 넘기는 방법
+//play(plus(100,200)); ?
+
+console.log("----------------");
+
+var f1 = function(a, b) {return a - b;}; // f1 = 함수주소;
+plus(f1); // => plus(함수주소)
+// 굳이 이렇게 번거롭게 작성하고 찾아가볼 필요 없이 아래처럼 작성할 수 있다.
 
 //또는 다음과 같이 익명 함수를 정의하여 바로 아규먼트로 넘길 수 있을 것이다.
-play(function(a, b) {return a - b;});
+play(function(a, b) {return a - b;}); // -> 함수 정의 후 주소를 넣는 방법 => play(함수 주소); => 함수 실행X
 
-//또한 arrow function을 정의하여 바로 아규먼트로 넘길 수 있다. 
-play((a, b) => a * b);
+//또한 arrow function을 정의하여 바로 아규먼트로 넘길 수 있다.
+play((a, b) => a * b); // 함수 정의 => 위 코드 = 이 코드
 
 //물론 arrow function이 여러 문장으로 구성된 경우도 있을 것이다.
 play((a, b) => {
@@ -43,8 +49,3 @@ play((a, b) => {
 
 </body>
 </html>
-
-
-
-
-

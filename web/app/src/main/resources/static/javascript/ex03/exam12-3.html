@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex03</title>
+</head>
+<body>
+<h1>함수 - 애로우(arrow) 함수</h1>
+<script>
+"use strict"
+// 익명 함수를 정의할 때 arrow function 문법을 사용할 수 있다.
+// 문법:
+//    (파라미터,파라미터,...) => 문장
+//    (파라미터,파라미터,...) => {문장1; 문장2;}
+
+function f0(a, b) {
+	return a + b;
+} // 정의하는 거라 ; 안붙여도 돼
+console.log(f0(1, 2));
+
+var f1 = function(a, b) {
+	return a + b;
+}; // 변수 선언과 할당이기 때문에 ;?
+console.log(f1(10, 20));
+
+// 애로우 펑션을 이렇게 쓰면 욕 먹어...
+var f2 = (a, b) => {
+	return a + b;
+};
+console.log(f2(100, 200));
+
+var f3 = (a, b) => a + b;
+console.log(f3(1000, 2000));
+
+// 여러 개의 문장을 가질 때는 블록{}으로 묶는다.
+// => {} 에서 값을 리턴하려면 return을 명시해야 한다.
+</script>
+
+</body>
+</html>
