@@ -14,14 +14,14 @@
 function createInterestCalculator(type) { // 이자 계산기
     switch (type) {
     case "보통예금":
-    	return function(money, month) {return money + (money * 0.0011 * month);}; // 익명함수(객체) 정의한 후 함수의 주소를 리턴 =>
+    	return function(money, month) {return money + (money * 0.0011 * month);}; // 클로저
     case "정기예금":
-    	return function(money, month) {return money + (money * 0.0014 * month);};
+    	return function(money, month) {return money + (money * 0.0014 * month);}; // 클로저
     default:
-    	return function(money, month) {return money;};
+    	return function(money, month) {return money;}; // 클로저
     }
 }
-// createInterestCalculator() 함수가 리턴하는 것은 내부에서 정의한 함수의 주소이다.
+// createInterestCalculator() 함수가 리턴하는 것은 내부에서 정의한 함수의 주소이다. (익명함수(객체) 정의한 후 함수의 주소를 리턴)
 // => 이렇게 함수 안에서 정의한 함수를 '클로저(closure)'라 부른다.
 
 var fn = createInterestCalculator("보통예금");

@@ -30,7 +30,7 @@ function createBox() {
 
 var box1 = createBox();
 var box2 = createBox();
-// 호출 당시에 만들어진 클로저들끼리는 복제한 변수를 공유한다. => 그 다음에 생긴 클로저들과는 공유하지 않는다.
+// 호출 당시에 만들어진 클로저들끼리는 복제한 변수를 공유한다. => 그 다음에 새로 생긴 클로저들과는 공유하지 않는다.
 
 box1.setValue(100);
 box2.setValue(200);

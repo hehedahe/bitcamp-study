@@ -5,13 +5,13 @@
 <title>ex03</title>
 </head>
 <body>
-<h1>자바스크립트 글로벌 함수 - JSON.stringify()</h1>
+<h1>자바스크립트 주요 함수 - JSON.stringify(자바스크립트객체)</h1>
 <textarea id="ta" cols="80" rows="10"></textarea>
 <button id="btn1">실행</button>
 <script>
 "use strict"
 // 자바스크립트 객체를 JSON 문자열로 바꾸로 싶을 때 사용한다.
-//
+//      자바스크립트 객체 ===변환===> JSON 형식의 문자
 // 용도:
 // => 웹브라우저에서 단순한 형식(name=aaa&age=20&tel=1111-1111)이 아닌
 //    데이터가 다른 데이터를 포함하는 복잡한 구조의 데이터를 서버에 보내고 싶을 때
@@ -24,9 +24,9 @@ var ta = document.getElementById("ta");
 
 document.getElementById("btn1").onclick = () => {
 	var obj = new Object();
-	obj.name = "홍길동";
-	obj["age"] = 20;
-	obj.tel = '111-2222';
+	obj.name = "홍길동"; // 객체에 값을 추가하는 방법1 => 제일 많이 쓰임
+	obj["age"] = 20; // 객체에 값을 추가하는 방법2
+	obj['tel'] = '111-2222'; // 객체에 값을 추가하는 방법3
 
 	ta.value = JSON.stringify(obj);
 };
