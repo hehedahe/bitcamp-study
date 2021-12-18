@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>메가박스 오리지널 티켓 목록</h1>
-<a href="form.html">새 티켓</a>
+<a href="/index.html">돌아가기</a>
 <table id=x-tkt-tbl border=1>
   <thead>
     <tr>
@@ -20,7 +20,7 @@
 
   </tbody>
 </table>
-
+<button id="x-create-btn" type="button">새 티켓</button>
 <script type="text/javascript">
 var tbody = document.querySelector("#x-tkt-tbl tbody");
 
@@ -43,6 +43,9 @@ fetch("/my1/list")
     };
   });
 
+document.querySelector("#x-create-btn").onclick = function() {
+  window.location.href = "form.html"
+}
 
 
 </script>

@@ -15,7 +15,7 @@ public class App {
 
   @RequestMapping("/hello")
   String hello() {
-    return "Hello World!얍!";
+    return "Hello mylist-boot!";
   }
 
 }

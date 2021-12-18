@@ -22,6 +22,9 @@ public class ContactController {
 
   @RequestMapping("/contact/add")
   public Object add(String name, String email, String tel, String company) {
+    if (size == contacts.length) { // 배열이 꽉 찼다면,
+      contacts = grow(); // 메서드 이름에서 해당 코드에 대한 설명을 짐작할 수 있다. => 배열을 늘려라!
+    }
     contacts[size++] = createCSV(name, email, tel, company);
     return size;
   }
@@ -29,20 +32,21 @@ public class ContactController {
   @RequestMapping("/contact/get")
   public Object get(String email) {
     int index = indexOf(email);
-    if(index == -1) {
-      return "";
-    } // else {} 생략
+    if (index == -1) {
+      return 0;
+    } //else { // else 생략 가능?
     return contacts[index];
+    //}
   };
 
   @RequestMapping("contact/update")
   public Object update(String name, String email, String tel, String company) {
     int index = indexOf(email);
-    if(index == -1) {
+    if (index == -1) {
       return 0;
     }
-    contacts[index] = createCSV(name, email, tel, company);
-    return 1;
+    contacts[index] = createCSV(name, email, tel, company); // 사용자가 새로 입력하여 보낸 데이터 그 자리에 새 값으로 덮어쓰기
+    return 1; // 1이면 update됐다!
   };
 
   @RequestMapping("/contact/delete")
@@ -51,36 +55,71 @@ public class ContactController {
     if (index == -1) {
       return 0;
     }
-    remove(index); // 예전 값을 리턴해주긴 하지만 필요없어서 안받음
+    remove(index); // → 메서드의 이름으로 코드의 의미를 짐작할 수 있다. ⇒ 이것이 메서드로 분리하는 이유이다.
     return 1;
-  }
+  };
 
-  // 기능: 
-  // - 입력 받은 파라미터 값을 가지고 CSV 형식으로 문자열을 만들어 준다.
+  // 기능:
+  // - 입력 받은 파라미터 값을 가지고 CSV 형식으로 문자열을 만들어준다.
   String createCSV(String name, String email, String tel, String company) {
     return name + "," + email + "," + tel + "," + company;
-  } // 메서드 문법 정의 => 한줄이라도 무엇을 하는 코드인지 설명이 된다!
+  }
 
   // 기능:
   // - 이메일로 연락처 정보를 찾는다.
   // - 찾은 연락처의 배열 인덱스를 리턴한다.
   int indexOf(String email) {
     for (int i = 0; i < size ; i++) {
-      if (contacts[i].split(",")[1].equals(email)) {
+      if (contacts[i].split(",")[1].equals(email)) {  // 예) "u1@test.com"
         return i;
-      } 
+      }
     }
     return -1;
-  }
+  };
 
   // 기능:
-  // - 배열에서 지정한 항목을 삭제한다.
+  // - 배열에서 저장한 항목을 삭제한다.
   String remove(int index) {
     String old = contacts[index];
+    // 현재 위치의 다음 항목에서 배열 끝까지 반복하며 앞으로 값을 당겨온다.
+    // 뒤에 있는 칭구들을 앞으로 땡겨와야하니 index는 삭제하는 다음 인덱스 기준 => index+1
     for (int i = index + 1; i < size ; i++) {
       contacts[i - 1] = contacts[i];
     }
     size--;
-    return old; // 삭제할 항목이긴 하지만, Java API에 나온 것처럼 쓰든 말든 return 해주더라고
+    return old;
   }
+
+  // 기능:
+  // - 배열의 크기를 늘린다.
+  // - 기존 배열의 값을 복사해온다.
+  String[] grow() {
+    // 기존 배열보다 50% 큰 배열을 새로 만든다.
+    //int newCapacity = newLength();
+    //String[] arr = new String[newCapacity];
+    String[] arr = new String[newLength()];
+    copy(contacts, arr);
+    return arr; // 메모리 위치정보인 배열 주소가 리턴
+  }
+
+  // 기능:
+  // - 주어진 배열의 길이를 50% 증가시킨 새 배열의 길이를 알려준다.
+  int newLength() {
+    return contacts.length + (contacts.length >> 1); // 오른쪽으로 1비트 이동 = contact.length / 2
+  }
+
+  // 기능:
+  // - 배열을 복사한다.
+  void copy(String[] source, String[] target) { // void는 return값이 없음
+    // 개발자가 잘못 사용할 것을 대비해서 다음 코드를 추가한다.
+    // 즉, target 배열이 source 배열보다 작을 경우 target 배열 크기만큼만 복사한다. 
+    int length = source.length;
+    if (target.length < source.length) {
+      length = target.length;
+    }
+    for (int i = 0; i < length; i++) { // target 배열이 더 작을 경우, target 배열만큼만 돌리겠다
+      target[i] = source[i]; 
+    }
+  } // if문 true라면 기존에 갖고 있던 연락처가 일부 삭제되므로 옳은 코드는 아니다!
+  // 다만 메서드를 만들 때, 예외가 발생하는 경우가 있는데 그걸 처리하기 위해?
 }

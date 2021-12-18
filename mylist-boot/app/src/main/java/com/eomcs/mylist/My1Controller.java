@@ -20,46 +20,60 @@ public class My1Controller {
 
   @RequestMapping("/my1/add")
   public Object add(String no, String name, String date, String price) {
-    String movie = no + "," + name + "," + date + "," + price;
-    movies[size++] = movie; // size=movies.length-1
+    movies[size++] = createCSV(no, name, date, price); // size=movies.length-1
     return size; // movies.length
   };
 
   @RequestMapping("/my1/get")
   public Object get(String no) {
-    for (int i = 0; i < size; i++) {
-      //String movie = movies[i];
-      //String[] values = movie.split(",");
-      if (movies[i].split(",")[0].equals(no)) {
-        return movies[i];
-      }
+    int index = indexOf(no);
+    if (index == -1) {
+      return 0;
     }
-    return "";
+    return movies[index];
   }
 
   @RequestMapping("/my1/update")
   public Object update(String no, String name, String date, String price) {
-    String movie = no + "," + name + "," + date + "," + price;
-    for (int i = 0; i < size; i++) {
-      if (movies[i].split(",")[0].equals(no)) {
-        movies[i] = movie;
-        return 1;
-      }
+    int index = indexOf(no);
+    if (index == -1) {
+      return 0;
     }
-    return 0;
+    movies[index] = createCSV(no, name, date, price);
+    return 1;
   };
 
   @RequestMapping("/my1/delete")
   public Object delete(String no) {
+    int index = indexOf(no);
+    if(index == -1) {
+      return 0;
+    }
+    remove(index);
+    return 1;
+  };
+
+  String createCSV(String no, String name, String date, String price) {
+    return no + "," + name + "," + date + "," + price;
+  }
+
+  int indexOf(String no) {
     for (int i = 0; i < size; i++) {
+      //String movie = movies[i];
+      //String[] values = movie.split(",");
       if (movies[i].split(",")[0].equals(no)) {
-        for (int j = i + 1; j < size; j++) {
-          movies[j-1] = movies[j];
-        }
-        size--;
-        return 1;
+        return i;
       }
     }
-    return 0;
-  };
-}
+    return -1;
+  }
+
+  String remove(int index) {
+    String old = movies[index];
+    for (int i = index + 1; i < size; i++) {
+      movies[i - 1] = movies[i];
+    }
+    size--;
+    return old;
+  }
+};
