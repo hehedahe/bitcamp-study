@@ -14,6 +14,14 @@ public class Exam0110Test {
     }
   }
 
+  static void printStars(int len) {
+    int starCnt = 1;
+    while (starCnt <= len) {
+      System.out.print("*");
+      starCnt++;
+    }
+  }
+
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
     System.out.print("밑변의 길이? ");
@@ -22,14 +30,8 @@ public class Exam0110Test {
 
     int starLen = 1;
     while (starLen <= len) {
-      printSpaces((len - starLen) / 2);
-
-      // 별 출력
-      int starCnt = 1;
-      while (starCnt <= starLen) {
-        System.out.print("*");
-        starCnt++;
-      }
+      printSpaces((len - starLen) / 2); // 공백을 몇 개 출력할지 계산식(expression) 표현식을 파라미터로 줌
+      printStars(starLen);
 
       // 출력 줄 바꾸기
       System.out.println();
