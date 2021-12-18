@@ -11,9 +11,9 @@ public class Exam0221 {
   public static void main(String[] args) {
     // 파라미터의 타입, 개수, 순서가 일치해야 한다.
 
-    //    hello("윤봉길"); // 컴파일 오류!
-    //    hello(20, "윤봉길"); // 컴파일 오류!
-    //    String r = hello("안중근", 30); // 컴파일 오류!
+    //    hello("윤봉길"); // 컴파일 오류! - 파라미터 1개
+    //    hello(20, "윤봉길"); // 컴파일 오류! - 파라미터 순서 바뀜
+    //    String r = hello("안중근", 30); // 컴파일 오류! - return값이 없으니 변수 선언 X
     //    void r = hello("안중근", 30); // 컴파일 오류!
   }
 }

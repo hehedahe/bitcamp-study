@@ -6,7 +6,7 @@ import java.util.Scanner;
 //
 public class Exam0110Test {
 
-  static void printSpaces(int len) { // len = length 줄임말로 자주 쓰임
+  static void printSpace(int len) {
     int spaceCnt = 1;
     while (spaceCnt <= len) {
       System.out.print(" ");
@@ -32,8 +32,8 @@ public class Exam0110Test {
     int len = keyScan.nextInt();
     keyScan.close();
 
-    for (int starLen = 1; starLen <= len; starLen += 2) {
-      printSpaces(getSpaceLength(len, starLen)); // 공백을 몇 개 출력할지 계산식(expression) 표현식을 파라미터로 줌
+    for (int starLen = 1; starLen <= len; starLen +=2) {
+      printSpace(getSpaceLength(len, starLen));
       printStars(starLen);
       System.out.println();
     }

@@ -5,7 +5,7 @@ package com.eomcs.lang.ex07;
 public class Exam0240 {
 
   // 4) 메서드 : 리턴값(O), 파라미터(O)
-  // => "이 돈 갖고 과자좀 사와!"
+  // => "이 돈 갖고 과자좀 사와!" -> 돈 주고 일을 시키고, 일이 끝나면 결과가 리턴됨
   static String hello(String name, int age) {
     String retVal = String.format("%d살 %s님을 환영합니다!", age, name);
     return retVal;
@@ -13,7 +13,7 @@ public class Exam0240 {
 
   public static void main(String[] args) {
 
-    // hello() 메서드를 실행하고, 그 리턴 값을 변수에 담는다.
+    // hello() 메서드를 실행하고, 그 리턴 값을 변수 r에 담는다.
     String r = hello("홍길동", 20);
     System.out.println(r);
 
