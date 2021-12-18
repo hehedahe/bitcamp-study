@@ -5,6 +5,15 @@ import java.util.Scanner;
 //# 메서드 : 사용 전
 //
 public class Exam0110Test {
+
+  static void printSpaces(int len) { // len = length 줄임말로 자주 쓰임
+    int spaceCnt = 1;
+    while (spaceCnt <= len) {
+      System.out.print(" ");
+      spaceCnt++;
+    }
+  }
+
   public static void main(String[] args) {
     Scanner keyScan = new Scanner(System.in);
     System.out.print("밑변의 길이? ");
@@ -13,13 +22,7 @@ public class Exam0110Test {
 
     int starLen = 1;
     while (starLen <= len) {
-      // 별 앞에 공백 출력
-      int spaceCnt = 1;
-      int spaceLen = (len - starLen) / 2;
-      while (spaceCnt <= spaceLen) {
-        System.out.print(" ");
-        spaceCnt++;
-      }
+      printSpaces((len - starLen) / 2);
 
       // 별 출력
       int starCnt = 1;
