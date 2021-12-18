@@ -28,14 +28,10 @@ public class Exam0110Test {
     int len = keyScan.nextInt();
     keyScan.close();
 
-    int starLen = 1;
-    while (starLen <= len) {
+    for (int starLen = 1; starLen <= len; starLen += 2) {
       printSpaces((len - starLen) / 2); // 공백을 몇 개 출력할지 계산식(expression) 표현식을 파라미터로 줌
       printStars(starLen);
-
-      // 출력 줄 바꾸기
       System.out.println();
-      starLen += 2;
     }
   }
 }
