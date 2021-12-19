@@ -20,7 +20,7 @@ public class Exam0310 {
     // => 그래서 "call by value"라 부른다.
     // => 비록 swap()에서 a와 b라는 이름의 변수가 있지만,
     //    이 변수는 main()에 있는 변수와 다른 변수이다.
-    swap(a, b);
+    swap(a, b); // => swap(100, 200);
     System.out.printf("main(): a=%d, b=%d\n", a, b);
   }
 }
