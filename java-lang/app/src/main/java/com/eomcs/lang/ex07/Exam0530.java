@@ -10,7 +10,7 @@ public class Exam0530 {
     //
     int sum = 0;
     for (String arg : args)
-      sum += Integer.parseInt(arg);
+      sum += Integer.parseInt(arg); // Integer.parseInt() => 문자열을 숫자로 바꿔라
     System.out.printf("합계: %d\n", sum);
   }
 }

@@ -15,7 +15,7 @@ public class Exam0540 {
     if (args.length < 4) {
       System.out.println(
           "실행 형식: java -cp ./bin/main com.eomcs.lang.ex07.Exam0540 이름 국어점수 영어점수 수학점수");
-      return;
+      return; // 더 이상 아래 명령문을 실행하지 않고, 현재 메서드를 종료하겠다. 는 의미
     }
 
     int sum = 0;
@@ -24,7 +24,7 @@ public class Exam0540 {
 
     System.out.printf("이름: %s\n", args[0]);
     System.out.printf("총점: %d\n", sum);
-    System.out.printf("평균: %.1f\n", sum / 3f);
+    System.out.printf("평균: %.1f\n", sum / 3f); // 3f -> 정수와..?
   }
 }
 
