@@ -29,7 +29,7 @@ public class Exam0460 {
     // 메소드 호출이 너무 깊어지는 경우는 재귀호출 대신 다른 방법을 사용하라.
     /*
     long sum = 0;
-    for (int i = 1; i <= 100000; i++) {
+    for (int i = 1; i <= 19000; i++) {
       sum += i;
     }
     System.out.println(sum);

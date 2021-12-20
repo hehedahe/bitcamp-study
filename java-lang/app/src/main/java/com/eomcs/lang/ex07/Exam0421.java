@@ -29,7 +29,7 @@ public class Exam0421 {
 
   }
 
-  static void compute(int[] moneys, float[] totals, float interest) {
+  static void compute(int[] moneys, float[] totals, float interest) { // totals 결과를 담을 배열을 넘겨줌
     for (int i = 0; i < moneys.length; i++) {
       totals[i] = moneys[i] + (moneys[i] * interest);
     }
@@ -40,7 +40,7 @@ public class Exam0421 {
     for (int i = 0; i < moneys.length; i++) {
       totals[i] = moneys[i] + (moneys[i] * interest);
     }
-    return totals;
+    return totals; // compute2()에서 만든 배열 totals의 주소를 return
   }
 
 }
