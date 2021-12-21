@@ -18,7 +18,7 @@ function createScore(name, kor, eng, math) {
 	obj.math = math;
 	obj.sum = kor + eng + math;
 	obj.aver = obj.sum / 3;
-	return obj;
+	return obj; // 객체 주소 리턴
 }
 
 var scores = []; // new Array();
@@ -44,8 +44,3 @@ for (var score of scores) {
 </script>
 </body>
 </html>
-
-
-
-
-

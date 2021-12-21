@@ -10,30 +10,26 @@
 "use strict"
 
 var obj = {
-	name: "홍길동", 
-	kor: 100, 
-	eng: 90, 
+	name: "홍길동",
+	kor: 100,
+	eng: 90,
 	math:80,
 	/*
   sum: function() {
 	  return this.kor + this.eng + this.math;
   },
   */
-	sum() {
-	    return this.kor + this.eng + this.math; 
+	sum() { // 앞에 function 붙이면 안 => Uncaught SyntaxError: Unexpected identifier
+	    return this.kor + this.eng + this.math;
 	},
 	aver() {
 	    return this.sum() / 3;
 	}
-}; 
+};
 
 console.log(obj.sum(), obj.aver());
+console.log(obj);
 
 </script>
 </body>
 </html>
-
-
-
-
-
