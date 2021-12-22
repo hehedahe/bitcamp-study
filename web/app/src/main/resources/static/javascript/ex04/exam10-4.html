@@ -9,6 +9,8 @@
 <script>
 "use strict"
 
+// 4) 객체 프로퍼티에 함수 저장 -> 실제로는 함수의 주소를 저장한다!!
+
 // 객체의 값을 다루는 함수를 객체에 추가한다.
 function createScore(name, kor, eng, math) {
 	var obj = new Object();
@@ -44,7 +46,7 @@ for (var score of scores) {
     console.log(score.name, score.kor, score.eng, score.math,
     		score.sum(), score.aver());
 }
-// sum()과 aver()를 호출하는 순간에 다시 계산하기 때문에 10-3의 단점 보완
+// => sum()과 aver()를 호출하는 순간에 다시 계산하기 때문에 10-3의 단점을 보완
 </script>
 </body>
 </html>
