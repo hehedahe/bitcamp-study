@@ -20,7 +20,6 @@ public class ContactController {
     return arr; // 복사한 항목들을 담고있는 새 배열을 리턴한다.
   }
 
-
   @RequestMapping("/contact/add")
   public Object add(Contact contact) {
     //System.out.println(contact.toString());
@@ -35,7 +34,6 @@ public class ContactController {
 
     return size;
   }
-
 
   @RequestMapping("/contact/get")
   public Object get(String email) {
