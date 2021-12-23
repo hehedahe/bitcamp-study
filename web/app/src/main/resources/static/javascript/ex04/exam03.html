@@ -34,11 +34,10 @@ console.log(obj.other.v3);
 obj.f1();
 obj.other.v4();
 
+// 값을 꺼내주는 iterator가 없어 객체의 프로퍼티를 직접 꺼내야 한다.
+for (var v of obj2) {
+  console.log(v);
+}
 </script>
 </body>
 </html>
-
-
-
-
-

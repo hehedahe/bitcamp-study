@@ -31,18 +31,25 @@ console.log(document.constructor.name);
 // => 상속 관계
 //    Document() --> Node() --> EventTarget() --> Object()
 
-// Object() 생성자가 추가한 함수 존재여부 확인
+console.log(document);
+
+console.log(Document.prototype); // 생성자.prototype
+// document.prototype => 객체.prototype으로 했으니 당연히 undefined
+
+// Document()의 함수
+console.log(document.createElement); // docuemnt ---> Document.prototype
+
+// Node()의 함수
+console.log(document.appendChild); // docuemnt ---> Document.prototype ---> Node.prototype
+
+// EventTarget()의 함수
+console.log(document.addEventListener); // docuemnt ---> Document.prototype ---> Node.prototype ---> EventTarget.prototype
+
+// Object()의 함수
 // undefined면 없는거고, 있으면 나오겠지
-console.log(document.toString); // ƒ toString() { [native code] } => 있음
+console.log(document.toString); // docuemnt ---> Document.prototype ---> Node.prototype ---> EventTarger.prototype ---> Object.prototype
 
-// Nod() 생성자가 추가한 함수 존재 여부 확인
-console.log(document.appendChild);
 
-// EventTarget() 생성자가 추가한 함수 존재 여부 확인
-console.log(document.addEventListener);
-
-// Document() 생성자가 추가한 함수 존재 여부 확인
-console.log(document.createElement);
 
 </script>
 </body>
