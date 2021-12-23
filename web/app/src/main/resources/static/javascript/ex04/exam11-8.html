@@ -22,18 +22,17 @@ console.log(obj0.constructor); // prototype 안에 construnctor가 포함되어 
 console.log(Object.prototype); // prototype 보관소 전체 내용 출력
 obj0.test0(); // obj0에 있는 test0() 함수 호출
 
-
+/*
 console.log("-----------------------");
 console.log("f1() 생성자:");
-
+*/
 function f1() {
   this.name = "홍길동";
-  console.log("홍길동 부름부름부름~~~");
 }
 f1.prototype.test1 = function() {
   console.log("test1() 호출됨!");
 }
-
+/*
 var obj1 = new f1();
 console.log(obj1);
 console.log(obj1.constructor);
@@ -43,9 +42,10 @@ obj1.test0(); // obj1 ---> f1.prototype ---> Object.prototype (상위 생성자.
 //obj1.testx(); // obj1 ---> f1.prototype ---> Object.prototype ---> null (최상위 생성자.prototype)
 // => 예외가 발생하면 아예 나가버리니 주석 처리
 
+
 console.log("-----------------------");
 console.log("f2() 생성자:");
-
+*/
 function f2() {
   f1.call(this); // f1()에서 정의된 this.변수, this.함수() 와 함께 f1() 함수를 호출
   this.email = "hong@test.com"
@@ -67,9 +67,11 @@ obj2.test1(); // obj2 ---> f2.prototype ---> f1.prototype
 obj2.test0(); // obj2 ---> f2.prototype ---> f1.prototype ---> Object.prototype
 // obj2.testx(); // obj2 ---> f1.prototype ---> f1.prototype ---> Object.prototype ---> null
 
-
+/*
 console.log("-----------------------");
 console.log("f3() 생성자:");
+
+*/
 function f3() {
   f2.call(this);
   this.tel = "010-1111-2222";
@@ -83,12 +85,13 @@ var obj3 = new f3();
 console.log(obj3);
 console.log(obj3.constructor);
 console.log(f3.prototype);
+/*
 obj3.test3(); // obj3 ---> f3.prototype
 obj3.test2(); // obj3 ---> f3.prototype ---> f2.prototype
 obj3.test1(); // obj3 ---> f3.prototype ---> f2.prototype ---> f1.prototype
 obj3.test0(); // obj3 ---> f3.prototype ---> f2.prototype ---> f1.prototype ---> Object.prototype
 obj3.testx(); // obj3 ---> f3.prototype ---> f1.prototype ---> f1.prototype ---> Object.prototype ---> null
-
+*/
 </script>
 </body>
 </html>
