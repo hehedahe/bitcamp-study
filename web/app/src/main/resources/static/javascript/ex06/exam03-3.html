@@ -24,19 +24,17 @@ var btnClick = function(e) {
 	alert("===> " + this.getAttribute("data-no"));
 	alert("===> " + e.target.getAttribute("data-no"));
 	for (var e of el2) {
-		e.style["background-color"] = "yellow";
+		// e.style["background-color"] = "yellow";
+		e.style.backgroundColor = "grey";
+		e.style["color"] = "green";
+		e.style.border = "1px dashed red";
 	}
 };
 
 for (var e of el) {
-	  e.addEventListener("click", btnClick);
+	  e.addEventListener("click", btnClick); // btnClick => 함수 주소 <-> btnClick()가 함수 실행 명령
 }
 
 </script>
 </body>
 </html>
-
-
-
-
-
