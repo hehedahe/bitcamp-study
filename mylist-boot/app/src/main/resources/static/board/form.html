@@ -6,38 +6,48 @@
 </head>
 <body>
 
-<h1>New Content</h1>
+<h1>New Post</h1>
 
-<form>
-제목: <input id="x-title" type="text"><br>
-날짜: <input type='date'><br>
-내용: <textarea id="x-content" type="text"></textarea><br>
-</form>
+<div>
+  <label>제목</label>
+  <input type="text" name='title' size="30" placeholder="제목을 입력하세요.">
+</div>
+<div>
+  <label>작성일</label>
+  <input type="date" name='date' size="50">
+</div>
+<div>
+    <label>내용</label>
+    <textarea name='content' cols="60" rows="5" placeholder="내용을 입력해주세요."></textarea>
+</div>
+
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cxl-btn" type="button">취소</button>
 
 <script type="text/javascript">
-  var xTitle = document.querySelector("#x-title");
-  var xDate = document.querySelector("input[type='date']");
-  var xContent = document.querySelector("#x-content");
+  var xTitle = document.querySelector("input[name='title']");
+  var xDate = document.querySelector("input[name='date']");
+  var xContent = document.querySelector("textarea");
+  console.log(xTitle, xDate, xContent);
 
+  document.querySelector("#x-add-btn").onclick = function(){
 
-  document.querySelector("#x-add-btn").onclick = function() {
-    if (xTitle.value == "") {
+    if (xTitle.value == "" || xDate.value == "" || xContent.value == "") {
       window.alert("필수 입력 항목이 비어 있습니다.");
       return;
     }
-    console.log(xDate.value);
 
-    fetch(`/board/add?title=${xTitle.value}&createDate=${xDate.value}&content=${xContent.value}`)
+    console.log(xTitle.value);
+
+    fetch(`/board/add?&title=${xTitle.value}&createDate=${xDate.value}&content=${xContent.value}`)
       .then(function(response) {
-        return response.text();
+        return response.json();
       })
-      .then(function(text) {
-        console.log(text);
+      .then(function(result) {
+        console.log(result);
         location.href = "index.html";
       });
-  };
+    }
 
   document.querySelector("#x-cxl-btn").onclick = function() {
     window.location.href = "index.html";

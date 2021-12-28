@@ -17,12 +17,19 @@ public class BoardController {
     return ArrayList3.size;
   }
 
+  @RequestMapping("/board/get")
+  public Object get(int index) {
+    if (index == -1) {
+      return"";
+    }
+    return ArrayList3.list[index];
+  };
+
   @RequestMapping("/board/update")
   public Object update(int index, Board board) {
     if (index < 0 || index >= ArrayList3.size) {
       return 0;
     }
-
     return ArrayList3.set(index, board) == null ? 0 : 1;
   }
 
@@ -31,12 +38,8 @@ public class BoardController {
     if (index < 0 || index >= ArrayList3.size) {
       return 0;
     }
-
-    ArrayList2.remove(index);
+    ArrayList3.remove(index);
     return 1;
   }
+
 }
-
-
-
-

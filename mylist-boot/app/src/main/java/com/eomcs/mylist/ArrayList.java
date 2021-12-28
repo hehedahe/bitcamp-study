@@ -12,7 +12,6 @@ public class ArrayList {
     if (size == list.length) { // 배열이 꽉 찼다면,
       list = grow(); // 메서드 이름에서 해당 코드에 대한 설명을 짐작할 수 있다. => 배열을 늘려라!
     }
-
     list[size++] = obj; // 인스턴스 주소(레퍼런스)가 들어옴
   }
 
