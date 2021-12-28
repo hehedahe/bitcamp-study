@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class My1Controller {
+public class TicketController {
 
   String[] movies = new String[10];
   int size = 0;

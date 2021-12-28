@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>To-do</title>
+</head>
+<body>
+<h1>To-do</h1>
+<a href="form.html">추가</a>
+<table id="x-todo-tbl" border=1>
+<thead>
+  <tr>
+    <th>해야 할 일</th>
+    <th><input type="checkbox" id="x-todo-all"></th>
+  </tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+<script type="text/javascript">
+
+var tbody = document.querySelector("#x-todo-tbl tbody");
+
+fetch("/todo/list")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(todoList) {
+    console.log(todoList);
+    /*
+    for (var contact of contacts) {
+      var tr = document.createElement("tr");
+      tr.innerHTML = `<td><a href="view.html?email=${contact.email}">${contact.name}</a></td>
+          <td>${contact.email}</td>
+          <td>${contact.tel}</td>
+          <td>${contact.company}</td>`;
+          //contact/get?name~ 은 서버사이드 랜더링 방식
+      tbody.appendChild(tr);
+    };
+    */
+  })
+
+</script>
+</body>
+</html>

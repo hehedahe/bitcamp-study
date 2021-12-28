@@ -62,4 +62,41 @@ public class ArrayList {
     }
   } // if문 true라면 기존에 갖고 있던 연락처가 일부 삭제되므로 옳은 코드는 아니다!
   // 다만 메서드를 만들 때, 예외가 발생하는 경우가 있는데 그걸 처리하기 위해?
+
+  // 기능: 
+  // - 배열에 저장된 목록만 꺼내 새 배열에 담아 리턴한다.
+  //
+  static Contact[] toArray() {
+    Contact[] arr = new Contact[size]; // 배열에 저장된 값만 복사할 새 배열을 만든다.
+    for (int i = 0; i < size; i++) {
+      arr[i]= contacts[i]; // 전체 배열에서 값이 들어있는 항목만 복사한다.
+    }
+    return arr; // 복사한 항목들을 담고있는 새 배열을 리턴한다.
+  }
+
+  // 기능: 
+  // - 배열에 항목을 추가한다.
+  // - 배열이 꽉 찼으면 배열의 크기를 늘린다.
+  // 
+  static void add(Contact contact) {
+    if (size == contacts.length) { // 배열이 꽉 찼다면,
+      contacts = grow(); // 메서드 이름에서 해당 코드에 대한 설명을 짐작할 수 있다. => 배열을 늘려라!
+    }
+
+    contacts[size++] = contact; // 인스턴스 주소(레퍼런스)가 들어옴
+  }
+
+  // 기능: 
+  // - 배열의 특정 위치에 값을 변경한다.
+  // - 리턴 값:
+  //   - 변경하기 전에 저장되어 있던 값
+  //
+  static Contact set(int index, Contact contact) {
+    if (index < 0 || index >= size) { // 값이 저장된 위치가 무효한 인덱스라면 null 리턴
+      return null;
+    }
+    Contact old = contacts[index];
+    contacts[index]= contact;
+    return old;
+  }
 }

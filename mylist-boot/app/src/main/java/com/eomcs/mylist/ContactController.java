@@ -9,26 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class ContactController {
 
   @RequestMapping("/contact/list")
-  public Object list() {
-    Contact[] arr = new Contact[ArrayList.size]; // 배열에 저장된 값만 복사할 새 배열을 만든다.
-    for (int i = 0; i < ArrayList.size; i++) {
-      arr[i]= ArrayList.contacts[i]; // 전체 배열에서 값이 들어있는 항목만 복사한다.
-    }
-    return arr; // 복사한 항목들을 담고있는 새 배열을 리턴한다.
+  public Object list() { // 클라이언트 요청을 다루는 메서드
+    return ArrayList.toArray(); // 배열을 다루는 메서드를 리턴
   }
 
   @RequestMapping("/contact/add")
   public Object add(Contact contact) {
-    //System.out.println(contact.toString());
-    System.out.println(contact); // 인스턴스의 값을 보고싶으면 ?
-    System.out.println(contact.email);
-
-    if (ArrayList.size == ArrayList.contacts.length) { // 배열이 꽉 찼다면,
-      ArrayList.contacts = ArrayList.grow(); // 메서드 이름에서 해당 코드에 대한 설명을 짐작할 수 있다. => 배열을 늘려라!
-    }
-
-    ArrayList.contacts[ArrayList.size++] = contact; // 인스턴스 주소(레퍼런스)가 들어옴
-
+    //System.out.println(contact); // 인스턴스의 값을 보고싶으면 ?
+    ArrayList.add(contact);
     return ArrayList.size;
   }
 
@@ -48,8 +36,7 @@ public class ContactController {
     if (index == -1) {
       return 0;
     }
-    ArrayList.contacts[index] = contact; // 사용자가 새로 입력하여 보낸 데이터 그 자리에 새 값으로 덮어쓰기
-    return 1; // 1이면 update됐다!
+    return ArrayList.set(index, contact) == null ? 0 : 1;
   };
 
   @RequestMapping("/contact/delete")
