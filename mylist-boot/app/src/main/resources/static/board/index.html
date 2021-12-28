@@ -2,32 +2,23 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>To-do</title>
-  <style>
-  .todo-checked {
-    text-decoration: line-through;
-    color: gray;
-  }
-  </style>
+  <title>Board</title>
 </head>
 <body>
-<h1>To-do</h1>
-
-<p>할 일 <input id="x-todo-input" type="text"></p>
-<table id="x-todo-table" border="1">
+<h1>Board List</h1>
+<a href="form.html">새 글</a>
+<table id="x-list-table" border="1">
 <thead>
   <tr>
-    <th></th>
-    <th>해야 할 일</th>
-    <th>변경</th>
-    <th>삭제</th>
+    <th>글번호</th>
+    <th>제목</th>
+    <th>조회수</th>
+    <th>날짜</th>
   </tr>
 </thead>
 <tbody>
 </tbody>
 </table>
-
-<input type="text" id="x-title-input">
 
 <script type="text/javascript">
   "use strict"
@@ -37,24 +28,25 @@
 
   var tbody = document.querySelector("#x-todo-table tbody");
 
-  document.querySelector("#x-todo-input").onkeyup = funciton(e) {
+  document.querySelector("#x-todo-input").onkeyup = function(e) {
     if (e.keyCode == 27) {
       e.target.value = "";
+
     } else if (e.keyCode == 13) {
-      if (xTitle.value == "") {
+      if (e.target.value == "") {
         window.alert("필수 입력 항목이 비어 있습니다.");
         return;
-      };
+      }
 
-      fetch(`/todo/add?title=${xTitle.value}`)
+      fetch(`/todo/add?title=${e.target.value}`)
         .then(function(response) {
           return response.text();
         })
         .then(function(text) {
           console.log(text);
-          window.reload();
+          location.reload();
         });
-      }
+    }
   };
 
   fetch("/todo/list")
@@ -65,7 +57,7 @@
       console.log(todoList);
       for (var i = 0; i < todoList.length; i++) {
         var tr = document.createElement("tr");
-        tr.setattribute("data-no", i);
+        tr.setAttribute("data-no", i);
         var checkedOption = "";
         var titleTdOption = "";
         if (todoList[i].done) {
@@ -127,10 +119,10 @@
    titleInput.value = titleSpan.innerHTML;
    titleInput.setAttribute("data-no", no);
    titleTd.appendChild(titleInput);
+   titleInput.style["display"] = "";
  }
 
  titleInput.onkeyup = function(e) {
-   // console.log(e.keycode);
    var no = titleInput.getAttribute("data-no");
    var titleSpan = titleInput.parentNode.querySelector("span");
    var originTitle = titleSpan.innerHTML;
@@ -148,7 +140,7 @@
          } else {
            console.log("변경했습니다.");
            titleSpan.innerHTML = titleInput.value;
-           cnacelTodoEditing();
+           cancelTodoEditing();
          }
        });
    }

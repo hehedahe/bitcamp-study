@@ -41,10 +41,4 @@ public class TodoController {
     ArrayList2.remove(index);
     return 1;
   };
-
-
-
-
-
-
 }
