@@ -37,7 +37,7 @@ public class ArrayList3 {
     for (int i = 0; i < size; i++) { 
       arr[i] = list[i]; 
     }
-    return arr; 
+    return arr;
   }
 
   static Object remove(int index) {

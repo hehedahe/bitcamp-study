@@ -38,7 +38,7 @@
         tr.innerHTML = `<th scope="row">${listNo}</th>
         <td class="list-title"><a href="view.html?index=${i}">${boardList[i].title}</td>
         <td>${boardList[i].createDate}</td>
-        <td>1</td>`;
+        <td>${boardList[i].viewCount}</td>`;
         tbody.appendChild(tr);
         console.log(tr);
       }

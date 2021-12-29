@@ -22,6 +22,7 @@ public class BoardController {
     if (index == -1) {
       return"";
     }
+    ((Board)ArrayList3.list[index]).viewCount++;
     return ArrayList3.list[index];
   };
 
