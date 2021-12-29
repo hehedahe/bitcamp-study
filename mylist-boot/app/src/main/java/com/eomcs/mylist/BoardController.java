@@ -24,7 +24,7 @@ public class BoardController {
     if (index < 0 || index >= ArrayList3.size) {
       return "";
     }
-    Board board = (Board) ArrayList3.list[index];
+    Board board = (Board)ArrayList3.list[index];
     board.viewCount++;
     return board;
   };
