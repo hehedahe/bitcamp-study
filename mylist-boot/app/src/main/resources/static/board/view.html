@@ -8,7 +8,7 @@
 
 <h1>Post details</h1>
 <div>
-  <label>번호</label>
+  <label>글 번호</label>
   <input type="number" name="index" readonly>
 </div>
 <div>
@@ -58,7 +58,8 @@
       return response.json();
     })
     .then(function(post) {
-      xIndex.value = post.index + 1;
+      console.log(post);
+      xIndex.value = parseInt(index) + 1;
       xTitle.value = post.title;
       xContent.value = post.content;
       xDate.value = post.createDate;
@@ -92,6 +93,44 @@
         location.href = "index.html";
       });
   };
+
+  xContent.onkeyup = function(e) {
+    console.log(xContent.innerHTML);
+    if (e.keyCode == 27) { // ESC 키를 눌러 편집을 취소한다면
+      var result = confirm("내용이 수정되었습니다. 수정하시겠습니까?");
+      if (result) {
+          if (xTitle.value == "" || xContent.value == "") {
+            window.alert("필수 입력 항목이 비어 있습니다.");
+            return;
+          }
+          fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}&createDate=${xDate.value}`)
+            .then(function(response) {
+              return response.text();
+            }).then(function(text) {
+              location.href = "index.html";
+            });
+        }
+        location.href = "index.html"
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </script>
 </body>

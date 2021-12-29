@@ -10,6 +10,7 @@ public class ArrayList3 {
       list = grow();
     }
     list[size++] = obj;
+
   }
 
   static Object[] grow() {
