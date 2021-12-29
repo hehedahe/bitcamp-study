@@ -35,7 +35,7 @@
         var tr = document.createElement("tr");
         tr.setAttribute("data-no", i);
         var listNo = parseInt(tr.getAttribute("data-no")) + 1;
-        tr.innerHTML = `<th scope="row">${listNo}</th>
+        tr.innerHTML = `<th scope="row">${boardList[i].index}</th>
         <td class="list-title"><a href="view.html?index=${i}">${boardList[i].title}</td>
         <td>${boardList[i].createDate}</td>
         <td>${boardList[i].viewCount}</td>`;
