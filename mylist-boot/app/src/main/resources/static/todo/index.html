@@ -37,25 +37,24 @@
 
   var tbody = document.querySelector("#x-todo-table tbody");
 
-  document.querySelector("#x-todo-input").onkeyup = funciton(e) {
+  document.querySelector("#x-todo-input").onkeyup = function(e) {
     if (e.keyCode == 27) {
       e.target.value = "";
     } else if (e.keyCode == 13) {
-      if (xTitle.value == "") {
+      if (e.target.value == "") {
         window.alert("필수 입력 항목이 비어 있습니다.");
         return;
-      };
     }
 
-      fetch(`/todo/add?title=${xTitle.value}`)
-        .then(function(response) {
-          return response.text();
-        })
-        .then(function(text) {
-          console.log(text);
-          window.reload();
-        });
-      
+    fetch(`/todo/add?title=${e.target.value}`)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(text) {
+        console.log(text);
+        window.reload();
+      });
+    }
   };
 
   fetch("/todo/list")

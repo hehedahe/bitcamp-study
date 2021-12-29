@@ -2,7 +2,7 @@ package com.eomcs.mylist;
 
 public class ArrayList {
 
-  // 인스턴스 필드
+  // 인스턴스 필드(변수)
   // => 인스턴스 필드는 new 명령을 통해 생성한다.
   Object[] list = new Object[5];
   int size = 0; // 배열에 집어넣은 연락처 개수
