@@ -30,8 +30,7 @@ fetch("/board/list")
   })
   .then(function(boards) {
     console.log(boards);
-
-    for (var i = 0; i < boards.length; i++) {
+    for (var i = 0; i < boards.length; i++) { // index 번호를 사용해야하니 for...of말고 fori를 사용하자
       var board = boards[i];
       var tr = document.createElement("tr");
       tr.innerHTML = `<td><a href="view.html?index=${i}">${board.title}</a></td>

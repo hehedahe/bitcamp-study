@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-<meta charset="utf-8">
-<title>Board</title>
+  <meta charset="utf-8">
+  <title>게시글</title>
 </head>
 <body>
 
-<h1>Post details</h1>
-<div>
-  <label>글 번호</label>
-  <input type="number" name="index" readonly>
-</div>
-<div>
-    <label>제목</label>
-    <input type="text" name='title' size="50" value="새로운 할 일">
-</div>
-<div>
-  <label>작성일</label>
-  <input type="date" name='date' size="50" readonly>
-</div>
-<div>
-    <label>내용</label>
-    <textarea name='content' cols="60" rows="5"></textarea>
-</div>
+<h1>게시글 상세</h1>
+
+<form>
+제목*: <input id="x-title" type="text"><br>
+내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
+조회수: <span id="x-viewCount"></span><br>
+등록일: <span id="x-creatdDate" type="text"></span><br>
+별표(*) 항목은 필수 입력입니다.<br>
 <button id="x-update-btn" type="button">변경</button>
 <button id="x-delete-btn" type="button">삭제</button>
 <button id="x-cxl-btn" type="button">취소</button>
+</form>
 
 <script type="text/javascript">
 
   var arr = location.href.split("?");
-  console.log(arr);
+  console.log(arr); // 현재 웹페이지의 주소가 ? 기준으로 쪼개짐
 
   if (arr.length == 1) {
     alert("요청 형식이 옳바르지 않습니다.")
@@ -41,40 +33,39 @@
   console.log(qs);
 
   var params = new URLSearchParams(qs);
-  var index = params.get("index");
-  console.log(index);
+  var index =  params.get("index");
   if (index == null) {
-    alert("번호 값이 없습니다.")
-    throw "파라미터 오류! ";
+    alert("인덱스 값이 없습니다.")
+    throw "파라미터 오류!"; // 예외 던져주기
   }
 
-  var xIndex = document.querySelector("input[name='index']");
-  var xTitle = document.querySelector("input[name='title']");
-  var xDate = document.querySelector("input[name='date']");
-  var xContent = document.querySelector("textarea");
+  var xTitle = document.querySelector("#x-title");
+  var xContent = document.querySelector("#x-content");
+  var xViewCount = document.querySelector("#x-viewCount");
+  var xCreatedDate = document.querySelector("#x-createdDate");
 
   fetch(`/board/get?index=${index}`)
-    .then(function(response) {
+    .then(function(response) { // then => 함수 등록 ?
       return response.json();
     })
-    .then(function(post) {
-      console.log(post);
-      xIndex.value = parseInt(index) + 1;
-      xTitle.value = post.title;
-      xContent.value = post.content;
-      xDate.value = post.createDate;
+    .then(function(board) {
+      xTitle.value = board.title;
+      xContent.value = board.content;
+      xViewCount.value = board.viewCount;
+      xCreatedDate.value = board.createdDate;
     });
 
   document.querySelector("#x-update-btn").onclick = function() {
     if (xTitle.value == "" || xContent.value == "") {
-      window.alert("필수 입력 항목이 비어 있습니다.");
+      alert("필수 입력 항목이 비어 있습니다.");
       return;
-    };
+    }
 
-    fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}&createDate=${xDate.value}`)
+    fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
         return response.text();
       }).then(function(text) {
+        console.log(text);
         location.href = "index.html";
       });
   };
@@ -86,51 +77,13 @@
   document.querySelector("#x-delete-btn").onclick = function() {
     fetch(`/board/delete?index=${index}`)
       .then(function(response) {
-        return response.json();
+        return response.json(); // 서버에서 숫자(1,0)나타내는 문자열로 보내서 JS 숫자로 나타낼 수 있음
       })
       .then(function(result) {
         console.log(result);
         location.href = "index.html";
       });
   };
-
-  xContent.onkeyup = function(e) {
-    console.log(xContent.innerHTML);
-    if (e.keyCode == 27) { // ESC 키를 눌러 편집을 취소한다면
-      var result = confirm("내용이 수정되었습니다. 수정하시겠습니까?");
-      if (result) {
-          if (xTitle.value == "" || xContent.value == "") {
-            window.alert("필수 입력 항목이 비어 있습니다.");
-            return;
-          }
-          fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}&createDate=${xDate.value}`)
-            .then(function(response) {
-              return response.text();
-            }).then(function(text) {
-              location.href = "index.html";
-            });
-        }
-        location.href = "index.html"
-      }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 </body>

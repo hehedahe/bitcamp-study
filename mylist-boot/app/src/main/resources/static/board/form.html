@@ -26,7 +26,7 @@
       return;
     }
 
-    fetch(`/board/add?&title=${xTitle.value}&content=${xContent.value}`)
+    fetch(`/board/add?title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
         return response.text();
       })
