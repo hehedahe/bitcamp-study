@@ -1,5 +1,6 @@
 package com.eomcs.mylist;
 
+import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,24 +14,29 @@ public class BoardController {
 
   @RequestMapping("/board/add")
   public Object add(Board board) {
+    board.setCreateDate(new Date(System.currentTimeMillis()));
     ArrayList3.add(board);
     return ArrayList3.size;
   }
 
   @RequestMapping("/board/get")
   public Object get(int index) {
-    if (index == -1) {
-      return"";
+    if (index < 0 || index >= ArrayList3.size) {
+      return "";
     }
-    ((Board)ArrayList3.list[index]).viewCount++;
-    return ArrayList3.list[index];
+    Board board = (Board) ArrayList3.list[index];
+    board.viewCount++;
+    return board;
   };
 
   @RequestMapping("/board/update")
   public Object update(int index, Board board) {
     if (index < 0 || index >= ArrayList3.size) {
-      return 0;
+      return 0; // update 안됐으면 0, 됐으면 1
     }
+    Board old = (Board)ArrayList3.list[index];
+    board.viewCount = old.viewCount;
+    board.createDate = old.createDate;
     return ArrayList3.set(index, board) == null ? 0 : 1;
   }
 
