@@ -6,39 +6,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TodoController {
 
+  // Todo 객체 목록을 저장할 메모리를 준비한다.
+  ArrayList todoList = new ArrayList();
+
   @RequestMapping("/todo/list")
   public Object list() {
-    return ArrayList2.toArray();
+    return ArrayList.toArray(todoList);
   }
 
   @RequestMapping("/todo/add")
   public Object add(int index, Todo todo) {
-    ArrayList2.add(todo);
-    return ArrayList2.size;
+    ArrayList.add(todoList, todo);
+    return todoList.size;
   }
 
   @RequestMapping("/todo/get")
   public Object get(int index) {
-    if (index < 0 || index >= ArrayList2.size) {
+    if (index < 0 || index >= todoList.size) {
       return "";
     }
-    return ArrayList2.list[index];
+    return todoList.list[index];
   };
 
   @RequestMapping("todo/update")
-  public Object update(int index, Todo todo) {
-    if (index < 0 || index >= ArrayList2.size) {
+  public Object update(int index, boolean done) {
+    if (index < 0 || index >= todoList.size) {
       return 0;
     }
-    return ArrayList2.set(index, todo) == null ? 0 : 1;
+    ((Todo) todoList.list[index]).done = done;
+    return ArrayList.set(todoList, index, done) == null ? 0 : 1;
   };
 
   @RequestMapping("/todo/delete")
   public Object delete(int index) {
-    if (index < 0 || index >= ArrayList2.size) {
+    if (index < 0 || index >= todoList.size) {
       return 0;
     }
-    ArrayList2.remove(index);
+    ArrayList.remove(todoList, index);
     return 1;
   };
 }

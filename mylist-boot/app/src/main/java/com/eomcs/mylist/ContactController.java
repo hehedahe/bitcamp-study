@@ -8,16 +8,21 @@ import org.springframework.web.bind.annotation.RestController;
 // 이 표시(애노테이션)가 붙어 있어야만 스프링부트가 이 클래스를 인식한다.
 public class ContactController {
 
+  // Contact 객체 목록을 저장할 메모리 준비
+  // => Object[] list = new Object[5];
+  // => int size = 0;
+  ArrayList contactList = new ArrayList();
+
   @RequestMapping("/contact/list")
   public Object list() { // 클라이언트 요청을 다루는 메서드
-    return ArrayList.toArray(); // 배열을 다루는 메서드를 리턴
+    return ArrayList.toArray(contactList); // 배열을 다루는 메서드를 리턴
   }
 
   @RequestMapping("/contact/add")
   public Object add(Contact contact) {
     //System.out.println(contact); // 인스턴스의 값을 보고싶으면 ?
-    ArrayList.add(contact);
-    return ArrayList.size;
+    ArrayList.add(contactList, contact);
+    return contactList.size;
   }
 
   @RequestMapping("/contact/get")
@@ -26,7 +31,7 @@ public class ContactController {
     if (index == -1) {
       return"";
     } //else { // else 생략 가능?
-    return ArrayList.list[index]; // Contact 인스턴스 리턴 => JSON형식 ?
+    return contactList.list[index]; // Contact 인스턴스 리턴 => JSON형식 ?
     //}
   };
 
@@ -36,7 +41,7 @@ public class ContactController {
     if (index == -1) {
       return 0;
     }
-    return ArrayList.set(index, contact) == null ? 0 : 1;
+    return ArrayList.set(contactList, index, contact) == null ? 0 : 1;
   };
 
   @RequestMapping("/contact/delete")
@@ -45,16 +50,16 @@ public class ContactController {
     if (index == -1) {
       return 0;
     }
-    ArrayList.remove(index); // → 메서드의 이름으로 코드의 의미를 짐작할 수 있다. ⇒ 이것이 메서드로 분리하는 이유이다.
+    ArrayList.remove(contactList, index); // → 메서드의 이름으로 코드의 의미를 짐작할 수 있다. ⇒ 이것이 메서드로 분리하는 이유이다.
     return 1;
   };
 
   // 기능:
   // - 이메일로 연락처 정보를 찾는다.
   // - 찾은 연락처의 배열 인덱스를 리턴한다.
-  static int indexOf(String email) {
-    for (int i = 0; i < ArrayList.size ; i++) {
-      Contact contact = (Contact) ArrayList.list[i];
+  int indexOf(String email) {
+    for (int i = 0; i < contactList.size ; i++) {
+      Contact contact = (Contact) contactList.list[i];
       if (contact.email.equals(email)) {  // 예) "u1@test.com"
         return i;
       }
