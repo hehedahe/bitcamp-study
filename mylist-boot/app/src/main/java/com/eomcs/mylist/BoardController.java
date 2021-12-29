@@ -14,7 +14,7 @@ public class BoardController {
 
   @RequestMapping("/board/add")
   public Object add(Board board) {
-    board.setCreateDate(new Date(System.currentTimeMillis()));
+    board.setCreatedDate(new Date(System.currentTimeMillis()));
     ArrayList3.add(board);
     return ArrayList3.size;
   }
@@ -36,7 +36,7 @@ public class BoardController {
     }
     Board old = (Board)ArrayList3.list[index];
     board.viewCount = old.viewCount;
-    board.createDate = old.createDate;
+    board.createdDate = old.createdDate;
     return ArrayList3.set(index, board) == null ? 0 : 1;
   }
 

@@ -12,7 +12,7 @@
 제목*: <input id="x-title" type="text"><br>
 내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
 조회수: <span id="x-viewCount"></span><br>
-등록일: <span id="x-creatdDate" type="text"></span><br>
+등록일: <span id="x-createdDate" type="text"></span><br>
 별표(*) 항목은 필수 입력입니다.<br>
 <button id="x-update-btn" type="button">변경</button>
 <button id="x-delete-btn" type="button">삭제</button>
@@ -22,7 +22,7 @@
 <script type="text/javascript">
 
   var arr = location.href.split("?");
-  console.log(arr); // 현재 웹페이지의 주소가 ? 기준으로 쪼개짐
+  console.log(arr);
 
   if (arr.length == 1) {
     alert("요청 형식이 옳바르지 않습니다.")
@@ -34,10 +34,12 @@
 
   var params = new URLSearchParams(qs);
   var index =  params.get("index");
+
   if (index == null) {
-    alert("인덱스 값이 없습니다.")
-    throw "파라미터 오류!"; // 예외 던져주기
+    alert("게시물 번호가 없습니다.")
+    throw "파라미터 오류!";
   }
+  console.log(index);
 
   var xTitle = document.querySelector("#x-title");
   var xContent = document.querySelector("#x-content");
@@ -45,7 +47,7 @@
   var xCreatedDate = document.querySelector("#x-createdDate");
 
   fetch(`/board/get?index=${index}`)
-    .then(function(response) { // then => 함수 등록 ?
+    .then(function(response) {
       return response.json();
     })
     .then(function(board) {
@@ -64,7 +66,8 @@
     fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
         return response.text();
-      }).then(function(text) {
+      })
+      .then(function(text) {
         console.log(text);
         location.href = "index.html";
       });
@@ -77,7 +80,7 @@
   document.querySelector("#x-delete-btn").onclick = function() {
     fetch(`/board/delete?index=${index}`)
       .then(function(response) {
-        return response.json(); // 서버에서 숫자(1,0)나타내는 문자열로 보내서 JS 숫자로 나타낼 수 있음
+        return response.json();
       })
       .then(function(result) {
         console.log(result);
