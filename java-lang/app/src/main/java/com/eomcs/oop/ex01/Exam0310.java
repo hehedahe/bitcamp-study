@@ -26,3 +26,5 @@ public class Exam0310 {
     System.out.println(s2.name);
   }
 }
+
+

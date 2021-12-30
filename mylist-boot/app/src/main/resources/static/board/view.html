@@ -53,8 +53,8 @@
     .then(function(board) {
       xTitle.value = board.title;
       xContent.value = board.content;
-      xViewCount.value = board.viewCount;
-      xCreatedDate.value = board.createdDate;
+      xViewCount.innerHTML = board.viewCount;
+      xCreatedDate.innerHTML = board.createdDate;
     });
 
   document.querySelector("#x-update-btn").onclick = function() {

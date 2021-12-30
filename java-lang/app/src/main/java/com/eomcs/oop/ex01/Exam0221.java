@@ -50,6 +50,11 @@ public class Exam0221 {
     System.out.printf("%s: %d, %d, %d, %d, %.1f\n",
         arr[2].name, arr[2].kor, arr[2].eng, arr[2].math, arr[2].sum, arr[2].aver);
   }
+
+
+
+
+
 }
 
 
