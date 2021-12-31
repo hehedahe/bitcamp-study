@@ -8,7 +8,7 @@ public class Exam0120 {
   static class Score {
 
     // 2) 여러 명의 구별되는 성적 데이터를 저장해야 하기 때문에
-    // 인스턴스 변수로 메모리를 설계하라!
+    //    인스턴스 변수로 메모리를 설계하라!
     String name;
     int kor;
     int eng;

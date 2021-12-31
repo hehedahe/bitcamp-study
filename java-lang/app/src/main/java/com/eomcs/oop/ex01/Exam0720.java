@@ -21,3 +21,4 @@ public class Exam0720 {
     obj = new Y2();
   }
 }
+

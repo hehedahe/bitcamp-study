@@ -11,6 +11,7 @@ public class Exam0230 {
     // - "스태틱 변수"라고도 부른다.
     // - 클래스 변수는 new 명령으로 생성하지 않는다.
     // - 클래스가 메모리에 로딩될 때 자동으로 "Method Area" 영역에 생성된다.
+    //
     static int result = 0;
 
     static void plus(int value) {
