@@ -35,6 +35,8 @@ public class Exam0110 {
     score.sum = score.kor + score.eng + score.math;
     score.average = score.sum / 3f;
 
+    score.name = "채다해";
+
     System.out.printf("%s, %d, %d, %d, %d, %.1f\n", score.name, score.kor, score.eng, score.math,
         score.sum, score.average);
   }

@@ -1,7 +1,9 @@
-package com.eomcs.mylist;
+package com.eomcs.mylist.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.mylist.domain.Contact;
+import com.eomcs.utility.ArrayList;
 
 @RestController
 // 이 클래스가 클라이언트 요청 처리 담당자임을 표시한다.
@@ -15,14 +17,14 @@ public class ContactController {
 
   @RequestMapping("/contact/list")
   public Object list() { // 클라이언트 요청을 다루는 메서드
-    return ArrayList.toArray(contactList); // 배열을 다루는 메서드를 리턴
+    return contactList.toArray(); // 배열을 다루는 메서드를 리턴
   }
 
   @RequestMapping("/contact/add")
   public Object add(Contact contact) {
     //System.out.println(contact); // 인스턴스의 값을 보고싶으면 ?
-    ArrayList.add(contactList, contact);
-    return contactList.size;
+    contactList.add(contact);
+    return contactList.size();
   }
 
   @RequestMapping("/contact/get")
@@ -31,17 +33,17 @@ public class ContactController {
     if (index == -1) {
       return"";
     } //else { // else 생략 가능?
-    return contactList.list[index]; // Contact 인스턴스 리턴 => JSON형식 ?
+    return contactList.get(index); // Contact 인스턴스 리턴 => JSON형식 ?
     //}
   };
 
   @RequestMapping("contact/update")
   public Object update(Contact contact) {
-    int index = indexOf(contact.email);
+    int index = indexOf(contact.getEmail());
     if (index == -1) {
       return 0;
     }
-    return ArrayList.set(contactList, index, contact) == null ? 0 : 1;
+    return contactList.set(index, contact) == null ? 0 : 1;
   };
 
   @RequestMapping("/contact/delete")
@@ -50,7 +52,7 @@ public class ContactController {
     if (index == -1) {
       return 0;
     }
-    ArrayList.remove(contactList, index); // → 메서드의 이름으로 코드의 의미를 짐작할 수 있다. ⇒ 이것이 메서드로 분리하는 이유이다.
+    contactList.remove(index); // → 메서드의 이름으로 코드의 의미를 짐작할 수 있다. ⇒ 이것이 메서드로 분리하는 이유이다.
     return 1;
   };
 
@@ -58,9 +60,9 @@ public class ContactController {
   // - 이메일로 연락처 정보를 찾는다.
   // - 찾은 연락처의 배열 인덱스를 리턴한다.
   int indexOf(String email) {
-    for (int i = 0; i < contactList.size ; i++) {
-      Contact contact = (Contact) contactList.list[i];
-      if (contact.email.equals(email)) {  // 예) "u1@test.com"
+    for (int i = 0; i < contactList.size(); i++) {
+      Contact contact = (Contact) contactList.get(i);
+      if (contact.getEmail().equals(email)) {  // 예) "u1@test.com"
         return i;
       }
     }

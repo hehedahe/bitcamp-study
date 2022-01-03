@@ -31,20 +31,28 @@ public class Exam0120 {
 
   public static void main(String[] args) {
 
-    Score s = new Score();
-    s.name = "홍길동";
-    s.kor = 100;
-    s.eng = 90;
-    s.math = 85;
+    Score s1 = new Score();
+    s1.name = "홍길동";
+    s1.kor = 100;
+    s1.eng = 90;
+    s1.math = 85;
 
     // 다음은 Score의 값을 다루는 연산자가 없을 때의 예이다.
     //    s.sum = s.kor + s.eng + s.math; 
     //    s.average = s.sum / 3f;
 
-    // 사용자 정의 데이터 타입의 값을 연산자를 사용하여 다뤄보자!
-    Score.calculate(s);
+    Score s2 = new Score();
+    s2.name = "채다해";
+    s2.kor = 10;
+    s2.eng = 20;
+    s2.math = 30;
 
-    System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s.name, s.kor, s.eng, s.math, s.sum, s.average);
+    // 사용자 정의 데이터 타입의 값을 연산자를 사용하여 다뤄보자!
+    Score.calculate(s1);
+    Score.calculate(s2);
+
+    System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s1.name, s1.kor, s1.eng, s1.math, s1.sum, s1.average);
+    System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s2.name, s2.kor, s2.eng, s2.math, s2.sum, s2.average);
   }
 }
 

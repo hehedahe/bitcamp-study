@@ -28,11 +28,12 @@
 
     fetch(`/board/add?title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
+        console.log(typeof xTitle.value);
         return response.text();
       })
       .then(function(text) {
         console.log(text);
-        location.href = "index.html";
+        // location.href = "index.html";
       });
     };
 
