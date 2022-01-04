@@ -8,35 +8,41 @@ package com.eomcs.oop.ex02;
 // 6) 클래스를 패키지로 분류한다.
 public class ExamTest2 {
 
-  public static void main(String[] args) {
-    // 2 + 3 - 1 * 7 / 3 = ?
+  static class Calculator {
 
     int result = 0;
 
-    result = plus(2, 3);
-    result = minus(result, 1);
-    result = multiple(result, 7);
-    result = divide(result, 3);
+    void plus(int value) {
+      result += value;
+    }
 
-    System.out.printf("result = %d\n", result);
+    void minus(int value) {
+      result -= value;
+    }
+
+    void multiple(int value) {
+      result *= value;
+    }
+
+    void divide(int value) {
+      result /= value;
+    }
+  }
+
+  public static void main(String[] args) {
+    // 2 + 3 - 1 * 7 / 3 = ?
+
+    Calculator.plus(2);
+    Calculator.plus(3);
+    Calculator.minus(1);
+    Calculator.multiple(7);
+    Calculator.divide(3);
+
+    System.out.printf("result = %d\n", Calculator.result);
   }
 
 
-  static int plus(int a, int b) {
-    return a + b;
-  }
 
-  static int minus(int a, int b) {
-    return a - b;
-  }
-
-  static int multiple(int a, int b) {
-    return a * b;
-  }
-
-  static int divide(int a, int b) {
-    return a / b;
-  }
 
 
 }

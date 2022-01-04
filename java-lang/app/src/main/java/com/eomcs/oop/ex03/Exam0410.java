@@ -25,7 +25,7 @@ public class Exam0410 {
     // => 보통 인스턴스를 만든 후에 인스턴스 변수를 초기화시키는 용도로 정의한다.
     // => 생성된 인스턴스가 제대로 쓰일 수 있도록 유효한 값으로 초기화시키는 일을 한다.
     // => 다음과 파라미터가 없는 생성자가 기본 생성자이다.(default constructor)
-    Score() {
+    public Score() {
       System.out.println("Score()");
     }
 
@@ -47,6 +47,8 @@ public class Exam0410 {
     //    Score s2 = new Score;
 
     Score s3 = new Score();
+
+    //    s3.Score(); // 생성자는 따로 호출할 수 없다!
   }
 }
 
