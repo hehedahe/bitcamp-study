@@ -13,36 +13,34 @@ public class ExamTest2 {
     int result = 0;
 
     void plus(int value) {
-      result += value;
+      this.result += value;
     }
 
     void minus(int value) {
-      result -= value;
+      this.result -= value;
     }
 
     void multiple(int value) {
-      result *= value;
+      this.result *= value;
     }
 
     void divide(int value) {
-      result /= value;
+      this.result /= value;
     }
+
   }
 
   public static void main(String[] args) {
     // 2 + 3 - 1 * 7 / 3 = ?
 
-    Calculator.plus(2);
-    Calculator.plus(3);
-    Calculator.minus(1);
-    Calculator.multiple(7);
-    Calculator.divide(3);
+    Calculator c = new Calculator();
 
-    System.out.printf("result = %d\n", Calculator.result);
+    c.plus(2);
+    c.plus(3);
+    c.minus(1);
+    c.multiple(7);
+    c.divide(3);
+
+    System.out.printf("result = %d\n", c.result);
   }
-
-
-
-
-
 }
