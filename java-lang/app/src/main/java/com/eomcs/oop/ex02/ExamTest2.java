@@ -11,16 +11,31 @@ public class ExamTest2 {
   public static void main(String[] args) {
     // 2 + 3 - 1 * 7 / 3 = ?
 
-    Calculator c = new Calculator();
+    int result = 0;
 
-    c.result = 2;
+    result = plus(2, 3);
+    result = minus(result, 1);
+    result = multiple(result, 7);
+    result = divide(result, 3);
 
-    Calculator.plus(c, 3);
-    Calculator.minus(c, 1);
-    Calculator.multiple(c, 7);
-    Calculator.divide(c, 3);
+    System.out.printf("result = %d\n", result);
+  }
 
-    System.out.printf("result = %d\n", c.result);
+
+  static int plus(int a, int b) {
+    return a + b;
+  }
+
+  static int minus(int a, int b) {
+    return a - b;
+  }
+
+  static int multiple(int a, int b) {
+    return a * b;
+  }
+
+  static int divide(int a, int b) {
+    return a / b;
   }
 
 
