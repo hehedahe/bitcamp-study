@@ -45,9 +45,9 @@ public class Exam0130 {
 
 // ## 클래스의 코드를 사용하는 시점?
 // - 스태틱 멤버(필드와 메서드)를 사용할 때
-//     예) A.v1 = 200; ← 스태틱 변수 사용
-//     예) System.out.println(A.v1); ← 스태틱 변수 out 사용
-//     예) Integer.parseInt(..); ← 스태틱 메서드 parseInt() 사용
+//     예) A.v1 = 200; <--- 스태틱 변수 사용
+//     예) System.out.println(A.v1); <--- 스태틱 변수 out 사용
+//     예) Integer.parseInt(..); <--- 스태틱 메서드 parseInt() 사용
 // - new 명령을 사용하여 인스턴스를 생성할 때
 //     예) new A();
 // - 한 번 클래스가 로딩되면 JVM을 종료할 때까지 유지한다.
@@ -117,3 +117,5 @@ public class Exam0130 {
 //    - 주의! 
 //      Heap에는 개발자가 작성한 명령어가 없다.
 //
+
+
