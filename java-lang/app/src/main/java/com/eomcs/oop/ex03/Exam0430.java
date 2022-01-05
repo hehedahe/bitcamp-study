@@ -11,8 +11,22 @@ public class Exam0430 {
     int sum;
     float average;
 
+    // 초기화시키는 메서드
+    // void init() {
+    //    this.name = "이름없음";
+    //    this.kor = 50;
+    //    this.eng = 50;
+    //    this.math = 50;
+    //    this.compute();
+    // } 
+
     Score() {
       System.out.println("Score()");
+      this.name = "이름없음";
+      this.kor = 50;
+      this.eng = 50;
+      this.math = 50;
+      this.compute();
     }
 
     Score(String name) {
@@ -42,6 +56,8 @@ public class Exam0430 {
     //
     // 인스턴스 생성 후에 나중에 따로 생성자를 호출할 수 없다!
     //    s1.Score("홍길동", 100, 90, 77); // 컴파일 오류!
+
+    //    s1.init(); // 생성자 대신 초기화시키는 메서드 실행
 
     Score s2 = new Score("유관순");
     Score s3 = new Score("홍길동", 100, 90, 77);
