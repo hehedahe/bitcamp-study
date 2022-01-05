@@ -24,6 +24,8 @@ public class Exam0691 {
   public static void main(String[] args) {
     System.out.println(A.a); // ?
     System.out.println(B.b); // ?
+    // => A클래스를 로딩할 때 B클래스는 이미 로딩되기 때문에 
+    // System.out.println(B.b); 에서는 스태틱 필드 b의 값만을 가져온다. (중복 로딩 X)
 
     // 클래스 로딩 절차
     // 1) 클래스를 Method Area에 로딩한다.
