@@ -7,6 +7,10 @@ public class Board {
   int viewCount;
   java.sql.Date createdDate;
 
+  public Board() {
+    System.out.println("Contact() 호출됨!");
+  }
+
   @Override
   public String toString() {
     return "Board [title=" + title + ", content=" + content + ", viewCount="
