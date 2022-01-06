@@ -1,6 +1,6 @@
 package com.eomcs.mylist.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Book {
   String title;
