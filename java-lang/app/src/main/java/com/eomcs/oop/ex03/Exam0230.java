@@ -8,10 +8,11 @@ public class Exam0230 {
 
     // 주의!
     // => 이름에 인스턴스가 붙었다고 해서 인스턴스 메서드는 Heap에 만들어지는 것이 아니다!
-    // => 클래스의 모든 코드는 Method Area 영역에 로딩 된다.
+    // => 클래스의 모든 코드는 Method Area 영역에 로딩된다.
     public void plus(int value) {
       this.result += value;
     }
+
     public void minus(int value) {
       this.result -= value;
     }
@@ -29,8 +30,8 @@ public class Exam0230 {
     // c1이 가리키는 인스턴스를 가지고 Method Area에 있는 plus()를 호출한다.
     c1.plus(123);
 
-    // c2가 가리키는 인스턴스를 가지고 Method Area에 있는 minus()를 호출한다.
-    c2.minus(30);
+    // c2가 가리키는 인스턴스를 가지고 Method Area에 있는 plus()를 호출한다.
+    c2.plus(30);
   }
 }
 

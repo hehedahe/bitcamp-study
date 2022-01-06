@@ -30,6 +30,7 @@ public class Exam0520 {
 
     System.out.printf("%d, %d, %d, %d, %c, %.1f, %.1f, %b, %s, %s\n", 
         obj.b2, obj.s2, obj.i2, obj.l2, obj.c2, obj.f2, obj.d2, obj.bool2, obj.str2, obj.date2);
+    // character 타입은 0으로 초기화되면 빈 문자로 리턴된다.
   }
 }
 

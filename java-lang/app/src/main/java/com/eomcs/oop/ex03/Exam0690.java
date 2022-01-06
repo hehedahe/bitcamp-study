@@ -10,6 +10,8 @@ public class Exam0690 {
     static {
       pi = 3.14159f;
     }
+    // static float pi = 2.14159f;
+    // 스태틱 초기화가 간단할 경우 스태틱 블록으로 나누지 말고, 위 문장처럼 한 번에 작성하자!
 
     static float area(int r) {
       return pi * r * r;

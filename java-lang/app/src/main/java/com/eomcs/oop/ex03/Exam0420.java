@@ -11,7 +11,10 @@ public class Exam0420 {
     int sum;
     float average;
 
-    // 생성자가 한 개라도 있으면 컴파일러는 기본 생성자를 만들어주지 않는다.
+    // 생성자가 한 개라도 있으면 
+    // 컴파일러는 자동으로 기본 생성자(defualt constructor)를 만들어주지 않는다.
+    //Score() {}
+
     Score(String name, int kor, int eng, int math) {
       System.out.println("Score(String,int,int,int) 호출!");
 
@@ -53,7 +56,7 @@ public class Exam0420 {
 }
 
 // 생성자?
-// => 인스턴스(객체)를 생성한 후에 사용하기 전에(제대로 쓰일 수 있도록) 
+// => 인스턴스(객체)를 생성한 후에 사용하기 전에 (제대로 쓰일 수 있도록) 
 //    유효한(적당한) 값으로 초기화시키는 작업을 수행한다.
 // 
 

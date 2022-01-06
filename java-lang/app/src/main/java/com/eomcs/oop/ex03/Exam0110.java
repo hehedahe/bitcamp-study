@@ -7,14 +7,14 @@ public class Exam0110 {
   // 지금 당장 A 클래스 앞에 붙은 static은 고민하지 말라!
   // 이 예제의 목표는 인스턴스 변수이다.
   static class A {
-    // 인스턴스 변수
+    // 인스턴스 변수 = 논스태틱 변수(필드)
     // => new 명령을 통해 생성된다.
     // => new 명령을 실행하기 전까지는 인스턴스 변수는 존재하지 않는다.
     // => Heap 영역에 생성된다.
     // => static이 붙지 않는다.
     int v1; // 4바이트 int 값을 저장할 메모리를 만들라는 명령!
     boolean v2; // true/false 논리값을 저장할 메모리를 만들라는 명령!
-    // 이 명령은 new 명령을 실행할 때 비로서 실행된다.
+    // 이 명령은 new 명령을 실행할 때 비로소 실행된다.
   }
 
   public static void main(String[] args) {

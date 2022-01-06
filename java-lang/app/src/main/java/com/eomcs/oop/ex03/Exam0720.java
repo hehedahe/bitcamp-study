@@ -15,10 +15,6 @@ public class Exam0720 {
     // - 다음과 같이 인스턴스 초기화 블록을 사용하여 생성자에 공통으로 들어갈
     //   코드를 작성하면 된다.
     //
-    {
-      a = 100;
-      System.out.println("인스턴스 초기화 블록 실행!");
-    }
 
     // 생성자가 있으면,
     // - 존재하는 생성자의 앞 부분에 삽입된다.
@@ -26,6 +22,11 @@ public class Exam0720 {
     public A() {
       a = 200;
       System.out.println("A() 생성자 호출");
+    }
+
+    {
+      a = 500;
+      System.out.println("인스턴스 초기화 블록 실행!");
     }
   }
 

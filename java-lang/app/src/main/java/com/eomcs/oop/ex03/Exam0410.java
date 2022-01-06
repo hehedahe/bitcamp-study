@@ -4,7 +4,7 @@ package com.eomcs.oop.ex03;
 public class Exam0410 {
 
   // Exam0410 클래스 조차도 기본 생성자가 자동으로 추가된다.
-  // 즉 다음의 생성자를 컴파일러가 자동으로 붙일 것이다.
+  // 즉, 다음의 생성자를 컴파일러가 자동으로 붙일 것이다.
   //public Exam0410() {}
 
   static class Score {
@@ -24,11 +24,11 @@ public class Exam0410 {
     //    따라서 모든 클래스는 반드시 한 개 이상의 생성자가 있다.
     // => 보통 인스턴스를 만든 후에 인스턴스 변수를 초기화시키는 용도로 정의한다.
     // => 생성된 인스턴스가 제대로 쓰일 수 있도록 유효한 값으로 초기화시키는 일을 한다.
+    //
     // => 다음과 파라미터가 없는 생성자가 기본 생성자이다.(default constructor)
-    Score() {
+    public Score() {
       System.out.println("Score()");
     }
-
 
     public void compute() {
       this.sum = this.kor + this.eng + this.math;
@@ -47,6 +47,8 @@ public class Exam0410 {
     //    Score s2 = new Score;
 
     Score s3 = new Score();
+
+    //    s3.Score(); // 생성자는 따로 호출할 수 없다!
   }
 }
 
