@@ -23,5 +23,4 @@ public class Calculator2 {
   public int getResult() {
     return origin.result;
   }
-
 }
