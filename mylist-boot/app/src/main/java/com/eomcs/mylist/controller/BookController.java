@@ -1,6 +1,5 @@
 package com.eomcs.mylist.controller;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,7 @@ public class BookController {
     bookList  = new ArrayList();
     System.out.println("BookController() 호출됨!");
 
-    FileReader in = new FileReader("books.csv");
+    com.eomcs.io.FileReader2 in = new com.eomcs.io.FileReader2("books.csv");
 
     StringBuilder buf = new StringBuilder();
 

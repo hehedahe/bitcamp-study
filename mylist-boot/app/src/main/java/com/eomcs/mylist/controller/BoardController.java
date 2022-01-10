@@ -1,6 +1,5 @@
 package com.eomcs.mylist.controller;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,7 @@ public class BoardController {
   public BoardController() throws Exception {
     System.out.println("BoardController() 호출됨!");
 
-    FileReader in = new FileReader("boards.csv");
+    com.eomcs.io.FileReader2 in = new com.eomcs.io.FileReader2("boards.csv");
 
     StringBuilder buf = new StringBuilder();
 
