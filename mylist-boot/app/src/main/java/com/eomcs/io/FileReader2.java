@@ -28,4 +28,9 @@ public class FileReader2 {
     }
     return buf.toString();
   }
+
+  // 자원해제하라는 요청이 들어오면 실제 일을 하는 객체에게 전달한다.
+  public void close() throws Exception {
+    this.close();
+  }
 }
