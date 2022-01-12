@@ -19,8 +19,6 @@ public class Exam0110 {
     static float plusf(float a, float b) {
       return a + b;
     }
-
-
   }
 
   public static void main(String[] args) {
