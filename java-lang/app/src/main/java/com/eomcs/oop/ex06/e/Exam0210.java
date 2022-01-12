@@ -20,12 +20,12 @@ class B {
 }
 public class Exam0210 extends B {
 
-  // final 메서드는 오버라이딩 불가!
+  // final 메서드는 오버라이딩 불가! => Cannot override the final method from B
   //
-  //  @Override
-  //  void m1() {
-  //
-  //  }
+  //    @Override
+  //    void m1() {
+  //  
+  //    }
 
   // 일반 메서드는 오버라이딩 가능!
   @Override

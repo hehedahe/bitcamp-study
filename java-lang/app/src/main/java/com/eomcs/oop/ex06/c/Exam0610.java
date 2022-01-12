@@ -5,6 +5,7 @@ public class Exam0610 {
 
   static class Car {}
   static class Sedan extends Car {}
+  static class Truck extends Car {}
   static class Tico extends Sedan {}
 
   static class CarFactory {
@@ -31,6 +32,13 @@ public class Exam0610 {
     }
   }
 
+  // 
+  //  static class TicoFactory extends SedanFactory {
+  //    @Override
+  //    Truck create() {
+  //      return new Truck();
+  //    }
+  //  }
 
   public static void main(String[] args) {
 

@@ -21,3 +21,4 @@ public final class Exam0510 {
     g.m1(100);
   }
 }
+
