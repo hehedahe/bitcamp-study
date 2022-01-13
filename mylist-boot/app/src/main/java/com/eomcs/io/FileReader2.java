@@ -9,28 +9,30 @@ public class FileReader2 {
   FileReader in;
 
   public FileReader2(String filename) throws Exception {
-    // 기존 객체를 준비한다. 
+    // 기존 객체를 준비한다.
     in = new FileReader(filename);
   }
 
   public String readLine() throws Exception {
     StringBuilder buf = new StringBuilder();
 
-    int c;
-    while ((c = in.read()) != -1) { // 파일에서 한 문자를 읽는다. 더이상 읽을 문자가 없으면 반복문을 종료한다.
-      if (c == '\n') { // 만약 읽은 문자가 줄바꿈 명령이라면, 지금까지 버퍼에 저장한 문자를 리턴한다.
+    int c = in.read();
+    while (c != -1) { // 파일에서 한 문자를 읽는다. 더이상 읽을 문자가 없으면 반복문을 종료한다.
+      if (c == '\n') {
         return buf.toString();
-      } else if ( c == '\r') {
-        // 무시! CR(Carriage Return; \r) 코드는 버퍼에 담지 맑고 버린다.
-      } else { // 문자를 읽을 때마다 버퍼에 임시 보관한다. 
-        buf.append((char) c);
+      } else if (c == '\r') {
+        // 무시! CR (Carriage Return; \r) 코드는 버퍼에 담지 말고 버린다.
+      } else { // 문자를 읽을 때마다 버퍼에 임시 보관한다.
+        buf.append((char)c);
       }
     }
     return buf.toString();
   }
 
-  // 자원해제하라는 요청이 들어오면 실제 일을 하는 객체에게 전달한다.
+
+  // 자원해제 하라는 요청이 들어오면 실제 일을 하는 객체에게 전달한다.
   public void close() throws Exception {
     this.close();
   }
+
 }
