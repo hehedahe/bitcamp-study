@@ -25,8 +25,6 @@ public class Exam0520 {
     }
 
     in.close();
-
-    System.out.println(strbuf.toString());
   }
 
 }
