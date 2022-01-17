@@ -28,7 +28,6 @@ public class Exam0120 {
     // 3) 읽기 도구를 닫는다.
     in.close();
 
-
   }
 
 }
