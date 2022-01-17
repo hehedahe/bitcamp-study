@@ -10,7 +10,7 @@ public class Exam0310 {
     // - 폴더 경로를 지정하지 않으면 현재 폴더를 의미한다.
     //
     File dir = new File("temp");
-    if (dir.mkdir()) { // 디렉토리 생성
+    if (dir.mkdir()) { // 디렉토리 생성 -> 생성됐으면 true, 아니면 false 리턴
       System.out.println("temp 디렉토리를 생성하였습니다.");
     } else {
       System.out.println("temp 디렉토리를 생성할 수 없습니다.");

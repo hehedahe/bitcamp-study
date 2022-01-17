@@ -14,13 +14,13 @@ public class Exam0210 {
     //
     File file1 = new File("./src/main/java/Hello2.java");
     System.out.printf("파일명: %s\n", file1.getName());
-    System.out.printf("파일크기: %d\n", file1.length());
+    System.out.printf("파일크기: %d\n", file1.length()); // byte
     System.out.printf("경로: %s\n", file1.getPath());
     System.out.printf("절대경로: %s\n", file1.getAbsolutePath());
     System.out.printf("계산된 절대경로: %s\n", file1.getCanonicalPath());
 
     // 존재하지 않는 폴더인 경우 크기를 알아낼 수 없다.
-    System.out.printf("총크기: %d\n", file1.getTotalSpace());
+    System.out.printf("총크기: %d\n", file1.getTotalSpace()); // 하드디스크 총 크기
     System.out.printf("남은크기: %d\n", file1.getFreeSpace());
     System.out.printf("가용크기: %d\n", file1.getUsableSpace());
 
@@ -29,7 +29,7 @@ public class Exam0210 {
     System.out.printf("파일여부: %b\n", file1.isFile());
     System.out.printf("감춤여부: %b\n", file1.isHidden());
     System.out.printf("존재여부: %b\n", file1.exists());
-    System.out.printf("실행가능여부: %b\n", file1.canExecute());
+    System.out.printf("실행가능여부: %b\n", file1.canExecute()); // 읽을 수 있냐? 접근할 수 있냐?
   }
 
 }

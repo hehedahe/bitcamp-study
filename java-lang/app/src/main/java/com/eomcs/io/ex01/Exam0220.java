@@ -28,7 +28,7 @@ public class Exam0220 {
     System.out.printf("디렉토리여부: %b\n", file1.isDirectory());
     System.out.printf("파일여부: %b\n", file1.isFile());
     System.out.printf("감춤여부: %b\n", file1.isHidden());
-    System.out.printf("존재여부: %b\n", file1.exists());
+    System.out.printf("존재여부: %b\n", file1.exists()); // 존재 여부 확인 후 사용하기!
     System.out.printf("실행가능여부: %b\n", file1.canExecute());
   }
 
