@@ -8,7 +8,7 @@ public class Exam0121 {
 
   public static void main(String[] args) throws Exception {
     // 1) 파일의 데이터를 읽을 객체를 준비한다. 
-    // => 파일의 문자집합을 명시할 수 있다.
+    //    => 파일의 문자집합을 명시할 수 있다.
     Charset charset = Charset.forName("UTF-8");
     FileReader in = new FileReader("sample/utf8.txt", charset); // 41 42 ea b0 80 ea b0 81
 
@@ -19,11 +19,11 @@ public class Exam0121 {
     System.out.printf("file.encoding=%s\n", System.getProperty("file.encoding"));
 
     // file.encoding이 UTF-8로 되어 있다면,
-    // => 영어는 1바이를 읽어서 2바이트 UCS2로 변환한다.
+    // => 영어는 1바이트를 읽어서 2바이트 UCS2로 변환한다.
     int ch1 = in.read(); // 41 => 0041('A')
     int ch2 = in.read(); // 42 => 0042('B')
 
-    // => 한글은 3바이를 읽어서 2바이트 UCS2로 변환한다.
+    // => 한글은 3바이트를 읽어서 2바이트 UCS2로 변환한다.
     int ch3 = in.read(); // ea b0 80 => ac00('가')
     int ch4 = in.read(); // ea b0 81 => ac01('각')
 

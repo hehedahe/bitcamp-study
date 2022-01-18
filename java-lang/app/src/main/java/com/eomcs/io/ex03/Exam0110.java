@@ -20,7 +20,7 @@ public class Exam0110 {
     // - JVM은 문자 데이터를 다룰 때 UCS2(UTF16BE, 2바이트) 유니코드를 사용한다.
     // - character stream 클래스 FileWriter는 문자 데이터를 출력할 때
     //   UCS2 코드를 JVM 환경변수 file.encoding에 설정된 character set 코드(UTF-8)로 변환하여 출력한다.
-    // - JVM 실행할 때 -Dfile.encoding=문자집합 옵션으로 기본 문자 집합을 설정한다.
+    // - JVM 실행할 때 [-Dfile.encoding=문자집합] 옵션으로 기본 문자 집합을 설정한다.
     //   만약 file.encoding 옵션을 설정하지 않으면 OS의 기본 문자집합(MS-949)으로 자동 설정된다.
     //
     //   Linux, macOS 의 기본 character set => UTF-8
@@ -46,8 +46,7 @@ public class Exam0110 {
     // - 단, character set을 지정할 때는 해당 OS에서 사용가능한 문자표이어야 한다.
     //   MS Windows에서는 ms949 문자표를 사용할 수 있지만,
     //   리눅스나 macOS에서는 ms949 문자표를 사용할 수 없다.
-    //   왜?
-    //   국제 표준이 아니기 때문이다.
+    //   왜? -> 국제 표준이 아니기 때문이다.
     //
     // [이클립스에서 실행]
     // - JVM을 실행할 때 '-Dfile.encoding=UTF-8' 옵션을 자동으로 붙인다.
