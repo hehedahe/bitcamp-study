@@ -17,5 +17,3 @@ public class Exam0120 {
     System.out.printf("%1$x(%1$d)\n", value);
   }
 }
-
-
