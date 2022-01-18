@@ -53,7 +53,6 @@ public class Exam0320 {
     // 해결책?
     // - ByteArrayInputStream을 상속 받아 이런 기능을 수행하는 메서드를 추가하라!
     // - DataInputStream 클래스처럼 만들라!
-
   }
 
 }

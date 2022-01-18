@@ -25,6 +25,11 @@ public class Exam0310 {
     // 일관성 있는 규칙이 생기게 되는 것이다.
     // 규칙이 있다는 것은 코딩을 매우 편하게 만든다.
 
+    //    for (int i = 0; i < buf.length; i++) {
+    //      System.out.printf("%02x ", buf[i]);
+    //    }
+    // 위와 같은 코드로 쳐도 되지만 일관성을 위해 아래 코드로 작성했다!
+
     int b;
 
     while (true) {
