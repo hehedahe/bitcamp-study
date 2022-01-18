@@ -2,6 +2,7 @@ package com.eomcs.io.ex05;
 
 import java.io.FileOutputStream;
 
+// FileOutputStream 을 상속받아 기능 확장 = DataFileOutputStream
 public class DataFileOutputStream extends FileOutputStream {
 
   public DataFileOutputStream(String filename) throws Exception {

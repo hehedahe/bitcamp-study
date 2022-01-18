@@ -9,9 +9,9 @@ public class Exam0110 {
     FileOutputStream out = new FileOutputStream("temp/test4.data");
 
     Member member = new Member();
-    member.name = "AB가각간";
-    member.age = 27;
-    member.gender = true;
+    member.name = "AB가각간"; // 영어 1바이트, 한글 3바이트 => 총 11바이트
+    member.age = 27; // 숫자 4바이트
+    member.gender = true; // 1바이트
 
     // 인스턴스의 값을 출력하라!
     // 1) 이름 출력 
