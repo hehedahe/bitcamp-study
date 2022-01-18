@@ -8,7 +8,7 @@ public class Exam0120 {
   public static void main(String[] args) throws Exception {
 
     // 1) 파일의 데이터를 읽는 일을 하는 객체를 준비한다.
-    FileReader in = new FileReader("sample/utf8.txt"); // 41 42 ea b0 81 ea b0 81
+    FileReader in = new FileReader("sample/utf8.txt"); // 41 42 ea b0 80 ea b0 81
 
     // 2) JVM 환경 변수 'file.encoding'에 설정된 문자코드표에 따라
     //    바이트를 읽어서 UCS2로 바꾼 후에 리턴한다.

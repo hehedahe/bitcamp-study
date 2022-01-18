@@ -16,7 +16,7 @@ public class Exam0320 {
 
     in.close();
 
-    System.out.printf("%d\n", count);
+    System.out.printf("%d\n", count); // count 리턴값은 3이다.
 
     for (int i = 0; i < 20; i++)
       System.out.printf("%c(%04x) ", buf[i], (int) buf[i]);

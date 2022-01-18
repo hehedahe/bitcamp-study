@@ -10,7 +10,7 @@ public class Exam0121 {
     // 1) 파일의 데이터를 읽을 객체를 준비한다. 
     // => 파일의 문자집합을 명시할 수 있다.
     Charset charset = Charset.forName("UTF-8");
-    FileReader in = new FileReader("sample/utf8.txt", charset); // 41 42 ea b0 81 ea b0 81
+    FileReader in = new FileReader("sample/utf8.txt", charset); // 41 42 ea b0 80 ea b0 81
 
     // 2) 출력 스트림 객체를 생성할 때 파일의 문자 집합을 지정하면 
     //    JVM 환경 변수 'file.encoding'에 설정된 값은 무시한다. 

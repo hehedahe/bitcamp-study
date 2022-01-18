@@ -10,7 +10,7 @@ public class Exam0310 {
 
     char[] chars = new char[] {'A','B','C','가','각','간','똘','똥'}; 
 
-    out.write(chars, 2, 3); // 2번 문자부터 3 개의 문자를 출력한다.
+    out.write(chars, 2, 3); // 2번 문자부터 3개의 문자를 출력한다.
 
     out.close();
 
