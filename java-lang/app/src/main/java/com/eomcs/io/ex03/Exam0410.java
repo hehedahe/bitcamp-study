@@ -16,7 +16,7 @@ public class Exam0410 {
 
     System.out.println("데이터 출력 완료!");
 
-    // 41 42 ea b0 80 ea b0 81 <- UTF-8 ?
+    // 41 42 ea b0 80 ea b0 81 <- UTF-8
   }
 
 }
