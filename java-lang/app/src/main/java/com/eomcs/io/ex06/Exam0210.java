@@ -22,3 +22,8 @@ public class Exam0210 {
     System.out.printf("경과된 시간: %d\n", end - start);
   }
 }
+
+
+
+
+
