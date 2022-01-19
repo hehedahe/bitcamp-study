@@ -8,7 +8,7 @@ public class Exam0110 {
 
   public static void main(String[] args) throws Exception {
     FileOutputStream fileOut = new FileOutputStream("temp/members.data");
-    DataOutputStream out = new DataOutputStream(fileOut);
+    DataOutputStream out = new DataOutputStream(fileOut); // Java에서 갖고 있는 데코레이터
 
     Member member = new Member();
     member.name = "AB가각간";
