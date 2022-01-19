@@ -2,10 +2,10 @@ package com.eomcs.mylist.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,23 +21,28 @@ public class BoardController {
   public BoardController() throws Exception {
     System.out.println("BoardController() 호출됨!");
 
-    DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("boards.data")));
+    try {
 
-    while (true) {
-      try {
-        Board board = new Board();
-        board.setTitle(in.readUTF());
-        board.setContent(in.readUTF());
-        board.setViewCount(in.readInt());
-        board.setCreatedDate(Date.valueOf(in.readUTF()));
+      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("boards.ser")));
 
-        boardList.add(board);
+      // 1) 객체가 각각 따로 serialize 되었을 경우, 다음과 같이 객체 단위로 읽으면 되고, 
+      //    while (true) {
+      //      try {
+      //        Board board = (Board) in.readObject(); // 내부적으로 객체를 만들어서 객체 주소를 리턴
+      //        boardList.add(board);
+      //
+      //      } catch (Exception e) {
+      //        break;
+      //      }
+      //    }
 
-      } catch (Exception e) {
-        break;
-      }
+      // 2) 목록이 통째로 serialize 되었을 경우, 한 번에 목록을 읽으면 된다.
+      boardList = (ArrayList) in.readObject(); // 단, 기존에 생성한 ArrayList 객체는 버린다.
+      in.close();
+    } catch(Exception e) {
+      System.out.println("게시판 데이터를 로딩하는 중에 오류 발생!");
     }
-    in.close();
+
   } 
 
   @RequestMapping("/board/list")
@@ -60,7 +65,6 @@ public class BoardController {
     }
     Board board = (Board)boardList.get(index);
     board.setViewCount(board.getViewCount() + 1);
-    save();
     return board;
   };
 
@@ -80,23 +84,24 @@ public class BoardController {
   public Object delete(int index) throws Exception {
     if (index < 0 || index >= boardList.size())
       return 0;
+    save();
     return boardList.remove(index) == null ? 0 : 1;
   }
 
   @RequestMapping("/board/save")
   public Object save() throws Exception {
-    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("boards.data")));
+    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("boards.ser")));
 
-    Object[] arr = boardList.toArray();
-    for(Object obj : arr) {
-      Board board = (Board) obj;
-      out.writeUTF(board.getTitle());
-      out.writeUTF(board.getContent());
-      out.writeInt(board.getViewCount());
-      out.writeUTF(board.getCreatedDate().toString());
-    }
+    // 1) 다음과 같이 목록에 들어있는 객체를 한 개씩 순차적으로 serialize 할 수 도 있고,
+    //    Object[] arr = boardList.toArray();
+    //    for(Object obj : arr) {
+    //      out.writeObject(obj);
+    //    }
+
+    // 2) 다음과 같이 목록 자체를 serialize 할 수 도 있다.
+    out.writeObject(boardList);
 
     out.close();
-    return arr.length;
+    return boardList.size();
   }
 }
