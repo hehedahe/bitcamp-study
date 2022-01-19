@@ -104,6 +104,4 @@ public class ArrayList {
     return this.list[index];
   }
 
-
-
 }

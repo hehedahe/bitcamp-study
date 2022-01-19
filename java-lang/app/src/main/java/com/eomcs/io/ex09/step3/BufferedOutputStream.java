@@ -16,7 +16,7 @@ public class BufferedOutputStream extends DecoratorOutputStream {
 
   @Override
   public void write(int b) throws IOException {
-    if (cursor == buf.length) { // 버퍼가 다차면
+    if (cursor == buf.length) { // 버퍼가 다 차면
       연결된부품.write(buf); // 버퍼에 들어있는 데이터를 한 번에 출력한다.
       cursor = 0; // 다시 커서를 초기화시킨다.
     }
