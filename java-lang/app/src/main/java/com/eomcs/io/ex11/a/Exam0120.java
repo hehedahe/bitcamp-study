@@ -19,7 +19,7 @@ public class Exam0120 {
 
     in.close();
 
-    System.out.println(member);
+    System.out.println(member); // Member 객체
   }
 }
 

@@ -11,6 +11,7 @@ public class Exam0210 {
     // => DataOutputStream의 기능을 포함한다.
     // => 인스턴스를 바이트 배열로 만들어 출력하는 기능(writeObject())이 있다.
     // => 단 java.io.Serializable 인터페이스를 구현한 클래스에 대해서만 가능하다.
+    // => implements java.io.Serializable
     //
     FileOutputStream fileOut = new FileOutputStream("temp/member2.data");
     ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -26,7 +27,7 @@ public class Exam0210 {
     // - java.io.Serializable 이 선언된 클래스의 객체만 출력할 수 있다.
     // - 인스턴스의 필드 값을 바이트 배열로 만들어(직렬화) 출력한다.
     // - 인스턴스의 필드의 값만 출력하는 것이 아니다.
-    // - 클래스 이름과 인스턴 변수의 정보도 함께 출력한다.
+    // - 클래스 이름과 인스턴스 변수의 정보도 함께 출력한다.
     //       출력데이터 = 클래스이름 + 인스턴스 변수 정보 + 인스턴스 변수 값
     //
     out.writeObject(member);

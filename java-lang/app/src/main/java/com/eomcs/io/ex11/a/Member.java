@@ -7,6 +7,6 @@ public class Member {
 
   @Override
   public String toString() {
-    return "Member [name=" + name + ", age=" + age + ", gender=" + gender + "]";
-  }
+    return "Member [name=" + /*this.*/name + ", age=" + age + ", gender=" + gender + "]";
+  } // Java에서는 this. 생략해도 되지만 JS에서는 안된다.
 }

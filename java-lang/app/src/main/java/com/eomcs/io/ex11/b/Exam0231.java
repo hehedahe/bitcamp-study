@@ -3,7 +3,7 @@ package com.eomcs.io.ex11.b;
 
 public class Exam0231 {
 
-  static class Score {
+  static class Score /*extends java.lang.Object*/{ // 수퍼클래스를 지정하지 않으면 java.lang.Object가 자동으로 붙는다.
     String name;
 
     // 복제 기능을 수행하려면 clone()을 오버라이딩 해야 한다.
@@ -17,7 +17,8 @@ public class Exam0231 {
 
     Score obj = new Score();
 
-    System.out.println(obj instanceof Cloneable);
+    System.out.println(obj instanceof Cloneable); // false => 이 Score 객체는 복제가 지원되지 않는 클래스입니다!
+    // => clone() 할 수 없습니다!
 
     Score copy = obj.clone(); // 런타임(run-time) 오류!
     // Object에서 상속 받은 clone()을 호출하려면
