@@ -11,8 +11,8 @@ public class Exam0120 {
     FileInputStream in = new FileInputStream("temp/jls11.pdf");
     BufferedInputStream in2 = new BufferedInputStream(in);
 
-    FileOutputStream out = new FileOutputStream("temp/jls11_3.pdf");
-    BufferedOutputStream out2 = new BufferedOutputStream(out);
+    FileOutputStream out = new FileOutputStream("temp/jls11_3.pdf"); // 2) 출력하라고 하는거야
+    BufferedOutputStream out2 = new BufferedOutputStream(out); // 1) 버퍼가 꽉 찰 때까지 기다렸다가
 
     int b;
 
