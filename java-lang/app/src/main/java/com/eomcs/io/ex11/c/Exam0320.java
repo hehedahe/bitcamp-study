@@ -39,7 +39,7 @@ public class Exam0320 {
     // serialize 할 때 사용할 클래스와 deserialize 할 때 사용할 클래스가
     // 같은지 검사하는 방법?
     // (serialize 할 때 사용한 Member 클래스와
-    // deserialize 할 때 사용할 Member 클래스가 동일한 클래스인지 검사하는 방법)
+    //  deserialize 할 때 사용할 Member 클래스가 동일한 클래스인지 검사하는 방법)
     // - 클래스에 내장된 스태틱 변수인 serialVersionUID 의 값을 비교한다.
     //
     // serialVersionUID 스태틱 변수?

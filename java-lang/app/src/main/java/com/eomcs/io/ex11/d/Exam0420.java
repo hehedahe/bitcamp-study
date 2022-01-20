@@ -32,4 +32,3 @@ public class Exam0420 {
     //   JVM은 같은 형식으로 판단한다.
   }
 }
-
