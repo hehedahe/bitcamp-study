@@ -13,7 +13,7 @@ public class Exam0230 {
     ByteArrayInputStream in1 = new ByteArrayInputStream(buf);
 
     // 문자열, int, long, boolean 값을 읽는 것은 DataInputStream 에 맡긴다.
-    // =>ByteArrayInputStream에  DataInputStream 기능을 덧붙인다.
+    // => ByteArrayInputStream에 DataInputStream 기능을 덧붙인다.
     DataInputStream in2 = new DataInputStream(in1);
 
     Member member = new Member();

@@ -21,9 +21,8 @@ public class Exam0120 {
     while ((b = in2.read()) != -1)
       out2.write(b);
 
-    // 아직 파일로 출력되지 않고 버퍼 남아 있는 데이터를
-    // 마무리로 출력한다.
-    out2.flush();
+    out2.flush(); // 아직 파일로 출력되지 않고 버퍼에 남아 있는 데이터를 마무리로 출력한다.
+
 
     long endTime = System.currentTimeMillis();
 
