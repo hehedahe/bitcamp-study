@@ -28,7 +28,7 @@ public class Exam0141 {
     obj2.age = 20;
 
     System.out.println(obj1 == obj2); // false
-    System.out.println(obj1.equals(obj2)); // false
+    System.out.println(obj1.equals(obj2)); // false => 오버라이딩한 게 아니니 java.lang.Object.equals()
 
     System.out.println(Integer.toHexString(obj1.hashCode()));
     System.out.println(Integer.toHexString(obj2.hashCode()));
