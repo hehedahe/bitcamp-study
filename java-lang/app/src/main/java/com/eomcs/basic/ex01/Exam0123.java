@@ -35,13 +35,13 @@ public class Exam0123 {
   }
 
   public static void main(String[] args) {
-    
+
     Score s1 = new Score("홍길동", 100, 100, 100);
-    
+
     String str = s1.toString();
     // Score 클래스에서 Object의 toString()을 오버라이딩 했기 때문에,
     // Score의 toString()을 호출한다.
-    
+
     System.out.println(str);
 
     // println()에 String이 아닌 객체를 넘기면,
@@ -53,8 +53,6 @@ public class Exam0123 {
     // 굳이 toString()을 번거롭게 호출하지 말라! 
   }
 }
-
-
 
 
 
