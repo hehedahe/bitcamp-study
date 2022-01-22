@@ -19,7 +19,7 @@ public class Exam0211 {
 
     // 이렇게 wrapper 클래스를 사용하면
     // 객체로 다룰 수 있다.
-    Long obj1 = Long.valueOf(l);
+    Long obj1 = Long.valueOf(l); // 자바의 모든 인스턴스는 Object의 서브 클래스이다!
     Double obj2 = Double.valueOf(d);
     Boolean obj3 = Boolean.valueOf(bool);
 
@@ -45,10 +45,11 @@ public class Exam0211 {
 
   // wapper 클래스는 primitive type의 값을 객체로 다룰 수 있게 해준다.
   // primitive type에 상관없이 Object 타입의 파라미터로 값을 받을 수 있다.
-  static void m(Object value) { // 모든 객체를 받을 수 있다.
+  static void m(Object value) { // Object의 모든 서브 클래스의 객체를 받을 수 있다.
     System.out.printf("wrapper value=%s\n", value);
   }
 }
+
 
 
 

@@ -17,6 +17,8 @@ public class Exam0220 {
     Integer obj2 = Integer.valueOf(200);
     int i2 = obj2.intValue();
 
+    //    Integer test = 100; // 우변에는 인스턴스 주소가 들어가야하는데 오류가 발생하지 않는 이유?
+    // => 컴파일러가 자동으로 100 -> Integer.valueOf(100) 으로 코드를 바꿔준다.
   }
 }
 
