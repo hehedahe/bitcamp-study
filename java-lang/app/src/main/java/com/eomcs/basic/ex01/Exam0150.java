@@ -25,7 +25,7 @@ public class Exam0150 {
     Student s3 = new Student("임꺽정", 21, true);
     Student s4 = new Student("유관순", 22, true);
 
-    System.out.println(s1 == s2);
+    System.out.println(s1 == s2); // false
 
     // 인스턴스가 다르면 hash code도 다르다.
     System.out.println(s1.hashCode());
@@ -37,7 +37,7 @@ public class Exam0150 {
     // 해시셋(집합)에 객체를 보관한다.
     HashSet<Student> set = new HashSet<Student>();
     set.add(s1);
-    set.add(s2); // 이미 s2의 해시값과 같은 객체(s1)가 들어 있기 때문에 중복을 막기 위해 s2는 저장되지 않는다.
+    set.add(s2);
     set.add(s3);
     set.add(s4);
 

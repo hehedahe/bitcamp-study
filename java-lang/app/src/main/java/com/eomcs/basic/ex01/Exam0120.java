@@ -39,8 +39,9 @@ public class Exam0120 {
 
     System.out.println(obj2 == obj3);
 
-    System.out.println(obj2.toString());
-    System.out.println(obj3.toString());
+    System.out.println(obj2.toString()); // com.eomcs.basic.ex01.Exam0120$My@53d8d10a
+    System.out.println(obj3.toString()); // com.eomcs.basic.ex01.Exam0120$My@e9e54c2
+    // => 클래스 이름은 같지만, 인스턴스가 다르기 때문에 식별 번호는 다르다.
   }
 
 }

@@ -22,8 +22,8 @@ public class Exam0131 {
     obj2.gender = 1;
     obj2.working = false;
 
-    System.out.println(obj1 == obj2);
-    System.out.println(obj1.equals(obj2));
+    System.out.println(obj1 == obj2); // false
+    System.out.println(obj1.equals(obj2)); // true
 
     // 결론!
     // => Object에서 상속 받은 것을 그대로 사용하면 equals()는 인스턴스가 같은지 비교한다.

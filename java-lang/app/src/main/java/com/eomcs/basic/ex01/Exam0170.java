@@ -53,6 +53,7 @@ public class Exam0170 {
     // Object에서 상속 받은 clone()을 호출한다.
     //    Score s3 = s1.clone(); // 컴파일 오류! 
     // => Score는 Exam0170과 상관없는 클래스!
+    // => Score에서 상속받은 Score의 clone()이고, 현재 main()는 Exam0170 클래스안에 있기 때문이다.
     //
     // Object에서 상속 받은 clone()은 protected 이다. 
     // 따라서 같은 패키지에 소속된 클래스이거나 상속 받은 서브 클래스가 아니면 호출할 수 없다.
@@ -71,7 +72,6 @@ public class Exam0170 {
 
   // 테스트용 인스턴스 메서드
   void m1() throws Exception {
-
     // Exam0170이 상속 받은 clone()이 아니다.
     // protected 멤버는 오직 자신이 상속 받은 경우에만 접근할 수 있다.
     //    Score score = new Score();

@@ -18,7 +18,7 @@ public class Exam0132 {
     Member m1 = new Member("홍길동", 20);
     Member m2 = new Member("홍길동", 20);
 
-    System.out.println(m1 == m2);
+    System.out.println(m1 == m2); // false
 
     // equals()
     // => 이 메서드는 Object에 정의된 메서드이다.
@@ -26,7 +26,7 @@ public class Exam0132 {
     // => 두 개의 인스턴스가 같은 인스턴스인지 비교한다.
     // => == 연산자와 동일하게 동작한다.
     //
-    System.out.println(m1.equals(m2));
+    System.out.println(m1.equals(m2)); // false
     // m1과 m2는 다른 인스턴스이기 때문에 결과는 당연히 false 이다.
 
     System.out.println("-----------------------");
@@ -34,9 +34,9 @@ public class Exam0132 {
     String s1 = new String("Hello");
     String s2 = new String("Hello");
 
-    System.out.println(s1 == s2);
+    System.out.println(s1 == s2); // false
 
-    System.out.println(s1.equals(s2));
+    System.out.println(s1.equals(s2)); // true
     // 위의 실행 결과를 보면 s1과 s2가 서로 다른 인스턴스인데도 불구하고
     // true를 리턴한다.
     // 이유?

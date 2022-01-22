@@ -58,7 +58,7 @@ public class Exam0151 {
     System.out.println(s1 == s2);
 
     System.out.println(s1.hashCode());
-    System.out.println(s2.hashCode());
+    System.out.println(s2.hashCode());  // 이미 s2의 해시값과 같은 객체(s1)가 들어 있기 때문에 중복을 막기 위해 s2는 저장되지 않는다.
     System.out.println(s3.hashCode());
     System.out.println(s4.hashCode());
     System.out.println("--------------------");

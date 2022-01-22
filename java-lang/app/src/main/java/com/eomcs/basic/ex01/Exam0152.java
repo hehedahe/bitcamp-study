@@ -37,7 +37,6 @@ public class Exam0152 {
     // HashMap
     // => 값을 저장할 때 key 객체의 해시코드를 이용하여 저장할 위치(인덱스)를 계산한다.
     // => 따라서 해시코드가 같다면 같은 key로 간주한다.
-    // 
 
     // 값을 저장할 때 사용한 key 객체로 값을 찾아 꺼낸다.
     System.out.println(map.get(k3));
