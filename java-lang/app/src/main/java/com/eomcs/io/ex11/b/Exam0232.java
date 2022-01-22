@@ -26,7 +26,7 @@ public class Exam0232 {
 
     Score copy = obj.clone();
 
-    System.out.println(obj == copy); // OK! Score3 클래스는 복제를 허락했기 때문이다. => 서로 다른 객체이다.
+    System.out.println(obj == copy); // OK! Score 클래스는 복제를 허락했기 때문이다. => 서로 다른 객체이다.
     System.out.println(obj.name);
     System.out.println(copy.name);
 
