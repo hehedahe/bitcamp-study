@@ -1,5 +1,6 @@
 package com.eomcs.app1;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
@@ -10,28 +11,24 @@ public class App {
   public static void main(String[] args) {
 
     while (true) {
-      String input = prompt();
+      Command command = prompt();
 
-      if (input.equals("exit") || input.equals("quit")) {
+      if (command.getName().equals("exit") || command.getName().equals("quit")) {
         break;
-      } else if(input.length() == 0) {
-        continue;
+      } else if(command.getName().equals("")) {
+        continue; 
 
-      } else if(input.equals("help")) {
+      } else if(command.getName().equals("help")) {
         doHelp();
 
+      } else if (command.getName().equals("add")) {
+        doAdd(command);
+
+      } else if (command.getName().equals("minus")) {
+        doMinus(command);
+
       } else {
-        String[] values = input.split(" ");
-
-        if (values[0].equals("add")) {
-          doAdd(values);
-
-        } else if (values[0].equals("minus")) {
-          doMinus(values);
-
-        } else {
-          System.out.println("지원하지 않는 연산자입니다.");
-        }
+        System.out.println("지원하지 않는 연산자입니다.");
       }
     }
 
@@ -39,9 +36,11 @@ public class App {
   }
 
   // 1) main()에서 직접 호출해야 하니 static으로 만들기
-  static String prompt() {
+  static Command prompt() {
     System.out.print("> ");
-    return keyScan.nextLine();
+    String[] values = keyScan.nextLine().split(" "); // add 100 200
+
+    return new Command(values[0], Arrays.copyOfRange(values, 1, values.length));
   }
 
   // 3) doHelp()
@@ -53,27 +52,27 @@ public class App {
   }
 
   // 4) doAdd()
-  static void doAdd(String[] values) {
-    if (values.length != 3) {
+  static void doAdd(Command command) {
+    if (command.getParamSize() != 2) {
       System.out.println("add 명령어 입력 형식이 옳바르지 않습니다.");
       System.out.println("형식: add 값1 값2");
       System.out.println("예) add 100 200");
     } else {
-      int v1 = Integer.parseInt(values[1]);
-      int v2 = Integer.parseInt(values[2]);
+      int v1 = command.getInt(0);
+      int v2 = command.getInt(1);
       System.out.printf("%d + %d = %d\n", v1, v2, (v1 + v2));
     }
   }
 
   // 5) doMinus()
-  static void doMinus(String[] values) {
-    if (values.length != 3) {
+  static void doMinus(Command command) {
+    if (command.getParamSize() != 2) {
       System.out.println("minus 명령어 입력 형식이 옳바르지 않습니다.");
       System.out.println("형식: minus 값1 값2");
       System.out.println("예) minus 100 200");
     } else {
-      int v1 = Integer.parseInt(values[1]);
-      int v2 = Integer.parseInt(values[2]);
+      int v1 = command.getInt(0);
+      int v2 = command.getInt(1);
       System.out.printf("%d - %d = %d\n", v1, v2, (v1 - v2));
     }
   }
