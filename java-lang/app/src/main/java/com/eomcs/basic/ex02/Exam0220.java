@@ -9,7 +9,7 @@ public class Exam0220 {
     // 인스턴스의 담긴 primitive 값을 다시 꺼내는 일("언박싱(unboxing)"이라 부른다)은
     // 매우 불편한다.
 
-    // int ==> Integer
+    // int값 ==> Integer 객체
     int i1 = 100;
     Integer obj1 = Integer.valueOf(i1);
 
@@ -19,6 +19,11 @@ public class Exam0220 {
 
     //    Integer test = 100; // 우변에는 인스턴스 주소가 들어가야하는데 오류가 발생하지 않는 이유?
     // => 컴파일러가 자동으로 100 -> Integer.valueOf(100) 으로 코드를 바꿔준다.
+    // => "오토 박싱"
+
+    // int v = obj;
+    // => 컴파일러가 obj -> obj.intValue() 로 코드를 변경한다.
+    // => "오토 언박싱"
   }
 }
 

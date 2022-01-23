@@ -37,5 +37,3 @@ public class Exam0224 {
     System.out.println(obj instanceof Integer);
   }
 }
-
-

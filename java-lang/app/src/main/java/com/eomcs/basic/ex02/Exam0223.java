@@ -24,5 +24,3 @@ public class Exam0223 {
     System.out.println(obj.toString());
   }
 }
-
-
