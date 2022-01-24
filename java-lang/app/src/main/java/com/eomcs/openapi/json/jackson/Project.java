@@ -1,4 +1,4 @@
-package com.eomcs.openapi.json.gson.jackson;
+package com.eomcs.openapi.json.jackson;
 
 import java.sql.Date;
 import java.util.ArrayList;

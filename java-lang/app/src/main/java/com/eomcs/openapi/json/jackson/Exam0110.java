@@ -1,5 +1,5 @@
 // 객체 --> JSON 문자열 : 객체의 필드 값을 json 형식의 문자열로 만들기
-package com.eomcs.openapi.json.gson.jackson;
+package com.eomcs.openapi.json.jackson;
 
 import java.sql.Date;
 import com.fasterxml.jackson.databind.ObjectMapper;

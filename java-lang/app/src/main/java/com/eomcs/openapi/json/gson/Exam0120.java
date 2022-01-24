@@ -1,7 +1,6 @@
 // JSON 문자열 --> 객체 : JSON 문자열을 해석하여 객체를 생성하기
 package com.eomcs.openapi.json.gson;
 
-import com.eomcs.openapi.json.gson.jackson.Member;
 import com.google.gson.Gson;
 
 public class Exam0120 {
@@ -14,7 +13,7 @@ public class Exam0120 {
     Gson gson = new Gson();
 
     // 3) JSON 문자열을 가지고 객체 만들기
-    Member m = gson.fromJson(jsonStr, Member.class); // JSON 형식을 받아 Member 객체에 담아 리턴 ?
+    Member m = gson.fromJson(jsonStr, Member.class);
 
     System.out.println(m);
   }

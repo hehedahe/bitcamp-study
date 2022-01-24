@@ -1,7 +1,6 @@
 // JSON 문자열 --> 객체 : 다른 객체를 포함하는 경우
 package com.eomcs.openapi.json.gson;
 
-import com.eomcs.openapi.json.gson.jackson.Board;
 import com.google.gson.Gson;
 
 public class Exam0420 {

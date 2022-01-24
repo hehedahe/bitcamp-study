@@ -3,7 +3,6 @@ package com.eomcs.openapi.json.gson;
 
 import java.lang.reflect.Type;
 import java.util.Collection;
-import com.eomcs.openapi.json.gson.jackson.Member;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

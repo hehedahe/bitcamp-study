@@ -1,4 +1,4 @@
-package com.eomcs.openapi.json.gson.jackson;
+package com.eomcs.openapi.json.jackson;
 
 public class ManagerParam {
   int no;

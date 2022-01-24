@@ -2,8 +2,6 @@
 package com.eomcs.openapi.json.gson;
 
 import java.sql.Date;
-import com.eomcs.openapi.json.gson.jackson.Manager;
-import com.eomcs.openapi.json.gson.jackson.ManagerParam;
 import com.google.gson.Gson;
 
 public class Exam0712 {

@@ -1,7 +1,6 @@
 // JSON 문자열 --> 객체 : 배열 다루기
 package com.eomcs.openapi.json.gson;
 
-import com.eomcs.openapi.json.gson.jackson.Member;
 import com.google.gson.Gson;
 
 public class Exam0220 {

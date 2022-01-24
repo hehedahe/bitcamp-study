@@ -1,5 +1,5 @@
 // JSON 문자열 --> 객체 : JSON 문자열을 해석하여 객체를 생성하기
-package com.eomcs.openapi.json.gson.jackson;
+package com.eomcs.openapi.json.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

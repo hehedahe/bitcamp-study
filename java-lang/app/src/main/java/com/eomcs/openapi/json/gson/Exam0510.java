@@ -3,8 +3,6 @@ package com.eomcs.openapi.json.gson;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import com.eomcs.openapi.json.gson.jackson.Member;
-import com.eomcs.openapi.json.gson.jackson.Project;
 import com.google.gson.Gson;
 
 public class Exam0510 {

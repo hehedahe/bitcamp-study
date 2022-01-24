@@ -1,4 +1,4 @@
-package com.eomcs.utility;
+package com.eomcs.util;
 
 public class ArrayList implements java.io.Serializable {
 
@@ -11,6 +11,7 @@ public class ArrayList implements java.io.Serializable {
   // 즉, non-static 메서드로 정의해야 한다.
   // 그리고 메서드가 호출될 때 받은 인스턴스를 사용하려면 내장 변수 this를 이용해야 한다.
 
+
   // 기능: 
   // - 배열에 항목을 추가한다.
   // - 배열이 꽉 찼으면 배열의 크기를 늘린다.
@@ -20,6 +21,12 @@ public class ArrayList implements java.io.Serializable {
       this.list = this.grow(); // 메서드 이름에서 해당 코드에 대한 설명을 짐작할 수 있다. => 배열을 늘려라!
     }
     this.list[this.size++] = obj; // 인스턴스 주소(레퍼런스)가 들어옴
+  }
+
+  public void addAll(Object[] arr) {
+    for (Object obj : arr) {
+      this.add(obj);
+    }
   }
 
   // 기능:

@@ -1,15 +1,15 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Contact;
-import com.eomcs.utility.ArrayList;
+import com.eomcs.util.ArrayList;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 // 이 클래스가 클라이언트 요청 처리 담당자임을 표시한다.
@@ -26,8 +26,14 @@ public class ContactController {
     System.out.println("ContactController() 호출됨!");
 
     try {
-      ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("contacts.ser")));
-      contactList = (ArrayList) in.readObject();
+      BufferedReader in = new BufferedReader(new FileReader("contacts.json"));
+
+      ObjectMapper mapper = new ObjectMapper();
+      Contact[] contacts = mapper.readValue(in.readLine(), Contact[].class);
+
+      for(Contact contact : contacts) {
+        contactList.add(contact);
+      }
       in.close();
     } catch (Exception e) {
       System.out.println("연락처 데이터를 로딩하는 중에 오류 발생!");
@@ -81,9 +87,11 @@ public class ContactController {
 
   @RequestMapping("/contact/save")
   public Object save() throws Exception {
-    ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("contacts.ser")));
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("contacts.json")));
 
-    out.writeObject(contactList);
+    ObjectMapper mapper = new ObjectMapper(); 
+    out.println(mapper.writeValueAsString(contactList.toArray()));
+
     out.close();
     return contactList.size();
   }
