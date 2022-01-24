@@ -11,15 +11,20 @@ import com.eomcs.util.ArrayList;
 public class CsvBoardDao {
   ArrayList boardList = new ArrayList();
 
-  public CsvBoardDao() throws Exception {
-    BufferedReader in = new BufferedReader(new FileReader("boards.csv"));
+  public CsvBoardDao() {
+    try {
+      BufferedReader in = new BufferedReader(new FileReader("boards.csv"));
 
-    String csvStr;
-    while ((csvStr = in.readLine()) != null) {
-      boardList.add(Board.valueOf(csvStr)); 
+      String csvStr;
+      while ((csvStr = in.readLine()) != null) {
+        boardList.add(Board.valueOf(csvStr)); 
+      }
+
+      in.close();
+
+    } catch (Exception e) {
+      System.out.println("게시글 데이터 로딩 중 오류 발생!");
     }
-
-    in.close();
   }
 
 
@@ -34,13 +39,40 @@ public class CsvBoardDao {
 
     out.flush();
     out.close();
-
   }
 
   public int countAll() {
     return boardList.size();
   }
 
+  public Object[] findAll() {
+    return boardList.toArray();
+  }
 
+  public void insert(Board board) {
+    boardList.add(board);
+  }
 
+  public Board findByNo(int no) {
+    if (no < 0 || no >= boardList.size()) {
+      return null;
+    }
+    return (Board) boardList.get(no);
+  }
+
+  public int update(int no, Board board) {
+    if (no < 0 || no >= boardList.size()) {
+      return 0; // update 과정 중에서 지워진 게시물은 무효하기 때뭉네?
+    }
+    boardList.set(no, board);
+    return 1;
+  }
+
+  public int delete(int no) {
+    if (no < 0 || no >= boardList.size()) {
+      return 0;
+    }
+    boardList.remove(no);
+    return 1;
+  }
 }
