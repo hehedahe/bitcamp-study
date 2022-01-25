@@ -20,7 +20,9 @@ public class BoardController {
   public Object add(Board board) throws Exception {
     board.setCreatedDate(new Date(System.currentTimeMillis()));
     boardDao.insert(board);
-    save();
+    // 어떤 메서드를 호출할 때 인스턴스 주소를 주면서 호출해야 한다.
+    // boardDao 변수에 들어있는 인스턴스 주소로 가서, 그 안에 있는 변수들을 사용해서 insert() 메서드를 사용해
+    // 그 변수 = boardList 변수
     return boardDao.countAll();
   }
 
@@ -30,8 +32,7 @@ public class BoardController {
     if (board == null) {
       return "";
     }
-    board.setViewCount(board.getViewCount() + 1);
-    save();
+    boardDao.increaseViewCount(index);
     return board;
   }
 
@@ -45,20 +46,12 @@ public class BoardController {
     board.setViewCount(old.getViewCount());
     board.setCreatedDate(old.getCreatedDate());
 
-    save();
-
     return boardDao.update(index, board);
   }
 
   @RequestMapping("/board/delete")
   public Object delete(int index) throws Exception {
-    save();
     return boardDao.delete(index);
   }
 
-  @RequestMapping("/board/save")
-  public Object save() throws Exception {
-    boardDao.save();
-    return boardDao.countAll();
-  }
 }

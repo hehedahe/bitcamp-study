@@ -1,25 +1,24 @@
 package com.eomcs.mylist.dao;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
-import java.io.FileReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.util.ArrayList;
 
-public class CsvBoardDao { 
-  // variables initializer 변수 선언에 값을 초기화시키는 문장
-  ArrayList boardList = new ArrayList(); // 변수 선언 = 변수를 만들라는 명령!
+public class BinaryBoardDao {
+  ArrayList boardList = new ArrayList();
 
-  public CsvBoardDao() {
+  public BinaryBoardDao() {
     try {
-      BufferedReader in = new BufferedReader(new FileReader("boards.csv"));
+      DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream("boards.bin")));
 
       String csvStr;
       while ((csvStr = in.readLine()) != null) {
-        /*this.*/boardList.add(Board.valueOf(csvStr)); 
-        // => 컴파일러는 boardList가 이 메서드 안에서 로컬변수가 아닐 때만 this. 를 붙인다.
+        boardList.add(Board.valueOf(csvStr)); 
       }
 
       in.close();
@@ -30,7 +29,7 @@ public class CsvBoardDao {
   }
 
 
-  private void save() throws Exception {
+  public void save() throws Exception {
     PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("boards.csv")));
 
     Object[] arr = boardList.toArray();
@@ -51,9 +50,8 @@ public class CsvBoardDao {
     return boardList.toArray();
   }
 
-  public void insert(Board board) throws Exception {
+  public void insert(Board board) {
     boardList.add(board);
-    this.save(); // this 생략 가능 
   }
 
   public Board findByNo(int no) {
@@ -63,27 +61,19 @@ public class CsvBoardDao {
     return (Board) boardList.get(no);
   }
 
-  public int update(int no, Board board) throws Exception {
+  public int update(int no, Board board) {
     if (no < 0 || no >= boardList.size()) {
       return 0; // update 과정 중에서 지워진 게시물은 무효하기 때뭉네?
     }
     boardList.set(no, board);
-    this.save();
     return 1;
   }
 
-  public int delete(int no) throws Exception {
+  public int delete(int no) {
     if (no < 0 || no >= boardList.size()) {
       return 0;
     }
     boardList.remove(no);
-    this.save();
     return 1;
-  }
-
-  public void increaseViewCount(int no) throws Exception {
-    Board board = findByNo(no);
-    board.setViewCount(board.getViewCount() + 1);
-    save();
   }
 }
