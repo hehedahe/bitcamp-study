@@ -12,7 +12,7 @@ public class ToolA implements Spec {
 
   // => 인터페이스에 선언된 메서드가 public 이기 때문에 이 메서드를 구현하는 클래스에서는
   //    public 보다 낮은 접근을 지정할 수 없다.
-  //    즉 무조건 public 메서드이다.
+  //    즉, 무조건 public 메서드이다.
   //
   @Override
   public void m1() {
