@@ -108,5 +108,7 @@ public class Exam0130 {
 
   public static void main(String[] args) {
     new Exam0130().test();
+    // 예) 
+    // ArrayList, LinkedList, Vector 3개 모두 List interface 를 구현했다.
   }
 }
