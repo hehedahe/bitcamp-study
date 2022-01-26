@@ -4,16 +4,16 @@ package com.eomcs.oop.ex09.b;
 // 1) 인터페이스 정의
 interface MyInterface {
   // 규칙1) 인터페이스에 선언되는 모든 메서드는 public 이다.
-  //   - 인터페이스에 정의하는 메서드는 호출 규칙이다.
-  //   - 규칙은 공개되어야 한다.
+  //         - 인터페이스에 정의하는 메서드는 호출 규칙이다.
+  //         - 규칙은 공개되어야 한다.
   // 규칙2) 인터페이스에 선언되는 모든 메서드는 추상 메서드로 선언한다.
-  //   - 인터페이스에 선언하는 메서드는 호출 규칙을 정의한 것이다.
-  //   - 규칙은 클래스가 따라야 한다.
-  //   - 그래서 인터페이스에 선언되는 모든 메서드는 몸체를 구현하지 않는다.
+  //        - 인터페이스에 선언하는 메서드는 호출 규칙을 정의한 것이다.
+  //        - 규칙은 클래스가 따라야 한다.
+  //        - 그래서 인터페이스에 선언되는 모든 메서드는 몸체를 구현하지 않는다.
   public abstract void m1();
 
   // public 을 생략할 수 있다.
-  abstract void m2(); // public 이 생략된 것이다. (default) 아니다!
+  abstract void m2(); // 인터페이스에서는 public 이 생략된 것이다. (default) 아니다!
 
   // abstract 를 생략할 수 있다.
   public void m3();
@@ -33,15 +33,15 @@ abstract class MyInterfaceImpl implements MyInterface {
   @Override
   public void m1() {}
 
-  // public 보다 접근 범위를 좁힐 수는 없다.
+  // 오버라이딩하는 메서드(public)보다 접근 범위를 좁힐 수는 없다.
   @Override
-  //  private void m2() {}  // 컴파일 오류!
+  //    private void m2() {}  // 컴파일 오류! 
   //  protected void m2() {} // 컴파일 오류!
   //  void m2() {} // 컴파일 오류!
   public void m2() {} // OK!
 
   // 인터페이스의 모든 메서드를 구현해야 한다.
-  // 한 개라도 빠뜨린다면 concrete 클래스가 될 수 없다.
+  // 한 개라도 빠뜨린다면 추상 메서드로 남아있기 때문에 concrete 클래스가 될 수 없다.
   // 추상 클래스로 선언해야 한다.
 }
 
