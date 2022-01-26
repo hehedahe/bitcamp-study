@@ -15,9 +15,9 @@ abstract class Letter {
   // => 자세한 구현은 서브 클래스에 맡긴다.
   public void print() { // <== 템플릿 메서드 디자인 패턴에서 "템플릿 메서드"에 해당한다. 
     this.printHeader();
-    System.out.println(this.content);
+    System.out.println(/*this.*/content); // 실무에서는 this. 를 생략한다.
     System.out.println();
-    System.out.printf("              From %s!\n", this.getSign());
+    System.out.printf("              From %s!\n", /*this.*/getSign());
     System.out.println();
     this.printFooter();
   }
