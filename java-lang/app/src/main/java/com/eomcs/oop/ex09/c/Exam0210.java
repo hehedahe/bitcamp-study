@@ -13,7 +13,7 @@ public class Exam0210 {
   }
 
   // 인터페이스는 단지 규칙이기 때문에
-  // (즉 아직 구현하지 않은 메서드이기 떄문에)
+  // (즉, 아직 구현하지 않은 메서드이기 때문에)
   // 다중 구현이 가능하다.
   class ProtocolImpl implements ProtocolA, ProtocolB {
     // ProtocolA 규칙 준수!

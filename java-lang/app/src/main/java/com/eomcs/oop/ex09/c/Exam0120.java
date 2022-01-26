@@ -30,7 +30,7 @@ public class Exam0120 {
     @Override
     public void rule3() {System.out.println("rule3()");}
 
-
+    public void m1() {System.out.println("m1()");}
   }
 
   void test() {
@@ -53,7 +53,7 @@ public class Exam0120 {
     c.rule1(); // OK
     c.rule2(); // OK
     c.rule3(); // OK
-    c.m1();
+    //    c.m1(); // 컴파일 오류!
     System.out.println("-------------------------------");
 
     //    b.rule1(); // 컴파일 오류!
