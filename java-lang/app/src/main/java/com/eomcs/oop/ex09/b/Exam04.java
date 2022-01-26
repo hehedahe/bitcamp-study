@@ -21,6 +21,7 @@ interface MyInterface4 {
   // 언제?
   // - 해당 기능을 m2()와 m3() 처럼 여러 메서드에서 사용해야 할 경우
   //   그 공통 코드를 다음과 같이 private 구현 메서드로 정의하면 될 것이다.
+  //
   private void x() {
     System.out.println("MyInterface4.x()");
   }
@@ -31,7 +32,7 @@ class MyInterface4Impl implements MyInterface4 {
   @Override
   public void m1() {
 
-    //    m2(); // 아래 오버라이딩한 m2()
+    //    m2(); // 44번 줄에서 오버라이딩한 m2() 메서드
 
     // 인터페이스에 선언된 다른 default 메서드를 호출하고 싶다면,
     MyInterface4.super.m2(); // super를 빼면 안된다.

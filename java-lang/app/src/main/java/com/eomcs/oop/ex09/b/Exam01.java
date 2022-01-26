@@ -24,7 +24,7 @@ interface MyInterface {
   // => private, protected, (default)는 없다.
   //  private void m5(); // 컴파일 오류!
   //  protected void m6(); // 컴파일 오류!
-  void m7(); // 이건 (default) 아니라, public 이 생략된 것이다.
+  void m7(); // 이건 (default) 아니라, public 이 생략된 것이다. + abstract 도 생략되었다.
 
 }
 
@@ -35,7 +35,7 @@ abstract class MyInterfaceImpl implements MyInterface {
 
   // 오버라이딩하는 메서드(public)보다 접근 범위를 좁힐 수는 없다.
   @Override
-  //    private void m2() {}  // 컴파일 오류! 
+  //  private void m2() {}  // 컴파일 오류! 
   //  protected void m2() {} // 컴파일 오류!
   //  void m2() {} // 컴파일 오류!
   public void m2() {} // OK!

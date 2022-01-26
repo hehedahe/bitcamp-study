@@ -10,7 +10,7 @@ public class CalculatorTest {
 
     c.plus(100);
     c.minus(200);
-    //    c.multiple(2); // 기존 클래스에 새로 추가한 메서드를 호출한다.
+    c.multiple(2); // 기존 클래스에 새로 추가한 메서드를 호출한다.
 
     System.out.println(c.result);
 
