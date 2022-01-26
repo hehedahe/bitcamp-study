@@ -1,7 +1,6 @@
 // 인터페이스 다중 상속과 구현
 package com.eomcs.oop.ex09.c;
 
-
 public class Exam0120 {
 
   interface ProtocolA {
@@ -30,11 +29,18 @@ public class Exam0120 {
     // ProtocolC 규칙 준수!
     @Override
     public void rule3() {System.out.println("rule3()");}
+
+
   }
 
   void test() {
 
     ProtocolImpl obj = new ProtocolImpl();
+    obj.rule1(); // OK
+    obj.rule2(); // OK
+    obj.rule3(); // OK
+    obj.m1();
+    System.out.println("-------------------------------");
 
     // 1) 인터페이스 레퍼런스로 구현체의 주소 받기
     ProtocolC c = obj;
@@ -47,6 +53,7 @@ public class Exam0120 {
     c.rule1(); // OK
     c.rule2(); // OK
     c.rule3(); // OK
+    c.m1();
     System.out.println("-------------------------------");
 
     //    b.rule1(); // 컴파일 오류!
