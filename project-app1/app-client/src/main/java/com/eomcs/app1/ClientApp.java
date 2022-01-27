@@ -10,7 +10,7 @@ public class ClientApp {
     System.out.println("[계산기 클라이언트]");
 
     // 1) 서버 애플리케이션과 네트워크 연결을 수행한다.
-    Socket socket = new Socket("localhost", 8888); // 서버와 연결될 때까지 객체를 생성하지 않는다.
+    Socket socket = new Socket("15.164.228.156", 8888); // 서버와 연결될 때까지 객체를 생성하지 않는다.
     //    Socket socket = new Socket("localhost", 8888); 
     System.out.println("서버와 연결되었음!");
 
