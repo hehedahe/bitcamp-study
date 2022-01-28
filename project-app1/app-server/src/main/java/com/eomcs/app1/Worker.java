@@ -18,37 +18,39 @@ public class Worker extends Thread {
       Scanner in = new Scanner(socket.getInputStream());
       PrintStream out = new PrintStream(socket.getOutputStream());
 
-      String request = in.nextLine();
-
-      String[] values = request.split(" ");
+      String queryString = in.nextLine();
+      String[] values = queryString.split("/");
 
       if (values.length != 3) {
-        out.println("계산식이 올바르지 않습니다.");
+        out.println("닿> 계산식이 올바르지 않습니다.");
       } else {
-        int a = Integer.parseInt(values[0]);
-        String op = values[1];
+        String op = values[0];
+        if (op.equals("%2f")) {
+          op = "/"; // %2f 문자열을 원래의 문자인 / 로 디코딩한다.
+        }
+        int a = Integer.parseInt(values[1]);
         int b = Integer.parseInt(values[2]);
         int result = 0; 
 
         switch (op) {
           case "+": 
             result = a + b;
-            out.printf("%d %s %d = %d", a, op, b, result);
+            out.printf("닿> %d %s %d = %d", a, op, b, result);
             break;
           case "-": 
             result = a - b;
-            out.printf("%d %s %d = %d", a, op, b, result);
+            out.printf("닿> %d %s %d = %d", a, op, b, result);
+            break;
+          case "*": 
+            result = a * b;
+            out.printf("닿> %d %s %d = %d", a, op, b, result);
             break;
           case "/": 
-            for (int i = 0; i < 10000000; i++) {
-              result = (int) (Math.random() * Math.random() * Math.sin(0.45));
-              result += (int) (Math.random() * Math.random() * Math.sin(0.45));
-            }
             result = a / b;
-            out.printf("%d %s %d = %d", a, op, b, result);
+            out.printf("닿> %d %s %d = %d", a, op, b, result);
             break;
           default:
-            out.println("지원하지 않는 연산자입니다.");
+            out.println("닿> 지원하지 않는 연산자입니다.");
             break;
         }
       }
