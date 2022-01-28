@@ -23,9 +23,9 @@ public class ClientApp {
         break;
       }
 
-      int slashPos = input.indexOf("/"); // 예) +/100/200, */3/7, -/100/73, //12/3
+      int slashPos = input.indexOf("/"); // / 문자 위치를 리턴
       String serverAddress = input.substring(0, slashPos);
-      String queryString = input.substring(slashPos + 1); // substring(시작주소)
+      String queryString = input.substring(slashPos + 1); // substring(시작주소) => // 예) +/100/200, */3/7, -/100/73, //12/3
 
       // 1) 서버 애플리케이션과 네트워크 연결을 수행한다.
       Socket socket = new Socket(serverAddress, 8888); // 서버와 연결될 때까지 객체를 생성하지 않는다.

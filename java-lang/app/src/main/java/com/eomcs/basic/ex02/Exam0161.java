@@ -22,5 +22,3 @@ public class Exam0161 {
     // => Object 클래스에 toString()이 정의되어 있다.
   }
 }
-
-

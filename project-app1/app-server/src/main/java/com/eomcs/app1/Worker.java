@@ -2,6 +2,7 @@ package com.eomcs.app1;
 
 import java.io.PrintStream;
 import java.net.Socket;
+import java.net.URLDecoder;
 import java.util.Scanner;
 
 public class Worker extends Thread {
@@ -18,41 +19,52 @@ public class Worker extends Thread {
       Scanner in = new Scanner(socket.getInputStream());
       PrintStream out = new PrintStream(socket.getOutputStream());
 
-      String queryString = in.nextLine();
-      String[] values = queryString.split("/");
+      // 1) HTTP 요청 데이터 읽기
+      String requestLine = in.nextLine(); // 무조건 ?
+      System.out.println(requestLine);
 
-      if (values.length != 3) {
-        out.println("닿> 계산식이 올바르지 않습니다.");
-      } else {
-        String op = values[0];
-        if (op.equals("%2f")) {
-          op = "/"; // %2f 문자열을 원래의 문자인 / 로 디코딩한다.
+      // 나머지 데이터는 버린다.
+      while (true) {
+        String str = in.nextLine();
+        if (str.length() == 0) {
+          break;
         }
-        int a = Integer.parseInt(values[1]);
-        int b = Integer.parseInt(values[2]);
-        int result = 0; 
+      }
+
+      // 예) requestLine => GET /+/100/200 HTTP/1.1
+      String requestUri = requestLine.split(" ")[1]; // 예) "/+/100/200"
+      String[] values = requestUri.split("/"); // 예) {"", "+", "100", "200"}
+
+      if (values.length == 4) {
+        String op = URLDecoder.decode(values[1], "UTF-8"); // "%2b" -> "+", "-", "*", "%2f" -> /
+        // queryString에서 + 문자는 공백으로, / 문자는 다른 의미로 사용되기 때문에 디코딩해준다. 
+        int a = Integer.parseInt(values[2]); // "100"
+        int b = Integer.parseInt(values[3]); // "200"
+        System.out.printf("%s, %d, %d\n", op, a, b);
+
+        String response = null;
 
         switch (op) {
           case "+": 
-            result = a + b;
-            out.printf("닿> %d %s %d = %d", a, op, b, result);
+            response = String.format("닿> %d + %d = %d", a, b, (a + b)); // String.format() == out.printf()
             break;
           case "-": 
-            result = a - b;
-            out.printf("닿> %d %s %d = %d", a, op, b, result);
+            response = String.format("닿> %d - %d = %d", a, b, (a - b));
             break;
           case "*": 
-            result = a * b;
-            out.printf("닿> %d %s %d = %d", a, op, b, result);
+            response = String.format("닿> %d * %d = %d", a, b, (a * b));
             break;
           case "/": 
-            result = a / b;
-            out.printf("닿> %d %s %d = %d", a, op, b, result);
+            response = String.format("닿> %d / %d = %d", a, b, (a / b));
             break;
           default:
-            out.println("닿> 지원하지 않는 연산자입니다.");
+            response = "닿> 지원하지 않는 연산자입니다.";
             break;
         }
+        writeResponse(out, response);
+
+      } else {
+        writeResponse(out, "요청 형식이 올바르지 않습니다.");
       }
 
       socket.close();
@@ -61,5 +73,14 @@ public class Worker extends Thread {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  // HTTP 응답 데이터 보내기
+  private void writeResponse(PrintStream out, String messageBody) {
+    out.println("HTTP/1.1 200 OK");
+    out.println("Content-Type: text/plain; charset=UTF-8");
+    out.println();
+    out.println(messageBody);
+    out.flush(); // 네트워크는 항상 마지막에 flush() 호출한다.
   }
 }
