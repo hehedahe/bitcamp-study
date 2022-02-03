@@ -15,9 +15,10 @@ public class Sender4 {
     FileInputStream fileIn = new FileInputStream(file);
 
     System.out.println("서버에 연결 중...");
-    Socket socket = new Socket("192.168.0.61", 8888);
+    Socket socket = new Socket("localhost", 8888);
     System.out.println("서버에 연결 완료!");
 
+    // long타입 값, 문자열, byte 배열을 출력하는 메서드가 있는 DataOutputStream을 데코레이터로 붙인다.
     DataOutputStream out = new DataOutputStream(socket.getOutputStream());
     Scanner in = new Scanner(socket.getInputStream());
 

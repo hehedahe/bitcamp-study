@@ -18,6 +18,7 @@ public class Receiver4 {
     System.out.println("클라이언트가 연결됨.");
 
     PrintStream out = new PrintStream(socket.getOutputStream());
+    // long타입 값, 문자열, byte 배열을 출력하는 메서드가 있는 DataInputStream을 데코레이터로 붙인다.
     DataInputStream in = new DataInputStream(socket.getInputStream());
 
     System.out.println("클라이언트로부터 데이터 수신 중...");
@@ -29,7 +30,7 @@ public class Receiver4 {
     String filename = in.readUTF();
 
     //3) 파일 데이터 읽기
-    File file = new File("temp/ok_" + filename);
+    File file = new File("temp2/ok_" + filename);
     FileOutputStream fileOut = new FileOutputStream(file);
 
     for (long i = 0; i < filesize; i++) {
