@@ -41,7 +41,7 @@
       return;
     }
 
-    fetch(`/calc?op=${encodeURIComponent(xOp.value)}&a=${xA.value}&b={$xB.value}`)
+    fetch(`/calc?op=${encodeURIComponent(xOp.value)}&a=${xA.value}&b=${xB.value}`)
       .then(function(response) {
         return response.text();
       })
