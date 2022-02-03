@@ -29,5 +29,3 @@ public class Client0410 {
     keyScan.close();
   }
 }
-
-

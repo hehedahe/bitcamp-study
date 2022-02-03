@@ -28,5 +28,3 @@ public class Server0220 {
     keyboard.close();
   }
 }
-
-
