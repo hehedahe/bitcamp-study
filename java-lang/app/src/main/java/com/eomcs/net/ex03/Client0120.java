@@ -12,7 +12,7 @@ public class Client0120 {
 
     try (Socket socket = new Socket("localhost", 8888);
         OutputStream out = socket.getOutputStream();
-        InputStream in = socket.getInputStream()) {
+        InputStream in = socket.getInputStream()) { // => try-with-resources
 
       System.out.println("서버와 연결되었음!");
 
@@ -30,8 +30,9 @@ public class Client0120 {
       // 서버에 바이트 배열을 전송한다.
       out.write(bytes);
       // out.flush();
-      // byte stream 을 사용할 때는 바로 출력한다.
+      // byte stream 을 사용할 때는 write() 하는 순간 바로 출력한다.
       // 따라서 flush()를 호출하지 않아도 된다.
+      // 문자를 출력할 때에는 flush()를 해야한다는 뜻!
       System.out.println("서버에 데이터를 보냈음!");
 
     } catch (Exception e) {

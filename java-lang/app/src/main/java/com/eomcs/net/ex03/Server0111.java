@@ -10,9 +10,10 @@ import java.util.Scanner;
 public class Server0111 {
   public static void main(String[] args) {
 
-
+    // try-with-resources
     try (Scanner keyboard = new Scanner(System.in);
-        ServerSocket serverSocket = new ServerSocket(8888)) {
+        ServerSocket serverSocket = new ServerSocket(8888)) { // 마지막 문장에 ;을 생략해도 된다.
+      // AutoCloseable 구현체 변수 선언만 올 수 있고, 일반 변수 선언문은 try 블록 안에 올 수 없다.
 
       System.out.println("클라이언트의 연결을 기다리고 있음.");
 
@@ -58,6 +59,7 @@ public class Server0111 {
       e.printStackTrace();
 
     }
+    // finally 블록이 없다 => try() 안에 선언된 것들(try-with-resources)은 자동으로 close()를 호출해준다.
     System.out.println("서버 종료!");
   }
 

@@ -71,17 +71,25 @@ public class Server0110 {
         e.printStackTrace();
 
       } finally {
-        try {out.close();} catch (Exception e) {}
-        try {in.close();} catch (Exception e) {}
+        // 순서대로 자원 닫기
+        //
+        try {out.close();} catch (Exception e) {} // 출력스트림 먼저 닫기
+        // 특히 버퍼를 쓸 때, 버퍼가 꽉 차지 않으면 출력하지 않고, flush()를 호출하여 찌꺼기를 다 내보내준다.
+        try {in.close();} catch (Exception e) {} // 입출력 스트림을 하나의 try블록에 넣지 않는 이유?
+        // => 출력 스트림을 닫다가 오류가 발생할 경우, 입력 스트림은 닫지도 못하고 끝나버려서!
         try {socket.close();} catch (Exception e) {}
         System.out.println("클라이언트와의 연결을 끊었음.");
       }
 
 
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println("상세 예외 정보:");
+      e.printStackTrace(); // 표준 출력 장치로 에러 정보를 출력하는데 Stack을 추적하라
+      // => main()가 어떤 메서드를 호출했고, 그 메서드가 어떤 메서드를 호출했고,
+      //    가장 마지막으로 호출되 메서드부터 거꾸로 추적하라
 
     } finally {
+      System.out.println("키보드 자원 해제 및 서버 소켓 자원 해제!");
       try { keyboard.close(); } catch (Exception e) {}
       try { serverSocket.close();} catch (Exception e) {}
     }

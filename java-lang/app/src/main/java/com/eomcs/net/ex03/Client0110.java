@@ -44,7 +44,7 @@ public class Client0110 {
 
       // 서버의 응답을 받는다.
       // - 서버가 응답을 할 때까지 리턴하지 않는다.
-      // 즉 blocking 모드로 작동한다.
+      // 즉, blocking 모드로 작동한다.
       int response = in.read();
       System.out.println(response);
 
