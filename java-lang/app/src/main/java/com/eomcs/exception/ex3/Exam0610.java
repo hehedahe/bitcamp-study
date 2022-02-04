@@ -44,3 +44,6 @@ public class Exam0610 {
     // 이것을 해결하는 방법은 finally 블록을 사용하는 것이다.
   }
 }
+
+
+

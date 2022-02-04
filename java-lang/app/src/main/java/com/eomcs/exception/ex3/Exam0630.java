@@ -21,8 +21,9 @@ public class Exam0630 {
 
         // 반드시 AutoCloseable 구현체이어야 한다.
         //        String s = "Hello"; // 컴파일 오류!
+        // => String 클래스는 AutoCloseable 인터페이스로 구현한 클래스가 아니다!
 
-        // 변수 선언만 올 수 있다.
+        // try () => 괄호 안에는 변수 선언만 올 수 있다.
         //                if (true) {} // 컴파일 오류!
 
         ) {

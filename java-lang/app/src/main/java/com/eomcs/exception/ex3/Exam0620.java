@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Exam0620 {
 
   public static void main(String[] args) {
-    Scanner keyScan = null;
+    Scanner keyScan = null; // 블록 안에 선언하게 되면 블록 안에서만 사용할 수 있다 ?
     try {
       keyScan = new Scanner(System.in);
 
