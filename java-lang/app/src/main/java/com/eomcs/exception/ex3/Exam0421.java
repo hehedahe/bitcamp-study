@@ -23,5 +23,4 @@ public class Exam0421 {
   public static void main(String[] args) throws Exception {
     m(1);
   }
-
 }

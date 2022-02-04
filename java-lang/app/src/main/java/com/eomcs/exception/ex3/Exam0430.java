@@ -15,7 +15,6 @@ public class Exam0430 {
       throw new SQLException();
     else if (i == 3)
       throw new IOException();
-
   }
 
   public static void main(String[] args) {
@@ -24,7 +23,7 @@ public class Exam0430 {
     //
     try {
       // try 블록에는 예외가 발생할 수 있는 코드를 둔다.
-      m(0);
+      m(4);
       System.out.println("실행 성공!");
       // try 블록에 있는 코드를 실행하는 중에
       // 예외가 발생하면,

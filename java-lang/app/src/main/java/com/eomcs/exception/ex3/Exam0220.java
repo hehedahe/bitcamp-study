@@ -17,7 +17,6 @@ public class Exam0220 {
     throw new RuntimeException();
   }
 
-
   public static void main(String[] args) {}
 
 }

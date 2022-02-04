@@ -17,7 +17,7 @@ public class Exam0320 {
     if (i == 0)
       throw new Exception();
     else if (i == 1)
-      throw new RuntimeException();
+      throw new RuntimeException(); // 메서드 선언부에 throws Exception을 적지 않을 경우, 이 메서드만 빨간줄X (얘는 선언부에 thorws하지 않아도 되니까~)
     else if (i == 2)
       throw new SQLException();
     else

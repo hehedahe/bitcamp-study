@@ -40,5 +40,4 @@ public class Exam0111 {
     System.out.println("시스템을 종료합니다.");
 
   }
-
 }

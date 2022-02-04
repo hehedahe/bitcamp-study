@@ -19,7 +19,7 @@ public class Exam0420 {
 
   public static void main(String[] args) throws Exception, RuntimeException, SQLException, IOException {
     // 예외 처리 방법 1:
-    // - 예외를 처리하고 싶지 않다면 상위 호출자에게 책임을 떠넘길 수 있다.
+    // - 예외를 처리하고 싶지 않다면 상위 호출자(main())에게 책임을 떠넘길 수 있다.
     m(1);
 
     // 컴파일 오류는 발생하지 않지만,
