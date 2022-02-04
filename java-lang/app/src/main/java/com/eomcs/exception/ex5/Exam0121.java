@@ -1,10 +1,10 @@
-// 예외 처리 후
+// 예외 처리 후 - 생각해 볼 문제
 package com.eomcs.exception.ex5;
 
 import java.sql.Date;
 import java.util.Scanner;
 
-public class Exam0120 {
+public class Exam0121 {
   // RuntimeException 계열의 예외는 굳이 throws 문장을 선언하지 않아도 되지만,
   // read()를 호출하는 개발자에게 어떤 예외가 발생할 수 있는지
   // 명확하게 제시해주는 것이 유지보수에 도움이 되기 때문에
@@ -39,20 +39,20 @@ public class Exam0120 {
   }
 
   public static void main(String[] args) {
-    try {
-      Board board = read();
-      System.out.println("---------------------");
-      System.out.printf("번호: %d\n", board.getNo());
-      System.out.printf("제목: %s\n", board.getTitle());
-      System.out.printf("내용: %s\n", board.getContent());
-      System.out.printf("등록일: %s\n", board.getCreatedDate());
+    // 이 프로그램을 실행할 때,
+    // 1) 번호를 입력할 때 숫자가 아닌 것을 입력하면, NumberFormatException 예외가 발생한다.
+    // 2) 날짜를 입력할 때 yyyy-MM-dd 형식에 맞지 않게 입력하면, illegalArgumentException 예외가 발생한다.
 
-    } catch (RuntimeException e) {
-      System.out.println(e.getMessage());
-      System.out.println("게시물 입력 중에 오류 발생!");
-      // e.printStackTrace();
-    }
-
+    // 예외 클래스 이름을 보면 오류 원인이 상세하게 나와 있지만,
+    // 전체적인 그림에서 어느 객체에서 발생된 예외인지 직관적으로 알 수 없다.
+    //
+    Board board = read();
+    System.out.println("---------------------");
+    System.out.printf("번호: %d\n", board.getNo());
+    System.out.printf("제목: %s\n", board.getTitle());
+    System.out.printf("내용: %s\n", board.getContent());
+    System.out.printf("등록일: %s\n", board.getCreatedDate());
   }
 }
+
 

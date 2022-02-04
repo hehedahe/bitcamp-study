@@ -33,5 +33,4 @@ public class Board {
     this.createdDate = createdDate;
   }
 
-
 }
