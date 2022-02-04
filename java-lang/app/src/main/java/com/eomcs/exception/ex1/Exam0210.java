@@ -29,5 +29,3 @@ public class Exam0210 {
     keyScan.close();
   }
 }
-
-
