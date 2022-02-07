@@ -13,7 +13,7 @@ public class CalcServer {
 
   // 각 클라이언트의 작업 결과를 보관할 맵 객체
   // => Map<clientID, result>
-  static Map<Long, Integer> resultMap = new HashMap<>();
+  static Map<Long, Integer> resultMap = new HashMap<>(); // 해시맵
 
 
   // 클라이언트와 대화하는 부분을 별도의 코드로 분리하여 실행한다.
