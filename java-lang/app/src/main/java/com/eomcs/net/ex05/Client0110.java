@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Client0110 {
   public static void main(String[] args) throws Exception {
-    Socket socket = new Socket("localhost", 8888);
+    Socket socket = new Socket("localhost", 8888); // 서버에 연결
     System.out.println("서버에 연결됨!");
 
     Scanner in = new Scanner(socket.getInputStream());
