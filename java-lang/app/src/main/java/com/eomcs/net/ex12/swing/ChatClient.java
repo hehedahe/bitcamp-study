@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -32,7 +33,7 @@ public class ChatClient extends JFrame {
 
 
   public ChatClient() {
-    super("계산기2");
+    super("**채팅**");
     this.addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
@@ -51,6 +52,9 @@ public class ChatClient extends JFrame {
     topPanel.add(addressTf);
     topPanel.add(portTf);
     JButton connetBtn = new JButton("연결");
+
+    portTf.addActionListener(this::connectChatServer); // port No. 입력 후 엔터 -> connetChatServer()
+
     // 1) 로컬 클래스
     //    class MyActionListener implements ActionListener {
     //      @Override
@@ -74,8 +78,8 @@ public class ChatClient extends JFrame {
     topPanel.add(connetBtn);
     contentPane.add(topPanel, BorderLayout.NORTH);
 
-
-    contentPane.add(messageListTa, BorderLayout.CENTER);
+    JScrollPane scrollPane = new JScrollPane(messageListTa);
+    contentPane.add(scrollPane, BorderLayout.CENTER);
 
 
     JPanel bottomPanel = new JPanel();
@@ -86,14 +90,16 @@ public class ChatClient extends JFrame {
     bottomPanel.add(sendBtn);
     contentPane.add(bottomPanel, BorderLayout.SOUTH);
 
+    messageTf.addActionListener(this::sendMessage);
+
     this.setVisible(true);
   }
 
   public static void main(String[] args) throws Exception {
-    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+    //    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
     //    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     //    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-    //    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+    UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
     //    UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
     //    UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); // 리눅스 OS 만 가능
     //    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); // Windows OS 만 가능
@@ -114,17 +120,43 @@ public class ChatClient extends JFrame {
       in = new DataInputStream(socket.getInputStream());
       out = new DataOutputStream(socket.getOutputStream());
 
+      new MessageReceiver(in).start();
+
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(this, "서버 연결 오류!", "오류!", JOptionPane.ERROR_MESSAGE);
     }
   }
 
   public void sendMessage(ActionEvent e) {
-    System.out.println("메세지 보내기");
+    if (messageTf.getText().length() == 0) {
+      return;
+    }
+
     try {
       out.writeUTF(messageTf.getText());
+      out.flush();
+      messageTf.setText("");
+
     } catch (Exception ex) {
       JOptionPane.showMessageDialog(this, "메세지 전송 오류!", "통신 오류!", JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  class MessageReceiver extends Thread {
+    DataInputStream in;
+
+    public MessageReceiver(DataInputStream in) {
+      this.in = in;
+    }
+
+    @Override
+    public void run() {
+      while (true) {
+        try {
+          String message = in.readUTF();
+          messageListTa.append(message + "\n");
+        } catch (Exception e) {}
+      }
     }
   }
 }
