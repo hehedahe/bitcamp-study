@@ -4,7 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import com.eomcs.design_pattern.iterator.ArrayList;
+import java.util.ArrayList;
 
 @SuppressWarnings("rawtypes")
 public class ChatServer {
@@ -30,12 +30,24 @@ public class ChatServer {
     }
   }
 
+  @SuppressWarnings("unchecked")
   public void sendMessage(String message) {
+    ArrayList deleteStreams = new ArrayList(); // 삭제 명단
+
     for (int i = 0; i < clientOutputStreams.size(); i++) {
-      DataOutputStream out = (DataOutputStream) clientOutputStreams.get(i);
+      DataOutputStream out = (DataOutputStream) clientOutputStreams.get(i); // 전체 목록이 clientOutputStreams에 들어있다.
       try {
         out.writeUTF(message);
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        System.out.println("전송 오류: " + message);
+        //        clientOutputStreams.remove(i);
+        deleteStreams.add(out); // 무효한 출력 스트림은 삭제 명단에 등록한다.
+      }
+    }
+
+    // 삭제 명단에 등록된 출력 스트림을 클라이언트 목록에서 제거한다.
+    for (Object delestreams : deleteStreams) {
+      clientOutputStreams.remove(delestreams);
     }
   }
 
@@ -63,11 +75,12 @@ public class ChatServer {
         while (true) {
           String message = in.readUTF();
           if (message.equals("\\quit")) {
-            out.writeUTF("Goodbye!");
+            out.writeUTF("<![QUIT[]>"); // 연결을 끊겠다는 특별한 메세지를 클라이언트에게 보낸다.
             out.flush();
+            clientOutputStreams.remove(out); // 메세지 출력 목록에서 연결이 종료된 클라이언트를 제거한다.
             break;
           }
-          sendMessage(String.format("[%s] %s", nickname, message));
+          sendMessage(String.format("[%s]  %s", nickname, message));
           //          sendMessage("[" + nickname + "]" + message); // 위 코드와 동일
         }
 

@@ -25,10 +25,13 @@ public class ChatClient extends JFrame {
   Socket socket;
   DataInputStream in;
   DataOutputStream out;
-  String nickname; // 인스턴스 필드가 새로 만들어질 때 null로 초기화 된다.
+  String nickname; // 인스턴스 필드가 새로 만들어질 때 null로 초기화 되므로 String nickname = null; 로 작성하지 않아도 된다.
 
+  // 컴파일하면 아래 문장들은 variable initialize => 변수 선언문은 남고, 변수 값 할당하는 문장은 생성자 안으로 들어간다.
   JTextField addressTf = new JTextField(30); // 텍스트를 칠 수 있는 클래스 (like JS input박스)
   JTextField portTf = new JTextField(4);
+  JButton connectBtn = new JButton("연결");
+
   JTextArea messageListTa = new JTextArea(); // 여러줄 입력
   JTextField messageTf = new JTextField(35);
 
@@ -51,12 +54,18 @@ public class ChatClient extends JFrame {
 
     this.addWindowListener(new WindowAdapter() {
       @Override
-      public void windowClosing(WindowEvent e) {
-        // 윈도우의 x 버튼을 눌렀을 때
+      public void windowClosing(WindowEvent e) { // 윈도우의 x 버튼을 눌렀을 때
+        if (connectBtn.getText().equals("종료")) {
+          try {
+            out.writeUTF("\\quit");
+            out.flush();
+          } catch (Exception ex) { // connectChatServer의 파라미터인 ActionEvent e 와 구분하기 위해 ex로 하기
+          }
+        }
         try {in.close();} catch (Exception ex) {}
         try {out.close();} catch (Exception ex) {}
-        try {socket.close();} catch (Exception ex) {} // 정상적일 때 0 -> 상태 코드를 리턴
-        System.exit(0);
+        try {socket.close();} catch (Exception ex) {}
+        System.exit(0); // 정상적일 때 0 -> 상태 코드를 리턴
       }
     }); // x 버튼 활성화
     this.setSize(500,400); // 창 크기
@@ -66,7 +75,6 @@ public class ChatClient extends JFrame {
     topPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // 기본 레이아웃 디폴트 = 가운데 정렬 => 기본 레이아웃 관리자를 교체
     topPanel.add(addressTf);
     topPanel.add(portTf);
-    JButton connetBtn = new JButton("연결");
 
     portTf.addActionListener(this::connectChatServer); // port No. 입력 후 엔터 -> connetChatServer()
 
@@ -89,8 +97,8 @@ public class ChatClient extends JFrame {
     //    connetBtn.addActionListener(e -> System.out.println("연결 버튼 눌렀음!"));
 
     // 4) 메서드 레퍼런스
-    connetBtn.addActionListener(this::connectChatServer);
-    topPanel.add(connetBtn);
+    connectBtn.addActionListener(this::connectChatServer);
+    topPanel.add(connectBtn);
     contentPane.add(topPanel, BorderLayout.NORTH);
 
     JScrollPane scrollPane = new JScrollPane(messageListTa);
@@ -123,28 +131,41 @@ public class ChatClient extends JFrame {
   }
 
   public void connectChatServer(ActionEvent e) {
-    System.out.println("서버에 연결하기!");
-    //    System.out.println(addressTf.getText());
-    //    System.out.println(portTf.getText());
 
-    try {
-      socket = new Socket(
-          addressTf.getText(), 
-          Integer.parseInt(portTf.getText()));
+    if (connectBtn.getText().equals("연결")) {
 
-      in = new DataInputStream(socket.getInputStream());
-      out = new DataOutputStream(socket.getOutputStream());
+      //    System.out.println("서버에 연결하기!");
+      //    System.out.println(addressTf.getText());
+      //    System.out.println(portTf.getText());
 
-      out.writeUTF(nickname);
-      out.flush();
+      try {
+        socket = new Socket(
+            addressTf.getText(), 
+            Integer.parseInt(portTf.getText()));
 
-      new MessageReceiver(in).start();
+        in = new DataInputStream(socket.getInputStream());
+        out = new DataOutputStream(socket.getOutputStream());
 
-    } catch (Exception ex) {
-      JOptionPane.showMessageDialog(this, "서버 연결 오류!", "오류!", JOptionPane.ERROR_MESSAGE);
+        out.writeUTF(nickname);
+        out.flush();
+
+        new MessageReceiver(in).start();
+
+      } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "서버 연결 오류!", "오류!", JOptionPane.ERROR_MESSAGE);
+      }
+
+      connectBtn.setText("종료"); // 서버에 연결되면 연결 버튼 -> 종료 버튼 바뀜
+    } else {
+      try {
+        out.writeUTF("\\quit");
+        out.flush();
+      } catch (Exception ex) { // connectChatServer의 파라미터인 ActionEvent e 와 구분하기 위해 ex로 하기
+      }
+      connectBtn.setText("연결");
+      messageListTa.setText("");
     }
   }
-
   public void sendMessage(ActionEvent e) {
     if (messageTf.getText().length() == 0) {
       return;
@@ -172,6 +193,9 @@ public class ChatClient extends JFrame {
       while (true) {
         try {
           String message = in.readUTF();
+          if (message.equals("<![QUIT[]>")) { // 서버에서 연결을 끊겠다는 메세지가 오면 스레드를 종료한다.
+            break; // 스레드 종료? run() 메서드의 실행을 마치면 스레드는 종료한다.
+          }
           messageListTa.append(message + "\n");
         } catch (Exception e) {}
       }
