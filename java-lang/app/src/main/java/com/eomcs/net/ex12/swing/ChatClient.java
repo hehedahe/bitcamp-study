@@ -25,6 +25,7 @@ public class ChatClient extends JFrame {
   Socket socket;
   DataInputStream in;
   DataOutputStream out;
+  String nickname; // 인스턴스 필드가 새로 만들어질 때 null로 초기화 된다.
 
   JTextField addressTf = new JTextField(30); // 텍스트를 칠 수 있는 클래스 (like JS input박스)
   JTextField portTf = new JTextField(4);
@@ -33,7 +34,21 @@ public class ChatClient extends JFrame {
 
 
   public ChatClient() {
-    super("**채팅**");
+
+    String title = "대화명을 입력하세요.\n(2자 이상)";
+
+    while (true) {
+      nickname = JOptionPane.showInputDialog(title);
+      if (nickname == null) {
+        System.exit(0); // 시스템 종료
+      } else if (nickname != null && nickname.length() >= 2) {
+        break;
+      }
+      title = "대화명을 다시 입력하세요!\n(2자 이상)";
+    }
+
+    this.setTitle("채팅!! - " + nickname);
+
     this.addWindowListener(new WindowAdapter() {
       @Override
       public void windowClosing(WindowEvent e) {
@@ -119,6 +134,9 @@ public class ChatClient extends JFrame {
 
       in = new DataInputStream(socket.getInputStream());
       out = new DataOutputStream(socket.getOutputStream());
+
+      out.writeUTF(nickname);
+      out.flush();
 
       new MessageReceiver(in).start();
 
