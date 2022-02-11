@@ -31,5 +31,4 @@ public class Exam0310 {
     C outer = new C();
     outer.m2();
   }
-
 }

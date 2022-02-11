@@ -5,8 +5,10 @@ package com.eomcs.oop.ex11.b;
 // 다음과 같이 wildcard(*)를 사용하여 전체 스태틱 멤버를 한 번에 지정할 수 있다.
 import static com.eomcs.oop.ex11.b.F.m1;
 import static com.eomcs.oop.ex11.b.F.v1;
+//import static com.eomcs.oop.ex11.b.F.*;
 import static com.eomcs.oop.ex11.b.sub.M.m2;
 import static com.eomcs.oop.ex11.b.sub.M.v2;
+//import static com.eomcs.oop.ex11.b.sub.M.*;
 import com.eomcs.oop.ex11.b.F.X;
 import com.eomcs.oop.ex11.b.sub.M.Y;
 

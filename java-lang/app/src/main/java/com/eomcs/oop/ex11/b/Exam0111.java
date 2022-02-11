@@ -5,14 +5,14 @@ class A2 {
 
   static class X {
     // top level class 처럼 스태틱 멤버 선언 가능
-    static int v1;
-    static void m1() {}
-    static {}
+    static int v1; // 필드
+    static void m1() {} // 메서드
+    static {} // 블록
 
     // top level class 처럼 인스턴스 멤버 선언 가능
-    int v2;
-    void m2() {}
-    {}
+    int v2; // 필드
+    void m2() {} // 메서드
+    {} // 블록
   }
 
 }
