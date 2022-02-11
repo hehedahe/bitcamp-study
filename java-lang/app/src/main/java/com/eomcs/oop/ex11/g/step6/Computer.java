@@ -7,3 +7,4 @@ public class Computer {
   public static final int MOUSE = 4;
   public static final int KEYBOARD = 5;
 }
+

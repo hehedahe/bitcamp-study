@@ -26,3 +26,4 @@ public class Exam0120 {
     p3.price = 18000;
   }
 }
+

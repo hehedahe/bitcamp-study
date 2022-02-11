@@ -11,3 +11,4 @@ public class Product {
   String maker;
   int price;
 }
+

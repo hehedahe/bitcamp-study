@@ -6,3 +6,4 @@ public class Appliance {
   public static final int DVD = 12;
   public static final int VACUUMCLEANER = 13;
 }
+

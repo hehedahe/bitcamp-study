@@ -3,7 +3,7 @@ package com.eomcs.oop.ex11.g.step7;
 
 public class Exam0110 {
   public static void main(String[] args) {
-
+    //
     // 분류를 지정할 때 OGNL 방식으로 표현할 수 있다.
     // OGNL(Object Graph Navigation Language)?
     // - 객체의 하위 프로퍼티 값에 접근하는 표기법.

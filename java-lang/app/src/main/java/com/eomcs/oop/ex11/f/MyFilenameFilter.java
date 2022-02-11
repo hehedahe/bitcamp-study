@@ -12,6 +12,7 @@ import java.io.FilenameFilter;
 // => public    : 모두 접근 가능
 // => (default) : 같은 패키지에 소속된 클래스 만이 접근 가능 
 public class MyFilenameFilter implements FilenameFilter {
+  @Override
   public boolean accept(File dir, String name) {
     if (name.endsWith(".java")) 
       return true; 

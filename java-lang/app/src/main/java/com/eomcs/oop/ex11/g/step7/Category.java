@@ -4,7 +4,6 @@ package com.eomcs.oop.ex11.g.step7;
 //상수를 관리하는 용도로만 사용될 클래스라면 서브 클래스를 만들지 못하도록 막아야 한다.
 //=> final 제한자를 사용하라!
 public class Category {
-
   //
   // static nested class 를 사용하여
   // 여러 상수를 그룹 별로 묶어 관리한다.
@@ -30,7 +29,7 @@ public class Category {
   // static nested class를 이런 식으로 적용한 대표적인 예가
   // 안드로이드 컴파일러가 자동 생성하는 R.java 이다.
   //
-  public final static class computer {
+  public final static class computer { // 클래스명이지만 마치 변수처럼 소문자로 시작한다.
     public static final int CPU = 1;
     public static final int VGA = 2;
     public static final int RAM = 3;

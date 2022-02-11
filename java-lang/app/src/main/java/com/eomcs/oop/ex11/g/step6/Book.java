@@ -7,3 +7,4 @@ public class Book {
   public static final int IT = 103;
   public static final int LANG = 104;
 }
+
