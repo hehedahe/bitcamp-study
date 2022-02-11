@@ -21,3 +21,4 @@ public class Exam0311 {
     class B4 {} // OK!
   }
 }
+
