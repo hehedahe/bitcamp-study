@@ -22,6 +22,10 @@ public class Exam0712 {
     Musics2.Player p1 = m1.new Player();
     Musics2.Player p2 = m2.new Player();
 
+    // 스태틱 중첩 클래스를 사용할 때는 다음과 같이 직접 생성자의 파라미터로 바깥 클래스의 객체를 넘겨줘야 했다.
+    //    Musics1.Player p1 = new Musics1.Player(m1);
+    //    Musics1.Player p2 = new Musics1.Player(m2);
+
     p1.play();
     p2.play();
   }

@@ -28,4 +28,3 @@ public class Exam0730 {
     System.out.println("--------------------");
   }
 }
-

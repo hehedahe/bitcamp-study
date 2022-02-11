@@ -51,6 +51,7 @@ class Musics4 {
 
   // 인터페이스 구현체를 inner 클래스로 정의한다.
   class PlayerImpl implements Player {
+    @Override
     public void play() {
       for (final String song : Musics4.this.songs) {
         System.out.println(song);
@@ -61,5 +62,3 @@ class Musics4 {
 
 
 }
-
-

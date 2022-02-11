@@ -5,14 +5,16 @@ class A2 {
   class X {
     // inner class 는 스태틱 멤버를 가질 수 없다.
     // 스태틱 멤버는 오직 
-    // - top level class 나 
+    // - top level class
     // - static nested class 
     // 만이 가질 수 있다.
-    // 
+    //
     //    static int v1; // 컴파일 오류!
     //    static void m1() {} // 컴파일 오류!
     //    static {} // 컴파일 오류!
+    // => JDK 16 부터 컴파일 오류가 나지 않지만, 아직 현업에서는 17을 사용하지 않으니 컴파일 오류!
 
+    // 인스턴스 멤버들
     int v2;
     void m2() {}
     {}
