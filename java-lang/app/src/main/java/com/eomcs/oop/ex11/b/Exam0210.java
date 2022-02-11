@@ -16,7 +16,6 @@ class B {
 
     // test() 메서드는 같은 멤버이기 때문에 
     // 다음과 같이 클래스 이름을 생략할 수 있다.
-
     v1 = 100;
     m1();
 
@@ -25,16 +24,13 @@ class B {
     //    v2 = 100; // 컴파일 오류!
     //    m2(); // 컴파일 오류!
   }
+}
 
-  public class Exam0210 {
-
-    public static void main(String[] args) {
-      // 스태틱 멤버는 클래스명으로 접근 가능
-      B.v1 = 100;
-      B.m1();
-      B.test();
-    }
-
+public class Exam0210 {
+  public static void main(String[] args) {
+    // 스태틱 멤버는 클래스명으로 접근 가능
+    B.v1 = 100;
+    B.m1();
+    B.test();
   }
-
 }
