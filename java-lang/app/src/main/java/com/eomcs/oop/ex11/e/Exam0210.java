@@ -7,6 +7,28 @@ public class Exam0210 {
     void print();
   }
 
+  //  class X {
+  //
+  //    public X() {
+  //      System.out.println("Hello!");
+  //    }
+  //
+  //    public X(int a) {
+  //      System.out.println("Hello!");
+  //    }
+  //
+  //    public X(String s) {
+  //      System.out.println("Hello!");
+  //    }
+  //
+  //    // 인스턴스 블럭은 여러 생성자에 공통으로 들어가는 소스들을 둔다.
+  //    // 인스턴스 블럭은 컴파일이 되진 않고, 생성자의 앞 부분에 들어간다.
+  //    // 컴파일 될 때, 생성자의 앞 부분에 복사되고 인스턴스 블럭은 사라진다.
+  //    {
+  //      System.out.println("ABC#");
+  //    }
+  //  }
+
   public static void main(final String[] args) {
 
     A obj = new A() {
@@ -36,3 +58,4 @@ public class Exam0210 {
 // - 인터페이스를 구현한 익명 클래스는 java.lang.Object 클래스를 상속 받는다.
 // - 따라서 익명 클래스의 생성자는 Object 클래스의 생성자를 먼저 호출한다.
 //
+// 익명 클래스의 생성자 호출 -> super() 호출

@@ -46,3 +46,4 @@ public class Exam0230 {
     //    obj = new A(100) {}; // 컴파일 오류!
   }
 }
+

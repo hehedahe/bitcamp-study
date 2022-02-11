@@ -21,3 +21,4 @@ public class Exam0120 {
     obj.print();
   }
 }
+
