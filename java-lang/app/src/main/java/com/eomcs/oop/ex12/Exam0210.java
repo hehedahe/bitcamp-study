@@ -14,6 +14,7 @@ public class Exam0210 {
     // 람다 문법으로 익명 클래스를 만들 수 있다.
     Player p = () -> System.out.println("Player...");
     p.play();
+    // => 파라미터가 1개인 경우 괄호 생략 가능하지만, 파라미터가 0개인 경우 생략 불가!
   }
 }
 
