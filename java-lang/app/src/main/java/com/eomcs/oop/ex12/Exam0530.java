@@ -87,6 +87,7 @@ public class Exam0530 {
     //    };
     c4.compute(100, 200); // plus() 메서드의 리턴 값은 무시한다.
 
+
     // 리턴 타입 int ===> Object
     Calculator5 c5 = MyCalculator::plus; // OK!
     // 위 문장은 다음과 같다.
@@ -94,10 +95,11 @@ public class Exam0530 {
     //      @Override
     //      public Object compute(int a, int b) {
     //        return MyCalculator.plus(a, b); // OK! 
-    //        //이유? plus()가 리턴한 int 값이 오토박싱 되기 때문이다.
+    //        //이유? plus()가 리턴한 int 값이 "오토박싱" 되기 때문이다.
     //      }
     //    };
     System.out.println(c5.compute(100, 200));
+
 
     // 리턴 타입 int ===> String
     //    Calculator6 c6 = MyCalculator::plus; // 컴파일 오류!
