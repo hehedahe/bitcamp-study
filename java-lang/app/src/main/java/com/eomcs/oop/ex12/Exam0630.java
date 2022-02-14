@@ -1,4 +1,4 @@
-// 메서드 레퍼런스 - 활용예
+// 메서드 레퍼런스 - 활용 예
 package com.eomcs.oop.ex12;
 
 import java.util.function.Predicate;
