@@ -1,7 +1,6 @@
 // 메서드 레퍼런스 - 스태틱 메서드 레퍼런스
 package com.eomcs.oop.ex12;
 
-
 public class Exam0540 {
 
   static class MyCalculator {
