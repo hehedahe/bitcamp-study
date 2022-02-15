@@ -122,6 +122,3 @@ public class LinkedList2<E> {
 
 
 
-
-
-
