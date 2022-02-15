@@ -10,7 +10,7 @@ public class Exam0210 {
     //    클래스명<타입명>
     ArrayList<Member> list = new ArrayList<Member>();
 
-    // => 레퍼런스 선언에 제레릭 정보가 있다면 new 연산자에서는 생략할 수 있다.
+    // => 레퍼런스 선언에 제네릭 정보가 있다면 new 연산자에서는 생략할 수 있다.
     ArrayList<Member> list2 = new ArrayList</*Member*/>(); // OK!
 
     ArrayList<Member> list3;
@@ -21,8 +21,6 @@ public class Exam0210 {
 
   }
 }
-
-
 
 
 

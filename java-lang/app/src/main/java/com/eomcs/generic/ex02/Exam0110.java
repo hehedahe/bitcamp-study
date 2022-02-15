@@ -18,7 +18,7 @@ public class Exam0110 {
 
     // ArrayList를 선언할 때 지정한 타입이 아닌 경우에는 컴파일 오류가 발생한다.
     // => 컬렉션에 잘못된 값이 들어갈 상황을 없앨 수 있다.
-    //    list.add(new String("Hello"));
+    //    list.add(new String("Hello")); // The method add(Member) in the type ArrayList<Member> is not applicable for the arguments (String)
     //    list.add(new Integer(100));
     //    list.add(new HashSet());
 

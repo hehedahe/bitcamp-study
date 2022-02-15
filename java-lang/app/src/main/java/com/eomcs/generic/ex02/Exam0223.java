@@ -38,9 +38,20 @@ public class Exam0223 {
 
     //    m1(new ArrayList<Object>()); // 컴파일 오류!
     //    m1(new ArrayList<A>()); // 컴파일 오류!
-    m1(new ArrayList<B1>()); // OK!
+    m1(new ArrayList<B1>()); // OK! B1 생략 가능!
+    m1(new ArrayList<>()); // OK! B1 생략 가능!
     //    m1(new ArrayList<B2>()); // 컴파일 오류!
     //    m1(new ArrayList<C>()); // 컴파일 오류!
+
+    // 아래처럼 자식 클래스의 타입도 넘겨줄 수 있지 않을까?(L.44) => NO!!!
+    // => 제네릭 문법에서 레퍼런스의 객체를 넘길 때에는 다형적 변수를 따지지 않는다.
+    // => 그러나 m1() 메서드 안에서 레퍼런스의 객체를 사용할 때(L.61~65)는 다형적 변수를 따진다.
+    //    B1 r1;
+    //    r1 = new Object();
+    //    r1 = new A();
+    //    r1 = new B1();
+    //    r1 = new B2();
+    //    r1 = new C();
   }
 
   static void m1(ArrayList<B1> list) {

@@ -24,7 +24,7 @@ public class Exam0240 {
     b3.set(100);
 
     // 제네릭을 사용하면 get() 메서드가 각 타입별로 존재하는 것처럼 사용할 수 있다.
-    // => 즉 형변환 할 필요가 없다.
+    // => 즉, 형변환 할 필요가 없다.
     Member v1 = b1.get();
     String v2 = b2.get();
     Integer v3 = b3.get();

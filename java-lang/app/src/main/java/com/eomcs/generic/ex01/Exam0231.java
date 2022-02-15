@@ -28,3 +28,7 @@ public class Exam0231 {
     //    b3 = new Box<Integer>(); // OK!
   }
 }
+
+
+
+
