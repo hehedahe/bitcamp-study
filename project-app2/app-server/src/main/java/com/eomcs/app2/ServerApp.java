@@ -1,12 +1,15 @@
 package com.eomcs.app2;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
-import com.eomcs.app2.handler.ScoreHandler;
-import com.eomcs.util.Prompt;
+import java.net.Socket;
+import com.eomcs.app2.table.ScoreTable;
+import com.eomcs.app2.vo.Score;
 
 public class ServerApp {
 
-  ScoreHandler scoreHandler = new ScoreHandler(); 
+  ScoreTable scoreHandler = new ScoreTable(); 
 
   public static void main(String[] args) {
     new ServerApp().service();
@@ -18,27 +21,58 @@ public class ServerApp {
     try(ServerSocket serverSocket = new ServerSocket(3306);) { // 3306 => mariaDB 포트번호
 
       while (true) {
-        printMenu();
-        String input = Prompt.promptString("명령> ");
+        Socket socket = serverSocket.accept();
+        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 
-        if (checkQuit(input)) {
-          break;
-        }
-
-        try {
-          switch (input) {
-            case "1": scoreHandler.create(); break;
-            case "2": scoreHandler.list(); break;
-            case "3": scoreHandler.detail(); break;
-            case "4": scoreHandler.update(); break;
-            case "5": scoreHandler.delete(); break;
-            default:
-              System.out.println("올바른 메뉴 번호를 입력하세요!");
+        while (true) {
+          String command = in.readUTF();
+          if (command.equals("quit")) {
+            break;
           }
-        } catch (Exception e) {
-          System.out.println("실행 중 오류 발생: " + e.getMessage());
+          try{
+            switch (command) {
+              case "insert":
+                Score score = (Score) in.readObject();
+                int count = ScoreTable.insert(score);
+                out.writeUTF("success");
+                out.writeInt(count);
+                break;
+              case "selectList":
+                Score[] scores = ScoreTable.selectList();
+                out.writeUTF("success");
+                out.writeObject(scores);
+                break;
+              case "selectOne":
+                int no = in.readInt();
+                score = ScoreTable.selectOne(no);
+                out.writeUTF("success");
+                out.writeObject(score);
+                break;
+              case "update":
+                no = in.readInt();
+                score = (Score) in.readObject(); 
+                count = ScoreTable.update(no, score);
+                out.writeUTF("success");
+                out.writeInt(count);
+                break;
+              case "delete":
+                no = in.readInt();
+                count = ScoreTable.delete(no);
+                out.writeUTF("success");
+                out.writeInt(count);
+                break;
+              default:
+                out.writeUTF("fail");
+                out.writeUTF("해당 명령을 지원하지 않습니다.");
+                break;
+            }
+          } catch (Exception e) {
+            out.writeUTF("fail");
+            out.writeUTF("실행 오류: " + e.getMessage());
+          }
+
         }
-        System.out.println();
       }
     } catch (Exception e) {
       System.out.println("서버 실행 오류!");
