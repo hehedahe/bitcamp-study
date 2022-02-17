@@ -40,13 +40,11 @@ public class ScoreTableProxy {
       if (status.equals("success")) {
         return in.readInt();
       } else {
-        throw new RuntimeException(in.readUTF());
+        throw new RuntimeException(in.readUTF()); // status.equals("fail") 일 때, 그 다음 줄을 읽어들인다.
       }
     } catch (Exception e) {
       throw new ScoreTableException(e);
     }
-
-
   }
 
   public Score[] selectList() {
@@ -58,7 +56,7 @@ public class ScoreTableProxy {
       if (status.equals("success")) {
         return (Score[]) in.readObject();
       } else {
-        throw new RuntimeException(in.readUTF()); // status 아닌가?
+        throw new RuntimeException(in.readUTF());
       }
     } catch (Exception e) {
       throw new ScoreTableException(e);
