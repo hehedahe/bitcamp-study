@@ -42,7 +42,7 @@ public class ScoreTable {
 
   public static Score[] selectList() {
     return scores.toArray(new Score[0]);
-    //    new Score[scores.size()] // 배열의 
+    //    new Score[scores.size()] // 배열의 ?
   }
 
   public static Score selectOne(int no) {

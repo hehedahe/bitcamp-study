@@ -41,6 +41,7 @@ public class ScoreHandler {
     score.setMath(Prompt.promptInt("수학? "));
 
     scores.add(score);
+    save();
   }
 
   public void list() {
@@ -88,7 +89,7 @@ public class ScoreHandler {
     score.setMath(Prompt.promptInt("수학(%d)? ", old.getMath()));
 
     scores.set(no, score);
-
+    save();
   }
 
   public void delete() {
@@ -98,6 +99,7 @@ public class ScoreHandler {
       return; // break가 아닌 이유?
     }
     scores.remove(no);
+    save();
   }
 
 }

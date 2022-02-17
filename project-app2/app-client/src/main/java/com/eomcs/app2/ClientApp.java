@@ -1,15 +1,10 @@
 package com.eomcs.app2;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import com.eomcs.app2.handler.ScoreHandler;
-import com.eomcs.app2.table.ScoreTable;
-import com.eomcs.app2.vo.Score;
+import com.eomcs.app2.net.ScoreTableProxy;
+import com.eomcs.util.Prompt;
 
 public class ClientApp {
-
-  ScoreHandler scoreHandler = new ScoreTable(); 
 
   public static void main(String[] args) {
     new ClientApp().service();
@@ -17,64 +12,34 @@ public class ClientApp {
 
 
   public void service() {
-
-
-    try(Socket socket = new Socket("localhost", 3306);) {
-
+    try {
+      ScoreTableProxy scoreTableProxy = new ScoreTableProxy("localhost", 3336);
+      ScoreHandler scoreHandler = new ScoreHandler(scoreTableProxy);
 
       while (true) {
-        Socket socket = serverSocket.accept();
-        ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-        ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+        printMenu();
+        String input = Prompt.promptString("명령> ");
 
-        while (true) {
-          String command = in.readUTF();
-          if (command.equals("qhuit")) {
-            break;
-          }
-          try{
-            switch (command) {
-              case "insert":
-                Score score = (Score) in.readObject();
-                int count = ScoreTable.insert(score);
-                out.writeUTF("success");
-                out.writeInt(count);
-                break;
-              case "selectList":
-                Score[] scores = ScoreTable.selectList();
-                out.writeUTF("success");
-                out.writeObject(scores);
-                break;
-              case "selectOne":
-                int no = in.readInt();
-                score = ScoreTable.selectOne(no);
-                out.writeUTF("success");
-                out.writeObject(score);
-                break;
-              case "update":
-                no = in.readInt();
-                score = (Score) in.readObject(); 
-                count = ScoreTable.update(no, score);
-                out.writeUTF("success");
-                out.writeInt(count);
-                break;
-              case "delete":
-                no = in.readInt();
-                count = ScoreTable.delete(no);
-                out.writeUTF("success");
-                out.writeInt(count);
-                break;
-              default:
-                out.writeUTF("fail");
-                out.writeUTF("해당 명령을 지원하지 않습니다.");
-                break;
-            }
-          } catch (Exception e) {
-            out.writeUTF("fail");
-            out.writeUTF("실행 오류: " + e.getMessage());
-          }
-
+        if (checkQuit(input)) {
+          scoreTableProxy.close();
+          break;
         }
+
+        try {
+          switch (input) {
+            case "1": scoreHandler.create(); break;
+            case "2": scoreHandler.list(); break;
+            case "3": scoreHandler.detail(); break;
+            case "4": scoreHandler.update(); break;
+            case "5": scoreHandler.delete(); break;
+            default:
+              System.out.println("올바른 메뉴 번호를 입력하세요!");
+          }
+        } catch (Exception e) {
+          System.out.println("실행 중 오류 발생: " + e.getMessage());
+        }
+
+        System.out.println();
       }
     } catch (Exception e) {
       System.out.println("서버와 통신하는 중 오류 발생: " + e.getMessage());
@@ -83,4 +48,16 @@ public class ClientApp {
     System.out.println("종료!");
   }
 
+  private void printMenu() {
+    System.out.println("메뉴:");
+    System.out.println("1. 등록");
+    System.out.println("2. 목록");
+    System.out.println("3. 상세");
+    System.out.println("4. 변경");
+    System.out.println("5. 삭제");
+  }
+
+  private boolean checkQuit(String input) {
+    return input.equals("quit") || input.equals("exit");
+  }
 }

@@ -1,6 +1,8 @@
 package com.eomcs.app2.vo;
 
 public class Score {
+  private static final long serialVersionUID = 1L;
+
   String name;
   int kor;
   int eng;
