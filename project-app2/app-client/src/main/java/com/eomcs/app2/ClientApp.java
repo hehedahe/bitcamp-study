@@ -2,23 +2,25 @@ package com.eomcs.app2;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
+import com.eomcs.app2.handler.ScoreHandler;
 import com.eomcs.app2.table.ScoreTable;
 import com.eomcs.app2.vo.Score;
 
-public class ServerApp {
+public class ClientApp {
 
-  ScoreTable scoreHandler = new ScoreTable(); 
+  ScoreHandler scoreHandler = new ScoreTable(); 
 
   public static void main(String[] args) {
-    new ServerApp().service();
+    new ClientApp().service();
   }
 
 
   public void service() {
 
-    try(ServerSocket serverSocket = new ServerSocket(3306);) { // 3306 => mariaDB 포트번호
+
+    try(Socket socket = new Socket("localhost", 3306);) {
+
 
       while (true) {
         Socket socket = serverSocket.accept();
@@ -27,7 +29,7 @@ public class ServerApp {
 
         while (true) {
           String command = in.readUTF();
-          if (command.equals("quit")) {
+          if (command.equals("qhuit")) {
             break;
           }
           try{
@@ -67,17 +69,15 @@ public class ServerApp {
                 out.writeUTF("해당 명령을 지원하지 않습니다.");
                 break;
             }
-            out.flush();
           } catch (Exception e) {
             out.writeUTF("fail");
             out.writeUTF("실행 오류: " + e.getMessage());
-            out.flush();
           }
+
         }
       }
-
     } catch (Exception e) {
-      System.out.println("서버 실행 오류!");
+      System.out.println("서버와 통신하는 중 오류 발생: " + e.getMessage());
     }
 
     System.out.println("종료!");
