@@ -38,7 +38,7 @@ eclipse {
         defaultOutputDir = file('myokok')
 
 		file {
-        	whenMerged { 
+        	whenMerged {
     	    	// use default Output for all source-folders. see also defaultOutputDir per project
 	        	entries.each { source ->
 					if (source.kind == 'src' && !source.path.startsWith('/')) { // only Source-folders in the project starting with '/' are project-references
@@ -107,7 +107,7 @@ dependencies {
 
   // Google JSON 라이브러리
   implementation 'com.google.code.gson:gson:2.8.9'
-  
+
   // jackson-databind JSON 라이브러리
   implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
 
