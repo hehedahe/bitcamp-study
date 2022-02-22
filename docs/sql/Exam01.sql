@@ -693,3 +693,7 @@ select
   t1.constraint_type
 from table_constraints t1
   inner join key_column_usage t2 on t2.constraint_name=t1.constraint_name;
+
+
+
+  
