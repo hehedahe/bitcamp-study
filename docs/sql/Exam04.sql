@@ -13,7 +13,7 @@ create table test1(
   no int primary key auto_increment,
   title varchar(255) not null,
   content text,
-  rdt datetime default now(),
+  rdt datetime default now(), /*현재 테이블 호출했을 때 시분초*/
   filepath1 varchar(255),
   filepath2 varchar(255),
   filepath3 varchar(255),
@@ -80,17 +80,20 @@ insert into test2(filepath, bno) values('c:/download/f.gif', 10);
 
 
 ## FK 제약 조건이 없을 때
+
+### 문제점 1
 - 첨부파일 데이터를 입력할 때 존재하지 않는 게시물 번호가 들어 갈 수 있다.
-- 그러면 첨부파일 데이터는 무효한 데이타 된다.
+- 그러면 첨부파일 데이터는 무효한 데이터가 된다.
 
 insert into test2(filepath, bno) values('c:/download/x.gif', 100);
+/* -> 100번 게시물이 없어! 그런데도 입력되어 결함 발생! 신뢰도 하락 */
 
-
-- 첨부 파일이 있는 게시물을 삭제할 수 있다.
-- 마찬가지로 해당 게시물을 참조하는 첨부파일 데이터는 무효한 데이터가 된다.
+### 문제점 2
+- 첨부 파일이 있는 게시물을 삭제할 때,
+  해당 게시물을 참조하는 첨부파일 데이터는 무효한 데이터가 된다.
 
 delete from test1 where no=1;
-
+/* => bno 1이 사라졌기 때문에 fno 1,2,3 은 무효한 데이터가 된다. */
 
 이런 문제가 발생한 이유?
 - 다른 테이블의 데이터를 참조하는 경우, 참조 데이터의 존재 유무를 검사하지 않기 때문이다.
@@ -112,6 +115,7 @@ delete from test1 where no=1;
 
 alter table 테이블명
     add constraint 제약조건이름 foreign key (컬럼명) references 테이블명(컬럼명);
+    /* 제약조건이름 = 라벨명 */
 
 예)
 /* 기존에 테이블에 무효한 데이터가 있을 수 있기 때문에 먼저 테이블의 데이터를 지운다.*/
@@ -140,29 +144,6 @@ delete from test1 where no=2; -- OK!
 delete from test1 where no=5; -- Error!
 
 
-## 용어 정리 
+## 용어 정리
 - test1 처럼 다른 테이블에 의해 참조되는 테이블을 '부모 테이블'이라 부른다.
 - test2 처럼 다른 테이블의 데이터를 참조하는 테이블을 '자식 테이블'이라 부른다.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
