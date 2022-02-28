@@ -143,7 +143,7 @@ from lect l left outer join room r on l.rno=r.rno;
 select mno, name
 from memb;
 
--- 2) 학생 데이터를 가져와서 연결하기
+-- 2) 학생 데이터를 가져와서 연결하기 => 모두 같은 문법!
 select mno, name, work
 from memb natural join stnt;
 
@@ -166,7 +166,7 @@ from memb m join stnt s on m.mno=s.mno;
 /* 안타깝게도 위의 SQL문은 학생 목록만 출력한다.
     왜? memb테이블의 데이터와 stnt 테이블의 데이터를
     연결할 때 mno가 같은 데이터만 연결하여 추출하기 때문이다.
-   해결책!
+    => 해결책!
     상대 테이블(stnt)에 연결할 대상(데이터)이 없더라도
     select에서 추출하는 방법 */
 select m.mno, name, work
@@ -178,7 +178,7 @@ from memb m left outer join stnt s on m.mno=s.mno;
     => 다음의 결과가 출력될 수 있도록 수강 신청 데이터를 출력하시오!
     수강신청번호, 강의명, 학생명, 재직여부, 수강신청일, 강의실명, 매니저명, 직위 */
 
-/* 1단계: 수강신청 데이터를 출력 */
+/* 1단계: 수강신청 데이터를 출력 <- 별명 */
 select la.lano, la.lno, la.mno, la.rdt
 from lect_appl la;
 
