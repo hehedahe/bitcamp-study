@@ -107,7 +107,7 @@ from lect l inner join room r on l.rno=r.rno;
 
 /* inner join의 문제점 예2:
  * 모든 강의장 이름을 출력하라.
- * 단 강의장에 강의가 배정된 경우 그 강의 이름도 출력하라.
+ * 단, 강의장에 강의가 배정된 경우 그 강의 이름도 출력하라.
  */
 select
   r.rno,
@@ -137,7 +137,7 @@ from lect l left outer join room r on l.rno=r.rno;
 
 /* 요구사항:
    모든 멤버의 번호와 이름을 출력하라!
-   단 학생의 경우 재직여부도 출력하라!*/
+   단, 학생의 경우 재직여부도 출력하라!*/
 
 -- 1) 모든 멤버 데이터 출력하기
 select mno, name
