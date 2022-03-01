@@ -164,11 +164,11 @@ select m.mno, name, work
 from memb m join stnt s on m.mno=s.mno;
 
 /* 안타깝게도 위의 SQL문은 학생 목록만 출력한다.
-    왜? memb테이블의 데이터와 stnt 테이블의 데이터를
-    연결할 때 mno가 같은 데이터만 연결하여 추출하기 때문이다.
-    => 해결책!
-    상대 테이블(stnt)에 연결할 대상(데이터)이 없더라도
-    select에서 추출하는 방법 */
+   => 왜? memb테이블의 데이터와 stnt 테이블의 데이터를
+      연결할 때 mno가 같은 데이터만 연결하여 추출하기 때문이다.
+   => 해결책!
+      상대 테이블(stnt)에 연결할 대상(데이터)이 없더라도
+      select에서 추출하는 방법 */
 select m.mno, name, work
 from memb m left outer join stnt s on m.mno=s.mno;
 
