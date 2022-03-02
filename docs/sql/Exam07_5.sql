@@ -337,7 +337,7 @@ select
   la.lano,
   la.lno,
   la.mno,
-  date_format(rdt, '%Y-%m-%d') reg_date,
+  date_format(la.rdt, '%Y-%m-%d') reg_date,
   l.titl
 from lect_appl la
   inner join lect l on la.lno=l.lno;
@@ -358,7 +358,7 @@ from lect_appl la
 6단계)
 select
   la.lano,
-  date_format(rdt, '%Y-%m-%d') reg_date,
+  date_format(la.rdt, '%Y-%m-%d') reg_date,
   l.titl,
   m.name,
 from lect_appl la
@@ -381,7 +381,7 @@ from lect_appl la
 7단계)
 select
   la.lano,
-  date_format(rdt, '%Y-%m-%d') reg_date,
+  date_format(la.rdt, '%Y-%m-%d') reg_date,
   l.titl,
   m.name,
   s.work
@@ -406,12 +406,58 @@ from lect_appl la
 8단계)
 select
   la.lano,
-  date_format(rdt, '%Y-%m-%d') reg_date,
+  date_format(la.rdt, '%Y-%m-%d') reg_date,
   l.titl,
   m.name,
-  s.work
+  s.work,
+  r.name
 from lect_appl la
   inner join lect l on la.lno=l.lno
   inner join memb m on la.mno=m.mno
   inner join stnt s on la.mno=s.mno
-  outer join room r on l.rno=r.rno;
+  left outer join room r on l.rno=r.rno;
+
++------+------------+------------------+------+------+------+
+| lano | reg_date   | titl             | name | work | name |
++------+------------+------------------+------+------+------+
+|    1 | 2017-11-02 | 자바프로그래밍   | s100 | N    | 501  |
+|    5 | 2017-12-07 | IoT프로그래밍    | s100 | N    | 301  |
+|    2 | 2017-11-03 | 자바프로그래밍   | s101 | Y    | 501  |
+|    6 | 2017-10-08 | 윈도우프로그래밍 | s101 | Y    | NULL |
+|    3 | 2017-11-04 | 자바프로그래밍   | s102 | N    | 501  |
+|    7 | 2017-11-09 | 윈도우프로그래밍 | s102 | N    | NULL |
+|    4 | 2017-12-06 | IoT프로그래밍    | s104 | N    | 301  |
+|    8 | 2017-11-11 | 윈도우프로그래밍 | s104 | N    | NULL |
++------+------------+------------------+------+------+------+
+
+select
+  la.lano,
+  /*date_format(la.rdt, '%Y-%m-%d') reg_date,*/
+  to_char(la.rdt, 'YYYY-MM-DD') reg_date,
+  l.titl,
+  m.name,
+  s.work,
+  r.name
+from lect_appl la
+  inner join lect l on la.lno=l.lno
+  inner join memb m on la.mno=m.mno
+  inner join stnt s on la.mno=s.mno
+  left outer join room r on l.rno=r.rno;
+
++------+------------+----------------+------+------+------+
+| lano | reg_date   | titl           | name | work | name |
++------+------------+----------------+------+------+------+
+|    1 | 2017-11-02 | 자바프로그래밍 | s100 | N    | 501  |
+|    2 | 2017-11-03 | 자바프로그래밍 | s101 | Y    | 501  |
+|    3 | 2017-11-04 | 자바프로그래밍 | s102 | N    | 501  |
+| NULL | NULL       | NULL           | NULL | NULL | 502  |
+| NULL | NULL       | NULL           | NULL | NULL | 503  |
+| NULL | NULL       | NULL           | NULL | NULL | 301  |
+| NULL | NULL       | NULL           | NULL | NULL | 302  |
+| NULL | NULL       | NULL           | NULL | NULL | 501  |
+| NULL | NULL       | NULL           | NULL | NULL | 601  |
+|    4 | 2017-12-06 | IoT프로그래밍  | s104 | N    | 301  |
+|    5 | 2017-12-07 | IoT프로그래밍  | s100 | N    | 301  |
+| NULL | NULL       | NULL           | NULL | NULL | 302  |
+| NULL | NULL       | NULL           | NULL | NULL | 303  |
++------+------------+----------------+------+------+------+
