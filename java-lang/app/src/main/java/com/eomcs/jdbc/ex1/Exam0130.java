@@ -27,7 +27,7 @@ public class Exam0130 {
       //    그러니 Driver 인스턴스가 여러 개 생성될까 걱정하지 말라!
       //    DriverManager에 같은 Driver 인스턴스가 여러 개 등록될까 걱정하지 말라!
       //
-      Class.forName("org.mariadb.jdbc.Driver");
+      Class.forName("org.mariadb.jdbc.Driver"); // forName() => 클래스를 로딩하는 메서드 
 
       // DriverManager에 자동 등록된 것을 확인해보자!
       java.sql.Driver driver = DriverManager.getDriver("jdbc:mariadb://");
