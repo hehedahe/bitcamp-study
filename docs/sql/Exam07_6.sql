@@ -3,7 +3,7 @@
 => 성능 문제를 생각하면서 사용해야 한다.
 */
 
-/* join이용하여 데이터를 추출한 방법 */
+/* join을 이용하여 데이터를 추출한 방법 */
 select la.lano, l.titl, m.name, s.work, la.rdt, r.name, m2.name, mr.posi
 from lect_appl la
         inner join memb m on la.mno=m.mno
@@ -16,10 +16,10 @@ from lect_appl la
 /* select 절에 서브쿼리 사용하기 */
 
 /* 수강신청 데이터를 출력 */
-select 
-    la.lano, 
-    la.lno, 
-    la.mno, 
+select
+    la.lano,
+    la.lno,
+    la.mno,
     la.rdt
 from lect_appl la;
 
@@ -90,7 +90,7 @@ from lect_appl la
             from lect l) as lec on la.lno=lec.lno;
 
 /* lect_appl 테이블 대신에 서브 쿼리의 결과를 테이블로 사용할 수 있다. */
-select 
+select
     la2.lano,
     la2.rdt,
     la2.sname,
@@ -110,10 +110,10 @@ from (
             inner join memb m on la.mno=m.mno
             inner join stnt s on la.mno=s.mno) la2
      inner join (
-        select 
-            l.lno, 
-            l.titl, 
-            r.name rname, 
+        select
+            l.lno,
+            l.titl,
+            r.name rname,
             m.name mname,
             mr.posi
         from lect l
