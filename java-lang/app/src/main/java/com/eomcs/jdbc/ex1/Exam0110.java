@@ -7,10 +7,11 @@ import java.sql.SQLException;
 // DBMS에 연결하기
 // => MariaDB에 연결을 대행하는 클래스를 사용한다.
 // => 이 클래스는 JDBC API 규칙에 따라 작성되었다.
-// => 이 클래스는 JDBC Driver 파일(*.jar)에 들어 있다.
+// => 이 클래스는 JDBC Driver 파일(*.jar)에 들어 있다. <- Referenced Libraries
 // => 이 클래스를 사용하려면 먼저 이 JDBC Driver 파일을 다운로드 받아
 //    프로젝트의 CLASSPATH에 등록해야 한다.
-// => 절차
+//
+// 절차
 // 1) mvnrepository.com 또는 search.maven.org에서 mariadb jdbc driver를 검색한다.
 // 2) 라이브러리 정보를 build.gradle 파일에 설정한다.
 // 3) gradle을 이용하여 eclipse 설정 파일을 갱신한다.
@@ -48,8 +49,8 @@ public class Exam0110 {
 
       // 2) java.sql.Driver 인스턴스를 드라이버 관리자에 등록한다.
       DriverManager.registerDriver(mariadbDriver);
-      //      DriverManager.registerDriver(oracleDriver);
-      //      DriverManager.registerDriver(mssqlDriver);
+      DriverManager.registerDriver(oracleDriver);
+      DriverManager.registerDriver(mssqlDriver);
 
       System.out.println("JDBC 드라이버 로딩 및 등록 완료!");
 
