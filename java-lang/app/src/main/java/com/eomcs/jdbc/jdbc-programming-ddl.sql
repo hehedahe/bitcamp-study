@@ -19,8 +19,9 @@ create table x_board_file (
   board_file_id int not null primary key auto_increment,
   file_path varchar(255) not null,
   board_id int not null,
-  constraint fk_board_file foreign key (board_id) references x_board(board_id) on delete cascade
+  constraint fk_board_file foreign key (board_id) references x_board(board_id) /*on delete cascade*/
 );
+-- on delete cascade :
 
 -- 게시물 데이터 입력
 insert into x_board(board_id, title, contents)

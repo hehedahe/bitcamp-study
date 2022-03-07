@@ -19,20 +19,22 @@ public class BoardDao {
         Statement stmt = con.createStatement()) {
 
       // 첨부파일 삭제
-      stmt.executeUpdate("delete from x_board_file where board_id = " + no);
+      stmt.executeUpdate("delete from x_board_file where board_id = " + no); 
+      // 테이블 생성 중 FK 지정시 `on delete cascade` 를 넣으면 리스크가 있지만
+      // 부모테이블의 데이터를 삭제할 때 굳이 자식테이블의 데이터를 찾아 지우지 않아도 된다.
 
       // 게시글 삭제
       return stmt.executeUpdate("delete from x_board where board_id=" + no);
     }
   }
 
-  public List<Board> findAll() throws Exception {
+  public List<Board> findAll() throws Exception { // 인터페이스 List 로 리턴하게 되면 인터페이스를 구현한 ArrayList, Stack, Queue 등 모두 올 수 있다.
     try (Connection con = DriverManager.getConnection(
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from x_board order by board_id desc")) {
 
-      ArrayList<Board> list = new ArrayList<>();
+      ArrayList<Board> list = new ArrayList<>(); // List 인터페이스를 구현한 ArrayList
       while (rs.next()) {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
@@ -81,17 +83,21 @@ public class BoardDao {
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("select * from x_board where board_id = " + no)) {
 
-      if (!rs.next())
+      //      if (!rs.next())
+      //        return null;
+      //
+      if (rs.next()) {
+        Board board = new Board();
+        board.setNo(rs.getInt("board_id"));
+        board.setTitle(rs.getString("title"));
+        board.setContent(rs.getString("contents"));
+        board.setRegisteredDate(rs.getDate("created_date"));
+        board.setViewCount(rs.getInt("view_count"));
+        return board;
+
+      } else {
         return null;
-
-      Board board = new Board();
-      board.setNo(rs.getInt("board_id"));
-      board.setTitle(rs.getString("title"));
-      board.setContent(rs.getString("contents"));
-      board.setRegisteredDate(rs.getDate("created_date"));
-      board.setViewCount(rs.getInt("view_count"));
-
-      return board;
+      }
     }
   }
 }
