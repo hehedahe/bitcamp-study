@@ -19,10 +19,10 @@ create table x_board_file (
   board_file_id int not null primary key auto_increment,
   file_path varchar(255) not null,
   board_id int not null,
-  constraint fk_board_file foreign key (board_id) references x_board(board_id)
+  constraint fk_board_file foreign key (board_id) references x_board(board_id) on delete cascade
 );
 
--- 게시물 데이터 입력 
+-- 게시물 데이터 입력
 insert into x_board(board_id, title, contents)
 values(1, '제목1', '내용');
 
@@ -42,38 +42,38 @@ insert into x_board(board_id, title, contents)
 values(6, '제목6', '내용');
 
 -- 게시물 첨부파일 데이터 입력
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(101, 'a1.gif', 1);
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(102, 'a2.gif', 1);
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(103, 'a3.gif', 1);
 
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(104, 'b1.gif', 2);
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(105, 'b2.gif', 2);
 
 
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(106, 'c1.gif', 3);
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(107, 'c2.gif', 3);
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(108, 'c3.gif', 3);
 
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(109, 'd1.gif', 4);
 
-insert into x_board_file(board_file_id, file_path, board_id) 
+insert into x_board_file(board_file_id, file_path, board_id)
 values(110, 'e1.gif', 5);
 
--- 데이터 조회 
+-- 데이터 조회
 select
   board_id,
   title,
   created_date
-from 
+from
   x_board
 order by board_id desc;
 
@@ -83,9 +83,9 @@ select
   contents,
   created_date,
   view_count
-from 
+from
   x_board
-where 
+where
   board_id = 3;
 
 -- 데이터 변경
@@ -113,9 +113,3 @@ from x_board b
   left outer join x_board_file f on b.board_id = f.board_id
 where
   b.board_id = 1;
-
-
-
-
-
-
