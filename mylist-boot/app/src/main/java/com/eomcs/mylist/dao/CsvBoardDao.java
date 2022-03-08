@@ -5,8 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import com.eomcs.mylist.domain.Board;
-import com.eomcs.util.ArrayList;
 
 public class CsvBoardDao { 
   // variables initializer 변수 선언에 값을 초기화시키는 문장

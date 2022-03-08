@@ -6,8 +6,8 @@ import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import com.eomcs.mylist.domain.Board;
-import com.eomcs.util.ArrayList;
 
 public class BinaryBoardDao {
   ArrayList boardList = new ArrayList();

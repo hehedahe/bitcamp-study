@@ -1,9 +1,9 @@
 package com.eomcs.mylist.controller;
 
+import java.util.ArrayList;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Todo;
-import com.eomcs.util.ArrayList;
 
 @RestController
 public class TodoController {
