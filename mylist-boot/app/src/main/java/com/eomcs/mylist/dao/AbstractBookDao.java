@@ -5,7 +5,7 @@ import com.eomcs.mylist.domain.Book;
 
 public abstract class AbstractBookDao implements BookDao {
 
-  protected ArrayList<Book> bookList = new ArrayList<>(); 
+  protected ArrayList<Book> bookList = new ArrayList<>(); // 생성자에 collection 타입? 생략해도 됨
 
   protected abstract void save() throws Exception;
 
