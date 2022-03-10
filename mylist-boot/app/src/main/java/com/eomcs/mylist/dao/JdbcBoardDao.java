@@ -89,8 +89,18 @@ public class JdbcBoardDao implements BoardDao {
   }
 
   @Override
-  public int update(int no, Board board) throws Exception {
-    return no;
+  public int update(Board board) throws Exception {
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt = con.prepareStatement( //
+            "update ml_board set title=?, content=? where board_no=?")) {
+
+      stmt.setString(1, board.getTitle());
+      stmt.setString(2, board.getContent());
+      stmt.setInt(3, board.getNo());
+
+      return stmt.executeUpdate();
+    }
 
   }
 

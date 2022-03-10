@@ -17,7 +17,7 @@ public interface BoardDao {
 
   Board findByNo(int no) throws Exception;
 
-  int update(int no, Board board) throws Exception;
+  int update(Board board) throws Exception; //int no 를 파라미터로 받았던 이유?
 
   int delete(int no) throws Exception;
 

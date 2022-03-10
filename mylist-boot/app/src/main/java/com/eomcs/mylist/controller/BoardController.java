@@ -36,16 +36,8 @@ public class BoardController {
   }
 
   @RequestMapping("/board/update")
-  public Object update(int index, Board board) throws Exception {
-    Board old = boardDao.findByNo(index);
-    if (old == null) {
-      return 0;
-    }
-
-    board.setViewCount(old.getViewCount());
-    board.setCreatedDate(old.getCreatedDate());
-
-    return boardDao.update(index, board);
+  public Object update(Board board) throws Exception {
+    return boardDao.update(board);
   }
 
   @RequestMapping("/board/delete")
