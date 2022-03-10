@@ -1,4 +1,4 @@
-package com.eomcs.mylist.dao;
+package com.eomcs.mylist.dao.mariadb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
+import com.eomcs.mylist.dao.BoardDao;
+import com.eomcs.mylist.dao.DaoException;
 import com.eomcs.mylist.domain.Board;
 
 // @Repository
@@ -17,9 +19,9 @@ import com.eomcs.mylist.domain.Board;
 //    Spring에서 DAO 처리하는 객체는 @Repository 로 사용한다.
 // ** 클라이언트의 요청을 받아 처리하는 애노테이션은 @RestController 이다.
 @Repository
-public class JdbcBoardDao implements BoardDao {
+public class BoardDaoImpl implements BoardDao {
 
-  public JdbcBoardDao() {
+  public BoardDaoImpl() {
     System.out.println("JdbcBoardDao 객체 생성!");
   }
 
