@@ -1,46 +1,94 @@
 package com.eomcs.mylist.dao;
 
-import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 import com.eomcs.mylist.domain.Board;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 // @Repository
 // - 클래스에 이 애노테이션을 붙여 표시해 두면, Spring Boot가 실행될 때 이 클래스의 객체를 자동 생성한다.
 // - 또한 이 객체를 원하는 곳에 자동으로 주입한다.
 //
-//@Repository  
-public class JdbcBoardDao extends AbstractBoardDao {
-
-  String filename = "boards.json";
+// ** @Component 과 @Repository 모두 객체를 자동 생성하는 애노테이션!
+//    Spring에서 DAO 처리하는 객체는 @Repository 로 사용한다.
+// ** 클라이언트의 요청을 받아 처리하는 애노테이션은 @RestController 
+@Repository
+public class JdbcBoardDao implements BoardDao {
 
   public JdbcBoardDao() {
-    try {
-      ObjectMapper mapper = new ObjectMapper();
+    System.out.println("JdbcBoardDao 객체 생성!");
+  }
 
-      //      TypeFactory 타입정보생성기 = mapper.getTypeFactory();
-      //      CollectionType 컬렉션타입정보 = 타입정보생성기.constructCollectionType(
-      //          List.class, // 컬렉션의 타입  
-      //          Board.class // 컬렉션에 들어갈 항목의 타입
-      //          );
-      //      Collection<Board> list = mapper.readValue(new File(filename), // JSON 데이터
-      //          컬렉션타입정보// 생성할 목록의 타입 정보(JavaType 객체)
-      //          );
-      //      boardList.addAll(list);
+  @Override
+  public int countAll() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
 
-      boardList.addAll(mapper.readValue(new File(filename), 
-          mapper.getTypeFactory().constructCollectionType(List.class, Board.class)));
+  @Override
+  public List<Board> findAll() throws Exception {
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt = con.prepareStatement( //
+            "select board_no,title,created_date,view_count from ml_board order by board_no desc");
+        ResultSet rs = stmt.executeQuery()) {
 
-    } catch (Exception e) {
-      System.out.println("게시글 데이터 로딩 중 오류 발생!");
+      ArrayList<Board> arr = new ArrayList<>();
+      while (rs.next()) {
+        Board board = new Board();
+        board.setNo(rs.getInt("board_no"));
+        board.setTitle(rs.getString("title"));
+        board.setCreatedDate(rs.getDate("created_date"));
+        board.setViewCount(rs.getInt("view_count"));
+        arr.add(board);
+      }
+      return arr;
     }
   }
 
   @Override
-  protected void save() throws Exception {
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(new File(filename), boardList.toArray());
+  public int insert(Board board) throws Exception {
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt =
+            con.prepareStatement("insert into ml_board(title,content) values(?,?)");) {
+
+      stmt.setString(1, board.getTitle());
+      stmt.setString(2, board.getContent());
+
+      return stmt.executeUpdate();
+    }
   }
+
+  @Override
+  public Board findByNo(int no) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public int update(int no, Board board) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public int delete(int no) throws Exception {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  @Override
+  public void increaseViewCount(int no) throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+
 }
 
 

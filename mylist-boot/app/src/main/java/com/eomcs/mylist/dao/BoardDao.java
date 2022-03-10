@@ -1,5 +1,6 @@
 package com.eomcs.mylist.dao;
 
+import java.util.List;
 import com.eomcs.mylist.domain.Board;
 
 public interface BoardDao {
@@ -10,9 +11,9 @@ public interface BoardDao {
 
   int countAll();
 
-  Object[] findAll();
+  List<Board> findAll(); // ArrayList가 아닌 이유?
 
-  void insert(Board board) throws Exception;
+  int insert(Board board) throws Exception;
 
   Board findByNo(int no);
 

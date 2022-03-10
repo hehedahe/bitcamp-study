@@ -1,15 +1,19 @@
 package com.eomcs.mylist.controller;
 
-import java.sql.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.eomcs.mylist.dao.CsvBoardDao;
+import com.eomcs.mylist.dao.BoardDao;
 import com.eomcs.mylist.domain.Board;
 
 @RestController
 public class BoardController {
 
-  CsvBoardDao boardDao = new CsvBoardDao(); // 게시글 보관 처리 역할
+  // @Autowired
+  // 
+  // 
+  @Autowired/*(required = false)*/
+  BoardDao boardDao;
 
   @RequestMapping("/board/list")
   public Object list() {
@@ -18,12 +22,7 @@ public class BoardController {
 
   @RequestMapping("/board/add")
   public Object add(Board board) throws Exception {
-    board.setCreatedDate(new Date(System.currentTimeMillis()));
-    boardDao.insert(board);
-    // 어떤 메서드를 호출할 때 인스턴스 주소를 주면서 호출해야 한다.
-    // boardDao 변수에 들어있는 인스턴스 주소로 가서, 그 안에 있는 변수들을 사용해서 insert() 메서드를 사용해
-    // 그 변수 = boardList 변수
-    return boardDao.countAll();
+    return boardDao.insert(board);
   }
 
   @RequestMapping("/board/get")
