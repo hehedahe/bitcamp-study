@@ -25,7 +25,6 @@ public class JdbcBoardDao implements BoardDao {
 
   @Override
   public int countAll() {
-    // TODO Auto-generated method stub
     return 0;
   }
 
@@ -124,8 +123,6 @@ public class JdbcBoardDao implements BoardDao {
             "update ml_board set view_count=view_count+1 where board_no=?")) {
 
       stmt.setInt(1, no);
-      stmt.executeUpdate();
-
       return stmt.executeUpdate();
     }
   }
