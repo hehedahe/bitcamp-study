@@ -15,7 +15,7 @@ import com.eomcs.mylist.domain.Board;
 //
 // ** @Component 과 @Repository 모두 객체를 자동 생성하는 애노테이션!
 //    Spring에서 DAO 처리하는 객체는 @Repository 로 사용한다.
-// ** 클라이언트의 요청을 받아 처리하는 애노테이션은 @RestController 
+// ** 클라이언트의 요청을 받아 처리하는 애노테이션은 @RestController 이다.
 @Repository
 public class JdbcBoardDao implements BoardDao {
 
@@ -25,11 +25,21 @@ public class JdbcBoardDao implements BoardDao {
 
   @Override
   public int countAll() {
-    return 0;
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt = con.prepareStatement( //
+            "select count(*) from ml_board");
+        ResultSet rs = stmt.executeQuery()) {
+
+      rs.next();
+      return rs.getInt(1);
+    } catch (Exception e) {
+      throw new DaoException(e);
+    }
   }
 
   @Override
-  public List<Board> findAll() throws Exception {
+  public List<Board> findAll(){
     try (Connection con = DriverManager.getConnection( //
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement( //
@@ -46,12 +56,14 @@ public class JdbcBoardDao implements BoardDao {
         arr.add(board);
       }
       return arr;
+    } catch (Exception e) {
+      throw new DaoException(e);
     }
   }
 
   @Override
-  public int insert(Board board) throws Exception {
-    try (Connection con = DriverManager.getConnection( //
+  public int insert(Board board){
+    try (Connection con = DriverManager.getConnection(
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt =
             con.prepareStatement("insert into ml_board(title,content) values(?,?)");) {
@@ -60,11 +72,13 @@ public class JdbcBoardDao implements BoardDao {
       stmt.setString(2, board.getContent());
 
       return stmt.executeUpdate();
+    } catch (Exception e) {
+      throw new DaoException(e);
     }
   }
 
   @Override
-  public Board findByNo(int no) throws Exception {
+  public Board findByNo(int no){
     try (Connection con = DriverManager.getConnection( //
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement( //
@@ -77,21 +91,23 @@ public class JdbcBoardDao implements BoardDao {
           return null;
 
         Board board = new Board();
-        board.setNo(rs.getInt("board_no")); // board_no 프로퍼티
-        board.setTitle(rs.getString("title")); // title 프로퍼티
+        board.setNo(rs.getInt("board_no")); // board_no "프로퍼티"
+        board.setTitle(rs.getString("title")); // title "프로퍼티"
         board.setContent(rs.getString("content"));
         board.setCreatedDate(rs.getDate("created_date"));
         board.setViewCount(rs.getInt("view_count"));
         return board;
       }
+    } catch (Exception e) {
+      throw new DaoException(e);
     }
   }
 
   @Override
-  public int update(Board board) throws Exception {
-    try (Connection con = DriverManager.getConnection( //
+  public int update(Board board) {
+    try (Connection con = DriverManager.getConnection(
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
-        PreparedStatement stmt = con.prepareStatement( //
+        PreparedStatement stmt = con.prepareStatement(
             "update ml_board set title=?, content=? where board_no=?")) {
 
       stmt.setString(1, board.getTitle());
@@ -99,12 +115,14 @@ public class JdbcBoardDao implements BoardDao {
       stmt.setInt(3, board.getNo());
 
       return stmt.executeUpdate();
+    } catch (Exception e) {
+      throw new DaoException(e);
     }
 
   }
 
   @Override
-  public int delete(int no) throws Exception {
+  public int delete(int no) {
     try (Connection con = DriverManager.getConnection( //
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement( //
@@ -112,11 +130,13 @@ public class JdbcBoardDao implements BoardDao {
 
       stmt.setInt(1, no);
       return stmt.executeUpdate();
+    } catch (Exception e) {
+      throw new DaoException(e);
     }
   }
 
   @Override
-  public int updateViewCount(int no) throws Exception {
+  public int updateViewCount(int no) {
     try (Connection con = DriverManager.getConnection( //
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement( //
@@ -124,9 +144,10 @@ public class JdbcBoardDao implements BoardDao {
 
       stmt.setInt(1, no);
       return stmt.executeUpdate();
+    } catch (Exception e) {
+      throw new DaoException(e);
     }
   }
-
 
 }
 
