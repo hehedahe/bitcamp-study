@@ -10,6 +10,7 @@
 <table id="x-board-tbl" border=1>
 <thead>
   <tr>
+    <th>번호</th>
     <th>제목</th>
     <th>조회수</th>
     <th>등록일</th>
@@ -29,11 +30,11 @@ fetch("/board/list")
     return response.json();
   })
   .then(function(boards) {
-    console.log(boards);
-    for (var i = 0; i < boards.length; i++) { // index 번호를 사용해야하니 for...of말고 fori를 사용하자
-      var board = boards[i];
+    // console.log(boards);
+    for (var board of boards) {
       var tr = document.createElement("tr");
-      tr.innerHTML = `<td><a href="view.html?index=${i}">${board.title}</a></td>
+      tr.innerHTML = `<td>${board.no}</td>
+      <td><a href="view.html?no=${board.no}">${board.title}</a></td>
           <td>${board.viewCount}</td>
           <td>${board.createdDate}</td>`;
       tbody.appendChild(tr);

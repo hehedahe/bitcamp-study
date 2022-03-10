@@ -106,8 +106,14 @@ public class JdbcBoardDao implements BoardDao {
 
   @Override
   public int delete(int no) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt = con.prepareStatement( //
+            "delete from ml_board where board_no=?")) {
+
+      stmt.setInt(1, no);
+      return stmt.executeUpdate();
+    }
   }
 
   @Override
@@ -115,7 +121,7 @@ public class JdbcBoardDao implements BoardDao {
     try (Connection con = DriverManager.getConnection( //
         "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
         PreparedStatement stmt = con.prepareStatement( //
-            "update ml_board set view_count=view_count + 1 where board_no=?")) {
+            "update ml_board set view_count=view_count+1 where board_no=?")) {
 
       stmt.setInt(1, no);
       stmt.executeUpdate();

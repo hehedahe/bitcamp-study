@@ -41,8 +41,8 @@ public class BoardController {
   }
 
   @RequestMapping("/board/delete")
-  public Object delete(int index) throws Exception {
-    return boardDao.delete(index);
+  public Object delete(int no) throws Exception {
+    return boardDao.delete(no);
   }
 
 }

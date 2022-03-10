@@ -9,6 +9,8 @@
 <h1>게시글 상세</h1>
 
 <form>
+<!-- 번호: <input id="x-no" type="text" readonly><br>  -->
+번호: <span id="x-no"></span><br>
 제목*: <input id="x-title" type="text"><br>
 내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
 조회수: <span id="x-viewCount"></span><br>
@@ -22,7 +24,7 @@
 <script type="text/javascript">
 
   var arr = location.href.split("?");
-  console.log(arr);
+  // console.log(arr);
 
   if (arr.length == 1) {
     alert("요청 형식이 옳바르지 않습니다.")
@@ -30,27 +32,30 @@
   }
 
   var qs = arr[1];
-  console.log(qs);
+  // console.log(qs);
 
   var params = new URLSearchParams(qs);
-  var index =  params.get("index");
+  var no =  params.get("no");
 
-  if (index == null) {
+  if (no == null) {
     alert("게시물 번호가 없습니다.")
     throw "파라미터 오류!";
   }
-  console.log(index);
+  //console.log(index);
 
+  var xNo= document.querySelector("#x-no");
   var xTitle = document.querySelector("#x-title");
   var xContent = document.querySelector("#x-content");
   var xViewCount = document.querySelector("#x-viewCount");
   var xCreatedDate = document.querySelector("#x-createdDate");
 
-  fetch(`/board/get?index=${index}`)
+  fetch(`/board/get?no=${no}`)
     .then(function(response) {
       return response.json();
     })
     .then(function(board) {
+      // xNo.value = board.no;
+      xNo.innerHTML = board.no;
       xTitle.value = board.title;
       xContent.value = board.content;
       xViewCount.innerHTML = board.viewCount;
@@ -63,12 +68,12 @@
       return;
     }
 
-    fetch(`/board/update?index=${index}&title=${xTitle.value}&content=${xContent.value}`)
+    fetch(`/board/update?no=${no}&title=${xTitle.value}&content=${xContent.value}`)
       .then(function(response) {
         return response.text();
       })
       .then(function(text) {
-        console.log(text);
+        // console.log(text);
         location.href = "index.html";
       });
   };
@@ -78,12 +83,12 @@
   };
 
   document.querySelector("#x-delete-btn").onclick = function() {
-    fetch(`/board/delete?index=${index}`)
+    fetch(`/board/delete?no=${no}`)
       .then(function(response) {
         return response.json();
       })
       .then(function(result) {
-        console.log(result);
+        // console.log(result);
         location.href = "index.html";
       });
   };
