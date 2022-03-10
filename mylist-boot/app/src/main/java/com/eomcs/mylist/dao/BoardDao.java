@@ -9,19 +9,19 @@ public interface BoardDao {
   // 메서드를 작성할 때 메서드 몸체(method body)를 작성하지 말아야 한다.
   // 메서드 바디가 없는 메서드를 "추상 메서드(abstract method)"라 부른다.
 
-  int countAll();
+  int countAll() throws Exception;
 
-  List<Board> findAll(); // ArrayList가 아닌 이유?
+  List<Board> findAll() throws Exception ; // ArrayList가 아닌 이유?
 
   int insert(Board board) throws Exception;
 
-  Board findByNo(int no);
+  Board findByNo(int no) throws Exception;
 
   int update(int no, Board board) throws Exception;
 
   int delete(int no) throws Exception;
 
-  void increaseViewCount(int no) throws Exception;
+  int updateViewCount(int no) throws Exception;
 }
 
 

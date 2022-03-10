@@ -65,15 +65,33 @@ public class JdbcBoardDao implements BoardDao {
   }
 
   @Override
-  public Board findByNo(int no) {
-    // TODO Auto-generated method stub
-    return null;
+  public Board findByNo(int no) throws Exception {
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt = con.prepareStatement( //
+            "select board_no,title,content,created_date,view_count from ml_board where board_no=?")) {
+
+      stmt.setInt(1, no);
+
+      try (ResultSet rs = stmt.executeQuery()) {
+        if (!rs.next())
+          return null;
+
+        Board board = new Board();
+        board.setNo(rs.getInt("board_no")); // board_no 프로퍼티
+        board.setTitle(rs.getString("title")); // title 프로퍼티
+        board.setContent(rs.getString("content"));
+        board.setCreatedDate(rs.getDate("created_date"));
+        board.setViewCount(rs.getInt("view_count"));
+        return board;
+      }
+    }
   }
 
   @Override
   public int update(int no, Board board) throws Exception {
-    // TODO Auto-generated method stub
-    return 0;
+    return no;
+
   }
 
   @Override
@@ -83,9 +101,17 @@ public class JdbcBoardDao implements BoardDao {
   }
 
   @Override
-  public void increaseViewCount(int no) throws Exception {
-    // TODO Auto-generated method stub
+  public int updateViewCount(int no) throws Exception {
+    try (Connection con = DriverManager.getConnection( //
+        "jdbc:mariadb://localhost:3306/studydb?user=study&password=1111");
+        PreparedStatement stmt = con.prepareStatement( //
+            "update ml_board set view_count=view_count + 1 where board_no=?")) {
 
+      stmt.setInt(1, no);
+      stmt.executeUpdate();
+
+      return stmt.executeUpdate();
+    }
   }
 
 
