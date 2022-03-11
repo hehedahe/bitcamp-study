@@ -1,6 +1,7 @@
 package com.eomcs.mylist;
 
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,10 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 public class App {
 
+  @Value("${spring.datasource.driver-class-name}")
+  String driverClassName;
+
+  @Value("${spring.datasource.url}")
+  String url;
+
+  @Value("${spring.datasource.username}")
+  String username;
+
+  @Value("${spring.datasource.password}")
+  String password;
+
+
   // Spring 프레임워크(IoC = 객체풀)에서 객체를 생성한 후 보관하도록 만드는 방법
   @Bean // => 다음 메서드를 호출한 후 이 메서드가 리턴한 값을 스프링 부트에 보관하라고 지시하는 애노테이션
   public DataSource createDataSource() {
     System.out.println("createDataSourc() 호출됨!!!!!");
+    System.out.println(driverClassName);
+    System.out.println(url);
+    System.out.println(username);
+    System.out.println(password);
+
+
     try {
       DriverManagerDataSource connectionPool = new DriverManagerDataSource();
       connectionPool.setDriverClassName("org.mariadb.jdbc.Driver");
