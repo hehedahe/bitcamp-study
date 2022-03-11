@@ -22,7 +22,8 @@ import com.eomcs.mylist.domain.Board;
 @Repository
 public class BoardDaoImpl implements BoardDao {
 
-  @Autowired // => 스프링 부트가 보관하고 있는 객체 중에서 다음 타입의 객체가 있다면 주입해 줄 것을 지시하는 애노테이션
+  @Autowired
+  // => 스프링 부트가 보관하고 있는 객체 중에서 다음 타입의 객체가 있다면 주입해 줄 것을 지시하는 애노테이션
   DataSource dataSource;
 
   public BoardDaoImpl() {
