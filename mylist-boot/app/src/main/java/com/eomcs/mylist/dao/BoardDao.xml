@@ -8,15 +8,25 @@
  -->
 <mapper namespace="com.eomcs.mylist.dao.BoardDao">
 
+<!-- 테이블의 컬럼과 객체 필드를 연결한다. -->
+  <resultMap type="board" id="boardMap">
+    <id column="board_no" property="no"/>
+    <result column="title" property="title"/>
+    <result column="content" property="content"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="view_count" property="viewCount"/>
+  </resultMap>
+
+
 <!-- 
   id => 인터페이스의 메서드 이름과 일치해야 한다.
  -->
-  <select id="findAll" resultType="Board">
+  <select id="findAll" resultMap="boardMap">
     select
-      board_no as no,
+      board_no,
       title,
-      created_date as createdDate,
-      view_count as viewCount
+      created_date,
+      view_count
     from
       ml_board
     order by
@@ -26,13 +36,13 @@
 <!-- 
   parameterType => 메서드의 파라미터 타입 및 개수와 일치해야 한다.
  -->
-  <select id="findByNo" resultType="Board" parameterType="int">
+  <select id="findByNo" resultMap="boardMap" parameterType="int">
     select
-      board_no no,
+      board_no,
       title,
       content,
-      created_date createdDate,
-      view_count viewCount
+      created_date,
+      view_count
     from
       ml_board
     where 
