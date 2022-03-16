@@ -15,7 +15,7 @@ public class App {
 
   @RequestMapping("/hello")
   String hello() {
-    return "Hello Web!";
+    return "Hello World!";
   }
 
 }
