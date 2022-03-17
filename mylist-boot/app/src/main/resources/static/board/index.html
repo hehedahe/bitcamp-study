@@ -7,7 +7,7 @@
 <body>
 <h1>게시글</h1>
 <a href="/index.html">돌아가기</a>
-<table id="x-board-tbl" border=1>
+<table id="x-board-tbl" border="1">
 <thead>
   <tr>
     <th>번호</th>
@@ -21,10 +21,12 @@
 </table>
 
 <button id="x-create-btn" type="button">새 게시글</button>
-<script type="text/javascript" src="../myQuery.js"/>
+
+<script type="text/javascript" src="../myQuery.js"></script>
 <script type="text/javascript">
 
 var tbody = _("#x-board-tbl tbody");
+console.log(tbody);
 
 fetch("/board/list")
   .then(function(response) {
@@ -46,7 +48,6 @@ fetch("/board/list")
 _("#x-create-btn").onclick = function() {
   window.location.href = "form.html"
 };
-
 </script>
 </body>
 </html>
