@@ -3,4 +3,4 @@ function myQuery(selector) {
   return e;
 }
 
-var x = myQuery;
+var _ = myQuery;

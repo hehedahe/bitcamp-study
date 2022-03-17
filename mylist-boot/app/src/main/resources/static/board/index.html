@@ -21,10 +21,10 @@
 </table>
 
 <button id="x-create-btn" type="button">새 게시글</button>
-s
+<script type="text/javascript" src="../myQuery.js"/>
 <script type="text/javascript">
 
-var tbody = myQuery("#x-board-tbl tbody");
+var tbody = _("#x-board-tbl tbody");
 
 fetch("/board/list")
   .then(function(response) {
@@ -33,7 +33,7 @@ fetch("/board/list")
   .then(function(boards) {
     // console.log(boards);
     for (var board of boards) {
-      var tr = myQuery("tr");
+      var tr = _("tr");
       tr.innerHTML = `<td>${board.no}</td>
       <td><a href="view.html?no=${board.no}">${board.title}</a></td>
           <td>${board.viewCount}</td>
@@ -43,7 +43,7 @@ fetch("/board/list")
 
   })
 
-document.querySelector("#x-create-btn").onclick = function() {
+_("#x-create-btn").onclick = function() {
   window.location.href = "form.html"
 };
 
