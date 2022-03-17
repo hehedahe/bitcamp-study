@@ -21,9 +21,10 @@
 </table>
 
 <button id="x-create-btn" type="button">새 게시글</button>
+s
 <script type="text/javascript">
 
-var tbody = document.querySelector("#x-board-tbl tbody");
+var tbody = myQuery("#x-board-tbl tbody");
 
 fetch("/board/list")
   .then(function(response) {
@@ -32,7 +33,7 @@ fetch("/board/list")
   .then(function(boards) {
     // console.log(boards);
     for (var board of boards) {
-      var tr = document.createElement("tr");
+      var tr = myQuery("tr");
       tr.innerHTML = `<td>${board.no}</td>
       <td><a href="view.html?no=${board.no}">${board.title}</a></td>
           <td>${board.viewCount}</td>
