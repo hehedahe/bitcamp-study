@@ -38,12 +38,17 @@
   titleInput.css("display", "none");
   
   var tbody = $("#x-todo-table tbody");
+  // console.log(typeof(tbody));
+  // console.log(tbody instanceof HTMLElement);
 
-  document.querySelector("#x-todo-input").onkeyup = function(e) {
-    if (e.keyCode == 27) {
-      e.target.value = "";
+  // titleInput.val("okok", "nono"); // => myQuery에서 arguments.length == 2
+
+  $("#x-todo-input").keyup(function(e) {
+    if (e.keyCode == 27) { // esc
+      $(e.target).val(""); // setter
+      
     } else if (e.keyCode == 13) {
-      if (e.target.value == "") {
+      if ($(e.target).val() == "") {
         window.alert("필수 입력 항목이 비어 있습니다.");
         return;
     }
@@ -57,28 +62,27 @@
         window.reload();
       });
     }
-  };
+  });
 
   fetch("/todo/list")
     .then(function(response) {
       return response.json();
     })
     .then(function(todoList) {
-      console.log(todoList);
-      for (var i = 0; i < todoList.length; i++) {
-        var tr = document.createElement("tr");
-        tr.setattribute("data-no", i);
+      // console.log(todoList);
+      for (var todo of todoList) {
         var checkedOption = "";
         var titleTdOption = "";
-        if (todoList[i].done) {
+        if (todo.done) {
           checkedOption = "checked";
           titleTdOption = "class='todo-checked'";
         }
-        tr.innerHTML = `<td><input type="checkbox" ${checkedOption} onchange="checkTodo(${i}, event.target.checked)"></td>
-        <td class="todo-title"><span ${titleTdOption}>${todoList[i].title}</span></td>
-        <td><button type="button" onclick="updateTodo(${i})">변경</button></td>
-        <td><button type="button" onclick="deleteTodo(${i})">삭제</button></td>`;
-        tbody.appendChild(tr);
+        $("<tr>").attr("data-no", todo.no)// tr태그 생성 + 태그의 속성 값 설정
+                 .html(`<td><input type="checkbox" ${checkedOption} onchange="checkTodo(${i}, event.target.checked)"></td>
+                        <td class="todo-title"><span ${titleTdOption}>${todoList[i].title}</span></td>
+                        <td><button type="button" onclick="updateTodo(${i})">변경</button></td>
+                        <td><button type="button" onclick="deleteTodo(${i})">삭제</button></td>`)
+                 .appendTo(tbody); // 자식태그.appendTo(부모태그);
       }
       $("#x-todo-input").focus();
     });
@@ -90,7 +94,7 @@
      })
      .then(function(result) {
        if (result == 0) {
-         window.alert("삭제하지 못했습니다!");
+         window.alert("삭제하지 못 했습니다!");
        } else {
          location.reload();
        }
@@ -121,22 +125,22 @@
    // 현재 Todo 항목을 편집 중인 상태에서 변경 버튼을 눌렀다면
    if (titleInput.parentNode instanceof HTMLTableCellElement) {
      // 다른 항목을 편집하기 위해 이동하기 전에 편집 전의 상태로 되돌린다.
-     titleInput.parentNode.querySelector("span").style["display"] = "";
+     titleInput.parent().find("span").css("disply", "");
    }
    var titleTd = $(`tr[data-no="${no}"] > td.todo-title`);
    var titleSpan = titleTd.find("span");
    titleSpan.css( "display","none" );
    titleInput.val( titleSpan.html() );
    titleInput.attr("data-no", no);
-   titleTd.appendChild(titleInput);
+   titleTd.append(titleInput);
    titleInput.css("display", "");
  }
 
- titleInput.onkeyup = function(e) {
+ titleInput.keyup(function(e) {
    // console.log(e.keycode);
-   var no = titleInput.getAttribute("data-no");
-   var titleSpan = titleInput.parentNode.querySelector("span");
-   var originTitle = titleSpan.innerHTML;
+   var no = titleInput.attr("data-no");
+   var titleSpan = titleInput.parent().find("span");
+   var originTitle = titleSpan.html();
 
    if (e.keyCode == 27) { // ESC 키를 눌러 편집을 취소한다면
      cancelTodoEditing();
@@ -150,17 +154,17 @@
            window.alert("변경하지 못했습니다!");
          } else {
            console.log("변경했습니다.");
-           titleSpan.innerHTML = titleInput.value;
+           titleSpan.html( titleInput.val() );
            cnacelTodoEditing();
          }
        });
    }
- };
+ });
 
  function cancelTodoEditing() {
-   titleInput.parentNode.querySelector("span").style["display"] = "";
-   titleInput.style["display"] = "none";
-   document.body.appendChild(titleInput);
+   titleInput.parent().find("span").css("display", "");
+   titleInput.css("display", "none");
+   $(document.body).append(titleInput);
  }
 </script>
 </body>
