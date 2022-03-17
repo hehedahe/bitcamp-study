@@ -1,10 +1,10 @@
 function myQuery(selector, parent) {
 
   if (typeof(selector) == "string") {
-    if (selector.startsWith("<")) { // <address> -> address 
-      // 파라미터 값이 
-      console.log(selector.substring(1, selector.length - 1));
-      var e = document.createElement(selector.substring(1, selector.length - 1));
+    if (selector.startsWith("<")) {
+      // 파라미터 값이 '<' 로 시작한다면 태그를 생성한다.
+      console.log(selector.substring(1, selector.length - 1)); // <address> -> address 
+      var e = document.createElement(selector.substring(1, selector.length - 1)); 
     } else if (parent != null) {
       // 부모 태그가 지정되어 있으면 그 부모 태그 아래에서 조건에 해당하는 태그를 찾는다.
       var e = parent.querySelector(selector); // js는 블록 안에 변수를 선언해도 로컬 변수다. => 바깥에서도 쓸 수 있다!
@@ -24,7 +24,7 @@ function myQuery(selector, parent) {
       e.style[name] = value; // setter
       return e; // 값을 설정한 태그를 리턴
     }
-  }
+  };
 
   // 태그 아래에서 다른 태그 찾기
   e.find = function(selector) {
@@ -49,6 +49,7 @@ function myQuery(selector, parent) {
       return e.value; // getter
     } else {
       e.value = v; // setter
+      return e;
     }
   };
 
@@ -59,6 +60,7 @@ function myQuery(selector, parent) {
     } else if(arguments.length == 2) {
       e.setAttribute(name, value);
       return e;
+    }
   };
 
   // 태그의 부모를 찾아 리턴한다.
@@ -87,7 +89,7 @@ function myQuery(selector, parent) {
   e.keyup = function(listener) { // keyup일 때 등록할 함수 = listener
     e.addEventListener("keyup", listener);
     return e;
-  }
+  };
 
   return e;
 }
