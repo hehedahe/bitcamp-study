@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.dao.ContactDao;
 import com.eomcs.mylist.domain.Contact;
+import com.eomcs.mylist.domain.ContactTel;
 
 @RestController
 // 이 클래스가 클라이언트 요청 처리 담당자임을 표시한다.
@@ -23,13 +24,17 @@ public class ContactController {
 
   @RequestMapping("/contact/add")
   public Object add(Contact contact, String[] tel) {
-    System.out.println(contact);
-    for (String t : tel) {
-      System.out.println(t + ",");
-    }
-    System.out.println();
+    //    System.out.println(contact);
+    //    for (String t : tel) {
+    //      System.out.println(t + ",");
+    //    }
+    //    System.out.println();
 
-    //    contactDao.insert(contact);
+    contactDao.insert(contact);
+    for (int i = 0; i < tel.length; i++) {
+      String[] value = tel[i].split(",");
+      contactDao.insertTel(new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]));
+    }
 
     return 0;
   }

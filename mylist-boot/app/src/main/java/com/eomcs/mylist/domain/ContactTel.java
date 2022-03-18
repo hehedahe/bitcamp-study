@@ -9,6 +9,13 @@ public class ContactTel {
   //  Contact contact; 
   // => 객체끼리는 단방향 참조여야 하는데, 이렇게 쌍방향 참조는 안된다!! 주의!!
 
+  public ContactTel() {}
+  public ContactTel(int contactNo, int telTypeNo, String tel) {
+    this.contactNo = contactNo;
+    this.telTypeNo = telTypeNo;
+    this.tel = tel;
+  }
+
   @Override
   public String toString() {
     return "ContactTel [no=" + no + ", contactNo=" + contactNo + ", telTypeNo=" + telTypeNo
