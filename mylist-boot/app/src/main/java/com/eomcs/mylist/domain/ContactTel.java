@@ -6,7 +6,8 @@ public class ContactTel {
   int contactNo;
   int telTypeNo;
   String tel;
-
+  //  Contact contact; 
+  // => 객체끼리는 단방향 참조여야 하는데, 이렇게 쌍방향 참조는 안된다!! 주의!!
 
   @Override
   public String toString() {

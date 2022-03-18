@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eomcs.mylist.dao.ContactDao">
+
+  <resultMap type="contact" id="contactMap"></resultMap>
+  <resultMap type="contactTel" id="contactTelMap"></resultMap>
+
+  <select id="countAll" resultType="int">
+    select count(*) from ml_contact;
+  </select>
+
+  <select id="findAll" resultMap="contactMap">
+    select
+      contact_no,
+      name,
+      email,
+      company
+    from
+      ml_contact
+    order by
+      name asc
+  </select>
+  
+  <insert id="insert" parameterType="contact">
+    insert into ml_contact(name, email, company)
+    values(#{name}, #{email}, #{company})
+  </insert>
+  
+  <select id="findByNo" parameterType="int" resultMap="contactmap">
+    select
+      contact_no,
+      name,
+      email,
+      company
+    from
+      ml_contact
+    where
+      contact_no=#{no}
+  </select>
+
+  <select id="findByEmail" parameterType="string" resultMap="contactmap">
+    select
+      contact_no,
+      name,
+      email,
+      company
+    from
+      ml_contact
+    where
+      email=#{email}
+  </select>
+  
+  <select id="findByName" parameterType="string" resultMap="contactmap">
+    select
+      contact_no,
+      name,
+      email,
+      company
+    from
+      ml_contact
+    where
+      name=#{name}
+  </select>
+  
+  <update id="update" parameterType="contact">
+    update ml_contact
+      name=#{name},
+      email=#{email},
+      company=#{company}
+    where
+      contact_no=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from ml_contact
+    where contact_no=#{no}
+  </delete>
+  
+  
+  <select id="findByContactNo" parameterType="int" resultMap="contactTelMap">
+    select
+      ct_no,
+      contact_no,
+      tt_no,
+      tel
+    from
+      ml_cont_tel
+    where
+      contact_no=#{no}
+  </select>
+  
+  <insert id="insertTel" parameterType="contactTel">
+    insert into ml_cont_tel(contact_no, tt_no, tel)
+    values(#{contactNO}, #{telTypeNo}, #{tel})
+  </insert>
+  
+  
+  <update id="updateTel" parameterType="contactTel">
+    update ml_cont_tel set
+      tt_no=#{telTypeNo},
+      tel=#{tel}
+    where
+      ct_no=#{no}
+  </update>
+  
+  <delete id="deleteTel" parameterType="int">
+    delete from ml_cont_tel
+    where ct_no=#{no}
+  </delete>
+  
+  
+  
+  
+  
+</mapper>
