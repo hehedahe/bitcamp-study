@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.eomcs.mylist.dao.TodoDao">
+
+<resultMap type="com.eomcs.mylist.domain.Todo" id="TodoMap"></resultMap>
+
+<select id="findAll" resultMap="TodoMap">
+  select * from ml_todo order by todo_no asc
+</select>
+
+
+
+
+
+
+</mapper>

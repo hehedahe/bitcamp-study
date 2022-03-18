@@ -10,8 +10,8 @@
 
 <!-- 테이블의 컬럼과 객체 필드를 연결한다. -->
   <resultMap type="board" id="boardMap">
-    <id column="board_no" property="no"/>
-    <result column="title" property="title"/>
+    <id column="board_no" property="no"/> <!-- PK => id태그 -->
+    <result column="title" property="title"/> <!-- 그외 컬럼 => result태그 -->
     <result column="content" property="content"/>
     <result column="created_date" property="createdDate"/>
     <result column="view_count" property="viewCount"/>

@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>To-do</title>
+  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.min.css"> <!-- 외부 css 라이브러리 추가 link태그-->
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <style>
   .todo-checked {
     text-decoration: line-through;
@@ -11,10 +13,11 @@
   </style>
 </head>
 <body>
+  <div class="container">
 <h1>To-do</h1>
 
 <p>할 일 <input id="x-todo-input" type="text"></p>
-<table id="x-todo-table" border="1">
+<table id="x-todo-table" border="1" class="table table-hover">
 <thead>
   <tr>
     <th></th>
@@ -26,11 +29,15 @@
 <tbody>
 </tbody>
 </table>
+</div>
 
 <input type="text" id="x-title-input">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <!-- <script type="text/javascript" src="../myQuery.min.js"></script> --> <!-- 우리가 만든 myQuery 압축파일 -->
+<script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
   "use strict"
 
@@ -50,7 +57,8 @@
       
     } else if (e.keyCode == 13) {
       if ($(e.target).val() == "") {
-        window.alert("필수 입력 항목이 비어 있습니다.");
+        // window.alert("필수 입력 항목이 비어 있습니다.");
+        Swal.fire("필수 입력 항목이 비어 있습니다.");
         return;
     }
 
@@ -81,8 +89,8 @@
         $("<tr>").attr("data-no", todo.no)// tr태그 생성 + 태그의 속성 값 설정
                  .html(`<td><input type="checkbox" ${checkedOption} onchange="checkTodo(${i}, event.target.checked)"></td>
                         <td class="todo-title"><span ${titleTdOption}>${todoList[i].title}</span></td>
-                        <td><button type="button" onclick="updateTodo(${i})">변경</button></td>
-                        <td><button type="button" onclick="deleteTodo(${i})">삭제</button></td>`)
+                        <td><button type="button" class="btn btn-primary btn-sm" onclick="updateTodo(${i})">변경</button></td>
+                        <td><button type="button" class="btn btn-primary btn-sm" onclick="deleteTodo(${i})">삭제</button></td>`)
                  .appendTo(tbody); // 자식태그.appendTo(부모태그);
       }
       $("#x-todo-input").focus();
