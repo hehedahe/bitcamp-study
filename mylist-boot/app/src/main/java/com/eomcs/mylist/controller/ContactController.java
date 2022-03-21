@@ -1,6 +1,9 @@
 package com.eomcs.mylist.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,24 +25,43 @@ public class ContactController {
 
   @RequestMapping("/contact/list")
   public Object list() { // 클라이언트 요청을 다루는 메서드
-    return contactDao.findAll(); // 배열을 다루는 메서드를 리턴
+    List<Contact> contacts = contactDao.findAll();
+    for (Contact contact : contacts) {
+      contact.setTels(contactDao.findTelByContactNo(contact.getNo()));
+    }
+    return contacts;
   }
 
   @RequestMapping("/contact/add")
   public Object add(Contact contact, String[] tel) {
-    //    System.out.println(contact);
-    //    for (String t : tel) {
-    //      System.out.println(t + ",");
-    //    }
-    //    System.out.println();
 
-    contactDao.insert(contact);
-    for (int i = 0; i < tel.length; i++) {
-      String[] value = tel[i].split(",");
-      contactDao.insertTel(new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]));
+    // 1) 트랜잭션으로 묶어서 실행할 작업을 정의
+    //    => 스프링 프레임워크에서 정한 규칙에 따라 정의해야 한다. => TransactionCallback
+    class ContactAddTransaction implements TransactionCallback {
+      @Override
+      public Object doInTransaction(TransactionStatus status) {
+        // 트랜잭션으로 묶어서 할 작업을 기술한다.
+
+        //    System.out.println(contact);
+        //    for (String t : tel) {
+        //      System.out.println(t + ",");
+        //    }
+        //    System.out.println();
+
+        contactDao.insert(contact);
+        for (int i = 0; i < tel.length; i++) {
+          String[] value = tel[i].split("_");
+          if (value[1].length() == 0) {
+            continue;
+          }
+          contactDao.insertTel(new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]));
+        }
+        return 1;
+      }
     }
 
-    return 0;
+    // 2) 트랜잭션 작업을 수행한다.
+    return transactionTemplate.execute(new ContactAddTransaction());
   }
 
   @RequestMapping("/contact/get")
@@ -47,6 +69,7 @@ public class ContactController {
     Contact contact = contactDao.findByNo(no);
     return contact != null ? contact : "";
   };
+
   /*
   @RequestMapping("contact/update")
   public Object update(Contact contact) throws Exception{
