@@ -33,6 +33,8 @@ public interface ContactDao {
 
   int deleteTel(int telNo);
 
+  int deleteTelByContactNo(int contactNo);
+
 
 
 }

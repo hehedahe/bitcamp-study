@@ -24,6 +24,7 @@
     order by 
       name asc
   </select>
+  
   <!-- 자동 증가된 PK 값을 받고 싶을 때! -->
   <insert id="insert" parameterType="contact" keyProperty="no" keyColumn="contact_no" useGeneratedKeys="true">
     insert into ml_contact(name,email,company) 
@@ -33,7 +34,6 @@
   <select id="findByNo" resultMap="contactMap" parameterType="int">
     select 
       contact_no,
-      name,
       email,
       company
     from 
@@ -107,8 +107,13 @@
   </update>
   
   <delete id="deleteTel" parameterType="int">
-    delete from ml_cont_tel 
+    delete from ml_cont_tel
     where ct_no=#{no}
+  </delete>
+  
+  <delete id="deleteTelByContactNo" parameterType="int">
+    delete from ml_cont_tel 
+    where contact_no=#{no}
   </delete>
   
 </mapper>
