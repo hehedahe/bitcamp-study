@@ -1,35 +1,33 @@
-package com.eomcs.mylist.service;
+package com.eomcs.mylist.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import com.eomcs.mylist.dao.ContactDao;
 import com.eomcs.mylist.domain.Contact;
 import com.eomcs.mylist.domain.ContactTel;
+import com.eomcs.mylist.service.ContactService;
 
 @Service
-// @Component 도 가능하지만! Service 객체를 콕! 집어서 붙일 때는 @Service 애노테이션을 사용한다.
-public class ContactServiceTransaction {
+public class DefaultServiceImpl implements ContactService {
 
   @Autowired
   ContactDao contactDao;
 
-  @Autowired
-  TransactionTemplate transactionTemplate;
-
+  @Override
+  @Transactional // 다음 메서드는 트랜잭션 안에서 실행하도록 설정한다.
   public int add(Contact contact) {
-    // 람다 문법이 적용 <= functional interface (추상메서드가 1개인 인터페이스)
-    return transactionTemplate.execute(Status -> {
-      contactDao.insert(contact);
-      for (ContactTel tel:contact.getTels()) {
-        tel.setContactNo(contact.getNo()); // 전화번호 입력 전에 자동 생성된 연락처 번호를 설정한다.
-        contactDao.insertTel(tel);
-      }
-      return 1;
-    });
-  }
+    contactDao.insert(contact);
+    for (ContactTel tel:contact.getTels()) {
+      tel.setContactNo(contact.getNo()); // 전화번호 입력 전에 자동 생성된 연락처 번호를 설정한다.
+      contactDao.insertTel(tel);
+    }
+    return 1;
+  } 
+  // => NonTransation 클래스 + @Transactional 애노테이션 = 트랜잭션 적용
 
+  @Override
   public List<Contact> list() {
     List<Contact> contacts = contactDao.findAll();
     for (Contact contact : contacts) {
@@ -46,7 +44,9 @@ public class ContactServiceTransaction {
     return contact;
   }
 
-  public Contact update(Contact contact) {
+  @Override
+  @Transactional
+  public int update(Contact contact) {
     int count = contactDao.update(contact);
     if (count > 0) {
       contactDao.deleteTelByContactNo(contact.getNo()); // 전화번호 변경 전에 기존 전화번호를 모두 삭제한다.
@@ -54,9 +54,11 @@ public class ContactServiceTransaction {
         contactDao.insertTel(tel); // 전화번호 객체 안에 이미 연락처 번호가 저장되어 있다.
       }
     }
-    return contact;
+    return count;
   }
 
+  @Override
+  @Transactional
   public int delete(int no) {
     contactDao.deleteTelByContactNo(no);
     return contactDao.delete(no);

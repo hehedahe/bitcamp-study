@@ -1,16 +1,12 @@
 package com.eomcs.mylist.controller;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.domain.Contact;
 import com.eomcs.mylist.domain.ContactTel;
-import com.eomcs.mylist.service.ContactServiceNonTransaction;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.eomcs.mylist.service.ContactService;
 
 @RestController
 // 이 클래스가 클라이언트 요청 처리 담당자임을 표시한다.
@@ -18,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ContactController {
 
   @Autowired
-  ContactServiceNonTransaction contactService;
+  ContactService contactService; // 클래스 대신 인터페이스를 지정한다.
 
   @RequestMapping("/contact/list")
   public Object list() { // 클라이언트 요청을 다루는 메서드
@@ -30,7 +26,6 @@ public class ContactController {
 
     // 요청 파라미터 분석 및 가공
     ArrayList<ContactTel> telList = new ArrayList<>();
-
     for (int i = 0; i < tel.length; i++) {
       String[] value = tel[i].split("_"); // 데이터 분석
       if (value[1].length() == 0) {
@@ -61,7 +56,7 @@ public class ContactController {
   }
 
   @RequestMapping("/contact/get")
-  public Contact get(int no) {
+  public Object get(int no) {
     Contact contact = contactService.get(no);
     if (contact == null) {
       return ""; // 컨트롤러는 서비스 객체의 리턴 값에 따라 응답 데이터(JSON)를 적절히 가공하여 리턴한다. 
@@ -91,31 +86,8 @@ public class ContactController {
   };
 
   @RequestMapping("/contact/delete")
-  public Contact delete(int no) throws Exception {
+  public int delete(int no) throws Exception {
     return contactService.delete(no);
   };
 
-  @RequestMapping("/contact/save")
-  public Object save() throws Exception {
-    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("contacts.json")));
-
-    ObjectMapper mapper = new ObjectMapper(); 
-    out.println(mapper.writeValueAsString(contactDao.toArray()));
-
-    out.close();
-    return contactDao.size();
-  }
-
-  // 기능:
-  // - 이메일로 연락처 정보를 찾는다.
-  // - 찾은 연락처의 배열 인덱스를 리턴한다.
-  int indexOf(String email) {
-    for (int i = 0; i < contactDao.size(); i++) {
-      Contact contact = (Contact) contactDao.get(i);
-      if (contact.getEmail().equals(email)) {  // 예) "u1@test.com"
-        return i;
-      }
-    }
-    return -1;
-  }
 }
