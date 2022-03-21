@@ -3,8 +3,6 @@ package com.eomcs.mylist.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import com.eomcs.mylist.dao.ContactDao;
 import com.eomcs.mylist.domain.Contact;
@@ -21,18 +19,14 @@ public class ContactServiceTransaction {
   TransactionTemplate transactionTemplate;
 
   public int add(Contact contact) {
-
-    return transactionTemplate.execute(new TransactionCallback<>() {
-      @Override
-      public Integer doInTransaction(TransactionStatus status) {
-        // 트랜잭션으로 묶어서 할 작업을 기술한다.
-        contactDao.insert(contact);
-        for (ContactTel tel:contact.getTels()) {
-          tel.setContactNo(contact.getNo()); // 전화번호 입력 전에 자동 생성된 연락처 번호를 설정한다.
-          contactDao.insertTel(tel);
-        }
-        return 1;       
+    // 람다 문법이 적용 <= functional interface (추상메서드가 1개인 인터페이스)
+    return transactionTemplate.execute(Status -> {
+      contactDao.insert(contact);
+      for (ContactTel tel:contact.getTels()) {
+        tel.setContactNo(contact.getNo()); // 전화번호 입력 전에 자동 생성된 연락처 번호를 설정한다.
+        contactDao.insertTel(tel);
       }
+      return 1;
     });
   }
 
