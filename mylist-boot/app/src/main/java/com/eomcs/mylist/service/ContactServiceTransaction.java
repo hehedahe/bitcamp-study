@@ -22,7 +22,7 @@ public class ContactServiceTransaction {
 
   public int add(Contact contact) {
 
-    class ContactAddTransaction implements TransactionCallback<Integer> {
+    return transactionTemplate.execute(new TransactionCallback<>() {
       @Override
       public Integer doInTransaction(TransactionStatus status) {
         // 트랜잭션으로 묶어서 할 작업을 기술한다.
@@ -33,9 +33,7 @@ public class ContactServiceTransaction {
         }
         return 1;       
       }
-    }
-
-    return transactionTemplate.execute(new ContactAddTransaction());
+    });
   }
 
   public List<Contact> list() {
