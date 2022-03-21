@@ -1,6 +1,7 @@
 package com.eomcs.mylist.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.mylist.dao.ContactDao;
@@ -15,6 +16,8 @@ public class ContactController {
   @Autowired
   ContactDao contactDao;
 
+  @Autowired
+  TransactionTemplate transactionTemplate;
 
 
   @RequestMapping("/contact/list")
