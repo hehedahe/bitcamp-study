@@ -28,6 +28,8 @@ public interface ContactDao {
 
   int insertTel(ContactTel tel);
 
+  int insertTels(List<ContactTel> tels);
+
   int updateTel(ContactTel tel);
 
   int deleteTel(int telNo);

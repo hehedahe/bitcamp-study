@@ -10,7 +10,7 @@ import com.eomcs.mylist.domain.ContactTel;
 import com.eomcs.mylist.service.ContactService;
 
 @Service
-public class DefaultServiceImpl implements ContactService {
+public class DefaultContactServiceImpl implements ContactService {
 
   @Autowired
   ContactDao contactDao;
@@ -19,7 +19,7 @@ public class DefaultServiceImpl implements ContactService {
   @Transactional // 다음 메서드는 트랜잭션 안에서 실행하도록 설정한다.
   public int add(Contact contact) {
     contactDao.insert(contact);
-    for (ContactTel tel:contact.getTels()) {
+    for (ContactTel tel : contact.getTels()) {
       tel.setContactNo(contact.getNo()); // 전화번호 입력 전에 자동 생성된 연락처 번호를 설정한다.
       contactDao.insertTel(tel);
     }
@@ -36,12 +36,15 @@ public class DefaultServiceImpl implements ContactService {
     return contacts;
   }
 
+  @Override
   public Contact get(int no) {
-    Contact contact = contactDao.findByNo(no);
-    if (contact != null) {
-      contact.setTels(contactDao.findTelByContactNo(no));
-    }
-    return contact;
+    //    Contact contact = contactDao.findByNo(no);
+    //    if (contact != null) {
+    //      contact.setTels(contactDao.findTelByContactNo(no));
+    //    }
+    //    return contact;
+    // join을 이용하여 select한 결과를 한 번에 받아 리턴하는 게 더 빠르다!
+    return contactDao.findByNo(no);
   }
 
   @Override
