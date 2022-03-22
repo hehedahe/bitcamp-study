@@ -23,66 +23,55 @@
 <button id="x-create-btn" type="button">새 연락처</button>
 
 <script id="tr-template" type="text/x-handlebars-template">
-<tr>
-  <td>{{no}}</td>
-  <td><a href="view.html?email={{no}}">${{name}}</a></td>
-  <td>{{email}}</td>
-  <td>{{tels.[0]}}</td>
-  <td>{{company}}</td>
+{{#each this}}
+  <tr>
+    <td>{{no}}</td>
+    <td><a href="view.html?no={{no}}">${{name}}</a></td>
+    <td>{{email}}</td>
+    <td>{{tels.[0].tel}}</td>
+    <td>{{company}}</td>
 </tr>
+{{/each}}
 </script>
 
 <script src="../node_modules\handlebars\dist\handlebars.min.js"></script>
 <script type="text/javascript">
+	
+	var tbody = document.querySelector("#x-contact-tbl tbody");
+	
+	// 템플릿 엔진에서 사용할 HTML 조각을 가져오기
+	var trTemplate = document.querySelector("#tr-template");
+	// 템플릿 엔진 준비
+	var htmlGenerator = Handlebars.compile(trTemplate.innerHTML);
+	
+	fetch("/contact/list")
+	  .then(function(response) {
+	    return response.json();
+	  })
+	  .then(function(contacts) {
+	    //console.log(contacts);
+	    
+	    var tbodyContent = "";
+	    for (var contact of contacts) {
+	      // 값이 들어있는 객체를 가지고 템플릿 엔진을 실행하여 HTML을 생성한다.
+	      var str = htmlGenerator(contact);
+	      tbodyContent += str;
+	    }
+	    
+	    console.log(tbodyContent);
+	    tbody.innerHTML = tbodyContent;
+	    })
+	
+	document.querySelector("#x-create-btn").onclick = function() {
+	  window.location.href = "form.html"
+	};
+	
+	
 
-var tbody = document.querySelector("#x-contact-tbl tbody");
+	
+	// 값이 들어있는 객체를 가지고 템플릿 엔진을 실행하여 HTML을 생성한다.
+	tbody.innerHTML = htmlGenerator(contacts);
 
-fetch("/contact/list")
-  .then(function(response) {
-    //console.log(response.json());
-    return response.json();
-  })
-  .then(function(contacts) {
-    console.log(contacts);
-    for (var contact of contacts) {
-      var tr = document.createElement("tr");
-      tr.innerHTML = `<td><a href="view.html?email=${contact.no}">${contact.name}</a></td>
-          <td>${contact.email}</td>
-          <td>${contact.tel}</td>
-          <td>${contact.company}</td>`;
-          //contact/get?name~ 은 서버사이드 랜더링 방식
-      tbody.appendChild(tr);
-    };
-  })
-
-document.querySelector("#x-create-btn").onclick = function() {
-  window.location.href = "form.html"
-};
-
-// 템플릿 엔진에서 사용할 HTML 조각을 가져오기
-var template1 = document.querySelector("#template1");
-console.log(template1.innerHTML);
-
-// 템플릿 엔진 준비
-var htmlGenerator = Handlebars.compile(template1.innerHTML);
-
-// 템플릿 엔진에 값이 들어있는 객체를 줘서 텍스트를 실행한다.
-//var obj = new Object();
-
-//var obj = {}
-//obj.name = "홍길동";
-
-/* var obj = {
-    name : "홍길동"
-}
-
-var str = htmlGenerator(obj); */
-
-var str = htmlGenerator({
-  name: "홍길동"
-});
-
-console.log(str);
 
 
 </script>
