@@ -11,15 +11,20 @@
     <result column="name" property="name" />
     <result column="email" property="email" />
     <result column="company" property="company" />
-  
     <collection property="tels" ofType="contactTel">
       <id column="ct_no" property="no" />
       <result column="tt_no" property="telTypeNo" />
       <result column="tel" property="tel" />
     </collection>
   </resultMap>
-  <resultMap type="contactTel" id="contactTelMap"></resultMap>
-
+  
+  <resultMap type="contactTel" id="contactTelMap">
+    <id column="ct_no" property="no" />
+    <result column="contact_no" property="contactNo" />
+    <result column="tt_no" property="telTypeNo" />
+    <result column="tel" property="tel" />
+  </resultMap>
+    
   <select id="countAll" resultType="int">
     select count(*) from ml_contact
   </select>
@@ -126,11 +131,11 @@
     values(#{contactNo}, #{telTypeNo}, #{tel}) 
   </insert>
 
-  <insert id="insertTels" parameterType="list">
+  <insert id="insertTels">
     insert into ml_cont_tel(contact_no, tt_no, tel)
     values
-    <foreach collection="list" item="tel" separator=",">
-      (#{contactNo}, #{telTypeNo}, #{tel})
+    <foreach collection="tels" item="contactTel" separator=",">
+      (#{contactNo}, #{contactTel.telTypeNo}, #{contactTel.tel})
     </foreach>
   </insert>
   
