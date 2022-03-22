@@ -26,7 +26,7 @@
 {{#each this}}
   <tr>
     <td>{{no}}</td>
-    <td><a href="view.html?no={{no}}">${{name}}</a></td>
+    <td><a href="view.html?no={{no}}">{{name}}</a></td>
     <td>{{email}}</td>
     <td>{{tels.[0].tel}}</td>
     <td>{{company}}</td>
@@ -49,30 +49,13 @@
 	    return response.json();
 	  })
 	  .then(function(contacts) {
-	    //console.log(contacts);
-	    
-	    var tbodyContent = "";
-	    for (var contact of contacts) {
-	      // 값이 들어있는 객체를 가지고 템플릿 엔진을 실행하여 HTML을 생성한다.
-	      var str = htmlGenerator(contact);
-	      tbodyContent += str;
-	    }
-	    
-	    console.log(tbodyContent);
-	    tbody.innerHTML = tbodyContent;
-	    })
+	    // 서버에서 받은 연락처 배열을 가지고 템플릿 엔진을 실행하여 tbody 콘텐트를 생성한다.
+	    tbody.innerHTML = htmlGenerator(contacts);
+	  });
 	
 	document.querySelector("#x-create-btn").onclick = function() {
 	  window.location.href = "form.html"
 	};
-	
-	
-
-	
-	// 값이 들어있는 객체를 가지고 템플릿 엔진을 실행하여 HTML을 생성한다.
-	tbody.innerHTML = htmlGenerator(contacts);
-
-
 
 </script>
 </body>
