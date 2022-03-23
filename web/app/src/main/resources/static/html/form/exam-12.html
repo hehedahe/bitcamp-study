@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>파일 업로드</title>
+</head>
+<body>
+
+<h1>여러 개의 파일 업로드</h1>
+
+<form action="/html/form/exam12" method="post" enctype="multipart/form-data"> <!-- 기본이 1MB 이다. -->
+  이름: <input type="text" name="name"><br>
+  나이: <input type="number" name="age"><br>
+  사진: <input type="file" name="photo" multiple><br> <!-- multiple 의 값은 무엇이 오든 상관없음. 속성이 존재하는 것만으로도 의미가 있다 예) readonly, multiple -->
+  <button>요청</button>
+</form>
+
+
+
+
+</body>
+</html>

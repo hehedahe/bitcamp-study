@@ -24,17 +24,34 @@ public class FormController {
   }
 
   @RequestMapping("/html/form/exam11")
-  public Object exam03(String name, int age, MultipartFile photo) {
+  public Object exam11(String name, int age, MultipartFile photo) { // => 클라이언트가 보낸 파일 photo로 받기
     System.out.println(name);
     System.out.println(age);
     System.out.println(photo.getOriginalFilename());
 
     try {
-      File photoFile = new File("c:/upload/" + photo.getOriginalFilename()); // "c:\\upload\\"
-      photo.transferTo(photoFile);
+      File photoFile = new File("c:/upload/" + photo.getOriginalFilename()); // "c:\\upload\\" => File 객체로 경로 지정
+      photo.transferTo(photoFile); // => photo로 받은 파일을 위에 지정한 경로에 저장
     } catch (Exception e) {
       e.printStackTrace();
       return "error!";
+    }
+    return "ok!";
+  }
+
+  @RequestMapping("/html/form/exam12")
+  public Object exam12(String name, int age, MultipartFile[] photo) { // photo는 exam-12.html 변수명과 똑같아야해!
+    System.out.println(name);
+    System.out.println(age);
+
+    for (MultipartFile part : photo) {
+      try {
+        File photoFile = new File("c:/upload/" + part.getOriginalFilename()); // "c:\\upload\\" => File 객체로 경로 지정
+        part.transferTo(photoFile); // => photo로 받은 파일을 위에 지정한 경로에 저장
+      } catch (Exception e) {
+        e.printStackTrace();
+        return "error!";
+      }
     }
     return "ok!";
   }
