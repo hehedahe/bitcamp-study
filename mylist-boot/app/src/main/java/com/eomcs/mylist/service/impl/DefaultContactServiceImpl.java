@@ -18,7 +18,7 @@ public class DefaultContactServiceImpl implements ContactService {
   @Transactional // 다음 메서드는 트랜잭션 안에서 실행하도록 설정한다.
   public int add(Contact contact) {
     contactDao.insert(contact);
-    contactDao.insertTels(contact.getNo(), contact.getTels());
+    contactDao.insertTels(contact.getContactNo(), contact.getTels());
     return 1;
   } 
   // => NonTransation 클래스 + @Transactional 애노테이션 = 트랜잭션 적용
@@ -44,8 +44,12 @@ public class DefaultContactServiceImpl implements ContactService {
   public int update(Contact contact) {
     int count = contactDao.update(contact);
     if (count > 0) {
-      contactDao.deleteTelByContactNo(contact.getNo()); // 전화번호 변경 전에 기존 전화번호를 모두 삭제한다.
-      contactDao.insertTels(contact.getNo(), contact.getTels());
+      contactDao.deleteTelByContactNo(contact.getContactNo()); // 전화번호 변경 전에 기존 전화번호를 모두 삭제한다.
+      //      for (ContactTel tel : contact.getTels()) {
+      //        contactDao.insertTel(tel); // 전화번호 객체에 안에 이미 연락처 번호가 저장되어 있다.
+      //      }
+      contactDao.insertTels(contact.getContactNo(), contact.getTels());
+
     }
     return count;
   }

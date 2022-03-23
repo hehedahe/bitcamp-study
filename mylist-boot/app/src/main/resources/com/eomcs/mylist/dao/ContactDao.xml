@@ -7,7 +7,7 @@
 <mapper namespace="com.eomcs.mylist.dao.ContactDao">
 
   <resultMap type="contact" id="contactMap">
-    <id column="contact_no" property="no" />
+    <id column="contact_no" property="contactNo" />
     <result column="name" property="name" />
     <result column="email" property="email" />
     <result column="company" property="company" />
@@ -35,6 +35,7 @@
       c.name,
       c.email,
       c.company,
+      t.contact_no,
       t.ct_no,
       t.tt_no,
       t.tel
@@ -46,7 +47,7 @@
   </select>
   
   <!-- 자동 증가된 PK 값을 받고 싶을 때! -->
-  <insert id="insert" parameterType="contact" keyProperty="no" keyColumn="contact_no" useGeneratedKeys="true">
+  <insert id="insert" parameterType="contact" keyProperty="contactNo" keyColumn="contact_no" useGeneratedKeys="true">
     insert into ml_contact(name,email,company) 
     values(#{name},#{email},#{company})
   </insert>

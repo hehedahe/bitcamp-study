@@ -15,7 +15,7 @@ public interface ContactDao {
 
   int insert(Contact contact);
 
-  Contact findByNo(int no);
+  Contact findByNo(int contactNo);
 
   Contact findByEmail(String email);
 
@@ -23,7 +23,7 @@ public interface ContactDao {
 
   int update(Contact contact);
 
-  int delete(int no);
+  int delete(int contactNo);
 
   List<ContactTel> findTelByContactNo(int contactNo);
 

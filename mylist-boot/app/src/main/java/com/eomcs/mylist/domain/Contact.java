@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Contact {
 
-  int no;
+  int contactNo;
   String name;
   String email;
   String company;
@@ -12,18 +12,11 @@ public class Contact {
   // => Contact 클래스에 ContactTel 클래스를 참조하는 코드가 없다면 
   //    ContactTel 클래스에 "Contact contact;" 를 넣어 단방향 참조해준다.
 
-
-  @Override
-  public String toString() {
-    return "Contact [no=" + no + ", name=" + name + ", email=" + email + ", company=" + company
-        + ", tels=" + tels + "]";
+  public int getContactNo() {
+    return contactNo;
   }
-
-  public int getNo() {
-    return no;
-  }
-  public void setNo(int no) {
-    this.no = no;
+  public void setContactNo(int contactNo) {
+    this.contactNo = contactNo;
   }
   public String getName() {
     return name;
@@ -49,6 +42,14 @@ public class Contact {
   public void setTels(List<ContactTel> tels) {
     this.tels = tels;
   }
+  @Override
+  public String toString() {
+    return "Contact [contactNo=" + contactNo + ", name=" + name + ", email=" + email + ", company="
+        + company + ", tels=" + tels + "]";
+  }
+
+
+
 
 
 }

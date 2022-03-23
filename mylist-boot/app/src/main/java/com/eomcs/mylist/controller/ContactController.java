@@ -76,7 +76,7 @@ public class ContactController {
       }
       // 연락처 변경의 경우, 이미 연락처 번호를 알기 때문에
       // 전화번호를 객체에 담을 때 연락처 번호도 함께 저장한다. => add()와 다른 점
-      ContactTel contactTel = new ContactTel(contact.getNo(), Integer.parseInt(value[0]), value[1]);
+      ContactTel contactTel = new ContactTel(contact.getContactNo(), Integer.parseInt(value[0]), value[1]);
       telList.add(contactTel); // 데이터 가공
     }
     contact.setTels(telList);
