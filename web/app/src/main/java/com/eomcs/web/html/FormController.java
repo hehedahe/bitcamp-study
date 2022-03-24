@@ -84,4 +84,42 @@ public class FormController {
     }
     return "ok!";
   }
+  @RequestMapping("/html/form/exam32")
+  public Object exam32(String name, int age, MultipartFile[] photo) { // photo는 exam-12.html 변수명과 똑같아야해!
+    System.out.println(name);
+    System.out.println(age);
+
+
+    if(photo !=null ) {
+      for (MultipartFile part : photo) {
+        try {
+          File photoFile = new File("c:/upload/" + part.getOriginalFilename()); // "c:\\upload\\" => File 객체로 경로 지정
+          part.transferTo(photoFile); // => photo로 받은 파일을 위에 지정한 경로에 저장
+        } catch (Exception e) {
+          e.printStackTrace();
+          return "error!";
+        }
+      }
+    }
+    return "ok!";
+  }
+  @RequestMapping("/html/form/exam41")
+  public Object exam41(String name, int age, MultipartFile[] photo) { // photo는 exam-12.html 변수명과 똑같아야해!
+    System.out.println(name);
+    System.out.println(age);
+
+
+    if(photo !=null ) {
+      for (MultipartFile part : photo) {
+        try {
+          File photoFile = new File("c:/upload/" + part.getOriginalFilename()); // "c:\\upload\\" => File 객체로 경로 지정
+          part.transferTo(photoFile); // => photo로 받은 파일을 위에 지정한 경로에 저장
+        } catch (Exception e) {
+          e.printStackTrace();
+          return "error!";
+        }
+      }
+    }
+    return "ok!";
+  }
 }
