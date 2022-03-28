@@ -13,6 +13,8 @@ public class Book {
   int page;
   int price;
   String photo;
+
+
   public int getNo() {
     return no;
   }

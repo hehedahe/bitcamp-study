@@ -9,7 +9,7 @@ import com.eomcs.mylist.domain.Contact;
 import com.eomcs.mylist.service.ContactService;
 
 @Service
-public class DefaultContactServiceImpl implements ContactService {
+public class DefaultContactService implements ContactService {
 
   @Autowired
   ContactDao contactDao;
