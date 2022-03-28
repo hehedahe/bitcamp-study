@@ -84,6 +84,7 @@ public class FormController {
     }
     return "ok!";
   }
+
   @RequestMapping("/html/form/exam32")
   public Object exam32(String name, int age, MultipartFile[] photo) { // photo는 exam-12.html 변수명과 똑같아야해!
     System.out.println(name);
@@ -103,6 +104,7 @@ public class FormController {
     }
     return "ok!";
   }
+
   @RequestMapping("/html/form/exam41")
   public Object exam41(String name, int age, MultipartFile[] photo) { // photo는 exam-12.html 변수명과 똑같아야해!
     System.out.println(name);
