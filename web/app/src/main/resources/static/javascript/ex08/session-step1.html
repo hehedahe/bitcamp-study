@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>세션 : 1단계</title>
-</head>
+<title>세션 다루기</title>
 <body>
 
 <h1>1단계</h1>
@@ -14,17 +13,23 @@
 
 <script type="text/javascript">
 document.querySelector("#btn1").onclick = function() {
-  //console.log("test1...!")
+  
   var fd = new FormData(document.forms.namedItem("form1"));
+  //console.log(new URLSearchParams(fd).toString());
   
   fetch("/session/step1", {
     method: "POST",
-    body: fd
+    body: new URLSearchParams(fd) 
+    // => POST 방식: multipart 형식이 아닌 application/x-www-form-urlencoded 로 보냄
+    // => payload를 보면 name=oooo&age=0000&working=ooo 형식으로 보낸 것을 확인할 수 있다.
+    // 그냥 fd로 요청할 경우 multipart/form-data 형식으로 보내고 payload에도 멀티파트 형식으로 보냄
   }).then(function(response) {
       return response.text();
   }).then(function(text) {
       console.log(text);
+      location.href = "session-step2.html";
   });
+  
 };
 
 

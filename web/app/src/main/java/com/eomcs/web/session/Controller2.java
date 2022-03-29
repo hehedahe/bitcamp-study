@@ -1,12 +1,12 @@
 package com.eomcs.web.session;
 
+import java.util.HashMap;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController // 일반 클래스는 스프링 프레임워크에서 관리하지 않으므로 애노테이션 추가
+@RestController
 public class Controller2 {
-
 
   @RequestMapping("/session/step1")
   public Object step1(String name, HttpSession session) {
@@ -31,11 +31,13 @@ public class Controller2 {
 
   @RequestMapping("/session/step4")
   public Object step4(HttpSession session) {
-    String name = (String) session.getAttribute("name");
-    int age = (int) session.getAttribute("age");
-    boolean working = (boolean) session.getAttribute("working");
+    HashMap<String, Object> map = new HashMap<>();
 
-    return String.format("step4() 실행: %s, %d, %b\n", name, age, working);
+    map.put("name", session.getAttribute("name"));
+    map.put("age", session.getAttribute("age"));
+    map.put("working", session.getAttribute("working"));
+
+    return map; // => {"name":"채다해","working":false,"age":30}
   }
 
 
