@@ -10,7 +10,7 @@ public class Controller1 {
   // 1) 세션을 사용하지 않는 request handler
   //
   @RequestMapping("/session/test1")
-  public Object test1(String name) {
+  public Object test1() {
     return "test1() 실행!";
   }
 
@@ -18,7 +18,7 @@ public class Controller1 {
   //  => HttpSession 객체를 달라고 파라미터에 선언하라!
   //
   @RequestMapping("/session/test2")
-  public Object test2(String name, HttpSession session) {
+  public Object test2(HttpSession session) {
     System.out.printf("test2() => %s\n", session.getId());
     return "test2() 실행!";
   }
@@ -29,8 +29,17 @@ public class Controller1 {
   //  => 세션이 있지만 무효한 상태일 경우 새 세션 객체를 만든다.
   //
   @RequestMapping("/session/test3")
-  public Object test3(String name, HttpSession session) {
+  public Object test3(HttpSession session) {
     System.out.printf("test3() => %s\n", session.getId());
+    return "test3() 실행!";
+  }
+
+  // 4) 세션을 무효화 시키기
+  //
+  @RequestMapping("/session/test4")
+  public Object test4(HttpSession session) {
+    System.out.printf("test4() => %s\n", session.getId());
+    session.invalidate(); // 요청한 클라이언트가 사용하는 현재 세션을 무효화시킨다.
     return "test3() 실행!";
   }
 }
