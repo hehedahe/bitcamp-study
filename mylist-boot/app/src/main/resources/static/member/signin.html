@@ -11,8 +11,13 @@
 <form name="form1">
 이메일: <input name="email" type="email"><br>
 암호: <input name="password" type="password"><br>
-<button id="x-add-btn">로그인</button>
-<button id="x-cancel-btn" type="button">취소</button>
+<div>
+  <button id="x-add-btn">로그인</button>
+  <button id="x-cancel-btn" type="button">취소</button>
+</div>
+<div>
+  <a href="form.html">회원가입</a>
+</div>
 </form>
 
 <script type="text/javascript">
@@ -47,7 +52,7 @@
   };
 
   document.querySelector("#x-cancel-btn").onclick = function() {
-    window.location.href = "index.html";
+    window.location.href = "../index.html";
   };
   
 
