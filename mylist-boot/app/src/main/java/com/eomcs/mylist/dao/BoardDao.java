@@ -19,7 +19,7 @@ public interface BoardDao {
 
   int countAll();
 
-  List<Board> findAll(); // ArrayList가 아닌 이유?
+  List<Board> findAll();
 
   int insert(Board board);
 
