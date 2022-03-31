@@ -13,6 +13,7 @@
     <result column="name" property="name"/>
     <result column="email" property="email"/>
     <result column="regist_date" property="registDate"/>
+    <!-- DB에 있는 password는 이미 가공된 데이터이므로 꺼내봤자 필요없음 -->
   </resultMap>
 
   <insert id="insert" parameterType="member">
@@ -29,5 +30,16 @@
       ml_member
     where
       email=#{email} and password=password(#{password}) <!-- MemberDao 인터페이스에서 @Param 으로 준 값이 들어온다. -->
+  </select>
+  
+  <select id="findByEmail" resultMap="memberMap" parameterType="String">
+    select 
+      no,
+      name,
+      email
+    from 
+      ml_member
+    where
+      email=#{email}
   </select>
 </mapper>

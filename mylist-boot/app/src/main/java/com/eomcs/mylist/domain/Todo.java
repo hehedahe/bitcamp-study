@@ -1,44 +1,14 @@
 package com.eomcs.mylist.domain;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
 public class Todo {
   int no;
   String title;
   boolean done;
-
-  public Todo() {
-    System.out.println("Contact() 호출됨!");
-  }
-
-
-
-  public String getTitle() {
-    return title;
-  }
-
-
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-
-
-  public boolean isDone() {
-    return done;
-  }
-
-
-
-  public void setDone(boolean done) {
-    this.done = done;
-  }
-
-
-
-  @Override
-  public String toString() {
-    return "Todo [title=" + title + ", done=" + done + "]";
-  }
 
 }
 

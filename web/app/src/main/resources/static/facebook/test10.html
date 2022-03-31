@@ -21,7 +21,8 @@ onlogin="checkLoginState();"></div>
 // 로그인 성공한 후 서버에 자동으로 로그인 하기
 // => 페이스북으로부터 사용자 정보 가져오기
 function autoServerLogin(accessToken) {
-    location.href = "login09.jsp?accessToken=" + accessToken;
+  //location.href = "login09.jsp?accessToken=" + accessToken;
+  location.href =  "/facebook/login2?accessToken=" + accessToken;
 }
 
 function checkLoginState() {

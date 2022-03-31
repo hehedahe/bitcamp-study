@@ -1,13 +1,7 @@
 package com.eomcs.mylist.controller;
 
-import static com.eomcs.mylist.controller.ResultMap.FAIL;
-import static com.eomcs.mylist.controller.ResultMap.SUCCESS;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.eomcs.mylist.domain.Board;
-import com.eomcs.mylist.domain.Member;
 import com.eomcs.mylist.service.BoardService;
 
 @RestController
@@ -19,7 +13,7 @@ public class BoardController {
   // 
   @Autowired/*(required = false)*/
   BoardService boardService;
-
+  /*
   @RequestMapping("/board/list")
   public Object list() {
     return boardService.findAll();
@@ -83,5 +77,5 @@ public class BoardController {
     }
     return boardService.delete(no);
   }
-
+   */
 }
