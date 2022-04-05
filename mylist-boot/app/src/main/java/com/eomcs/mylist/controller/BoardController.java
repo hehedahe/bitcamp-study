@@ -1,7 +1,13 @@
 package com.eomcs.mylist.controller;
 
+import static com.eomcs.mylist.controller.ResultMap.FAIL;
+import static com.eomcs.mylist.controller.ResultMap.SUCCESS;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.eomcs.mylist.domain.Board;
+import com.eomcs.mylist.domain.Member;
 import com.eomcs.mylist.service.BoardService;
 
 @RestController
@@ -13,14 +19,15 @@ public class BoardController {
   // 
   @Autowired/*(required = false)*/
   BoardService boardService;
-  /*
+
   @RequestMapping("/board/list")
   public Object list() {
-    return boardService.findAll();
+    return new ResultMap().setStatus(SUCCESS).setData(boardService.list());
   }
 
   @RequestMapping("/board/add")
   public Object add(Board board, HttpSession session) {
+    System.out.println("BoardController.add() 호출됨!");
     Member member = (Member) session.getAttribute("loginUser");
     if (member == null) {
       return new ResultMap().setStatus(FAIL).setData("로그인 하지 않았습니다.");
@@ -32,12 +39,11 @@ public class BoardController {
 
   @RequestMapping("/board/get")
   public Object get(int no) {
-    Board board = boardService.findByNo(no);
+    Board board = boardService.get(no);
     if (board == null) {
-      return "";
+      return new ResultMap().setStatus(FAIL).setData(board);
     }
-    boardService.updateViewCount(no);
-    return board;
+    return new ResultMap().setStatus(SUCCESS).setData(board);
   }
 
   @RequestMapping("/board/update")
@@ -75,7 +81,6 @@ public class BoardController {
     } else {
       return new ResultMap().setStatus(FAIL).setData("게시글 번호가 유효하지 않거나 게시글 작성자가 아닙니다.");
     }
-    return boardService.delete(no);
   }
-   */
+
 }

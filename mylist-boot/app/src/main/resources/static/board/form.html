@@ -8,9 +8,9 @@
 
 <h1>새 게시글</h1>
 
-<form>
-제목*: <input id="x-title" type="text"><br>
-내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
+<form name="form1">
+제목*: <input id="x-title" type="text" name="title"><br>
+내용*: <textarea id="x-content" cols="60" rows="10" name="content"></textarea><br>
 별표(*) 항목은 필수 입력입니다.<br>
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cxl-btn" type="button">취소</button>
@@ -26,18 +26,23 @@
       return;
     }
 
-    fetch(`/board/add?title=${encodeURIComponent(xTitle.value)}&content=${encodeURIComponent(xContent.value)}`)
-      .then(function(response) {
-        console.log(encodeURIComponent(xTitle.value));
-        return response.text();
-      })
-      .then(function(text) {
-        console.log(text);
-        location.href = "index.html";
-      });
-    };
-    // title과 content에 벡틱이나 &을 입력하면 문자 그대로 넘어가지 않음
-    // → encodeURICompnent() 메서드를 이용하여 hex코드로 인식하게 해주면 인식 가능!
+  var fd = formData("form1")
+    
+  fetch("/board/add", {
+     method: "POST",
+     body: new URLSearchParams(fd)
+    })
+     .then(function(response) {
+       console.log(encodeURIComponent(xTitle.value));
+       return response.text();
+    })
+     .then(function(text) {
+       console.log(text);
+       location.href = "index.html";
+    });
+  };
+   // title과 content에 벡틱이나 &을 입력하면 문자 그대로 넘어가지 않음
+   // → encodeURICompnent() 메서드를 이용하여 hex코드로 인식하게 해주면 인식 가능!
 
   document.querySelector("#x-cxl-btn").onclick = function() {
     window.location.href = "index.html";

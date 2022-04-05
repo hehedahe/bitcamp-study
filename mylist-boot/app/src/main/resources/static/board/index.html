@@ -12,6 +12,7 @@
   <tr>
     <th>번호</th>
     <th>제목</th>
+    <th>작성자</th>
     <th>조회수</th>
     <th>등록일</th>
   </tr>
@@ -22,20 +23,23 @@
 
 <button id="x-create-btn" type="button">새 게시글</button>
 
-<script type="text/javascript" src="../myQuery.js"></script>
 <script type="text/javascript">
 
-var tbody = _("#x-board-tbl tbody");
-console.log(tbody);
+var tbody = document.querySelector("#x-board-tbl tbody");
 
 fetch("/board/list")
   .then(function(response) {
     return response.json();
   })
-  .then(function(boards) {
-    // console.log(boards);
-    for (var board of boards) {
-      var tr = _("tr");
+  .then(function(result) { // status 속성과 data 속성이 들어있음!
+    if (result.status == "fail") {
+      window.alert("서버 요청 오류!");
+      console.log(resulst.data);
+      return;
+    }
+    
+    for (var board of result.data) {
+      var tr = document.createElement("tr");
       tr.innerHTML = `<td>${board.no}</td>
       <td><a href="view.html?no=${board.no}">${board.title}</a></td>
           <td>${board.viewCount}</td>
@@ -45,7 +49,7 @@ fetch("/board/list")
 
   })
 
-_("#x-create-btn").onclick = function() {
+document.querySelector("#x-create-btn").onclick = function() {
   window.location.href = "form.html"
 };
 </script>

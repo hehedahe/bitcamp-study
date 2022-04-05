@@ -18,8 +18,10 @@ public class MvcConfiguration implements WebMvcConfigurer {
   // 인터센터를 추가하고 싶다면 다음 메서드를 규칙에 따라 정의하라!
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
+    System.out.println("MvcConfiguration.addInterceptor() 실행됨!");
     // 이 메서드가 정의되어 있다면,
     // 스프링부트는 이 메서드를 호출하여 추가할 인터셉터의 정보를 InterceptorRegistry로 받는다.
-    registry.addInterceptor(new AuthInterceptor());
+    registry.addInterceptor(new AuthInterceptor())
+    .addPathPatterns("/**/add*", "/**/update*", "/**/delete*");
   }
 }
