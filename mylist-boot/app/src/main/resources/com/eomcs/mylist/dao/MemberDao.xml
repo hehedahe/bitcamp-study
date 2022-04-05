@@ -17,7 +17,7 @@
   </resultMap>
 
   <insert id="insert" parameterType="member">
-    insert into ml_member(name,email,password)
+    insert into ml_member(name,email,password) 
     values(#{name},#{email},password(#{password}))
   </insert>
   
@@ -32,7 +32,7 @@
       email=#{email} and password=password(#{password}) <!-- MemberDao 인터페이스에서 @Param 으로 준 값이 들어온다. -->
   </select>
   
-  <select id="findByEmail" resultMap="memberMap" parameterType="String">
+  <select id="findByEmail" resultMap="memberMap" parameterType="string">
     select 
       no,
       name,

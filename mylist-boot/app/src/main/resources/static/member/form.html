@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
-  <title>독서록</title>
+  <title>회원가입</title>
 </head>
 <body>
 
@@ -18,46 +18,44 @@
 </form>
 
 <script type="text/javascript">
-  var xName = document.querySelector("input[name=name]");
-  var xEmail = document.querySelector("input[name=email]");
-  var xPassword = document.querySelector("input[name=password]");
+var xName = document.querySelector("input[name=name]");
+var xEmail = document.querySelector("input[name=email]");
+var xPassword = document.querySelector("input[name=password]");
 
   // 확인 버튼을 누르기 전에 브라우저는 onsubmit 에 등록되어 있는 함수를 호출하는데
   // 리턴 값이 false 가 아닐 경우에만 서버에 보낸다 ?
-  document.querySelector("form[name=form1]").onsubmit = function() {
-    if (xName.value == "" ||
-    		xEmail.value == "" ||
-    		xPassword.value == "") {
-      window.alert("필수 입력 항목이 비어 있습니다.");
-      return false;
-    }
+document.querySelector("form[name=form1]").onsubmit = function() {
+  if (xName.value == "" || 
+      xEmail.value == "" ||
+      xPassword.value == "") {
+    window.alert("필수 입력 항목이 비어 있습니다.");
+    return false;
+  }
   
-    var fd = new FormData(document.forms.namedItem("form1"));
-
-    fetch("/member/signup", {
+  var fd = new FormData(document.forms.namedItem("form1"));
+  
+  fetch("/member/signup", { 
       method: "POST",
       body: new URLSearchParams(fd)
-    })
+    }) 
     .then(function(response) {
       return response.text();
     })
     .then(function(text) {
       if (text == "success") {
-        location.href = "signin.html"
+        location.href = "signin.html";
       } else {
-        window.alert("회원가입 실패!");
+        window.alert("회원가입 실패!!");
       }
     });
-  
-    return false;
-  };
+  return false;
+};
 
-  document.querySelector("#x-cancel-btn").onclick = function() {
-    window.location.href = "../index.html";
-  };
-  
-
+document.querySelector("#x-cancel-btn").onclick = function() {
+  window.location.href = "../index.html";
+};
 </script>
 
 </body>
 </html>
+  

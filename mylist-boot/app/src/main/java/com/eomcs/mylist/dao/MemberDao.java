@@ -13,6 +13,7 @@ public interface MemberDao {
   // => 파라미터를 두 개 이상 넘길 때, SQL Mapper 에서 "xx" 라는 이름으로 파라미터를 꺼내달라고 요청 
 
   Member findByEmail(String email);
+
   //  List<Member> findAll();
   //
   //  Member findByNo(int no);
