@@ -9,16 +9,16 @@
 <h1>새 게시글</h1>
 
 <form name="form1">
-제목*: <input id="x-title" type="text" name="title"><br>
-내용*: <textarea id="x-content" cols="60" rows="10" name="content"></textarea><br>
+제목*: <input type="text" name="title"><br>
+내용*: <textarea cols="60" rows="10" name="content"></textarea><br>
 별표(*) 항목은 필수 입력입니다.<br>
 <button id="x-add-btn" type="button">등록</button>
 <button id="x-cxl-btn" type="button">취소</button>
 </form>
 
 <script type="text/javascript">
-  var xTitle = document.querySelector("#x-title");
-  var xContent = document.querySelector("#x-content");
+  var xTitle = document.querySelector("input[name=title]");
+  var xContent = document.querySelector("textarea");
 
   document.querySelector("#x-add-btn").onclick = function(){
     if (xTitle.value == "" || xContent.value == "") {
@@ -26,19 +26,20 @@
       return;
     }
 
-  var fd = formData("form1")
+  var fd = new FormData(document.forms.namedItem("form1"));
     
   fetch("/board/add", {
      method: "POST",
      body: new URLSearchParams(fd)
-    })
-     .then(function(response) {
-       console.log(encodeURIComponent(xTitle.value));
-       return response.text();
-    })
-     .then(function(text) {
-       console.log(text);
-       location.href = "index.html";
+    }).then(function(response) {
+       //console.log(encodeURIComponent(xTitle.value));
+       return response.json();
+    }).then(function(result) {
+      if (result.status == "success") {
+        location.href = index.html
+      } else {
+        alert(result.data);
+      }
     });
   };
    // title과 content에 벡틱이나 &을 입력하면 문자 그대로 넘어가지 않음

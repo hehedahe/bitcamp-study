@@ -8,11 +8,12 @@
 
 <h1>게시글 상세</h1>
 
-<form>
-<!-- 번호: <input id="x-no" type="text" readonly><br>  -->
-번호: <span id="x-no"></span><br>
-제목*: <input id="x-title" type="text"><br>
-내용*: <textarea id="x-content" cols="60" rows="10"></textarea><br>
+<form name="form1">
+번호: <input name="no" type="text" readonly><br>
+<!-- 번호: <span id="x-no"></span><br> -->
+제목*: <input name="title" type="text"><br>
+내용*: <textarea name="content" cols="50" rows="10"></textarea><br>
+작성자: <span id="x-writer"></span><br>
 조회수: <span id="x-viewCount"></span><br>
 등록일: <span id="x-createdDate" type="text"></span><br>
 별표(*) 항목은 필수 입력입니다.<br>
