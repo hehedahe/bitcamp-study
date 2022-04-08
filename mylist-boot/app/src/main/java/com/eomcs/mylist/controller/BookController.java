@@ -1,7 +1,13 @@
 package com.eomcs.mylist.controller;
 
+import static com.eomcs.mylist.controller.ResultMap.FAIL;
+import static com.eomcs.mylist.controller.ResultMap.SUCCESS;
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.UUID;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +17,8 @@ import com.eomcs.mylist.service.BookService;
 
 @RestController 
 public class BookController {
+
+  private static final Logger log = LogManager.getLogger(BookController.class);
 
   @Autowired
   BookService bookService;
@@ -25,11 +33,14 @@ public class BookController {
     try {
       // 저장된 파일명을 도메인 객체에 설정한다.
       book.setPhoto(saveFile(file)); // 리턴 값은 null 아니면 파일명
-      return bookService.add(book);
+      bookService.add(book);
+      return new ResultMap().setStatus(SUCCESS);
 
     } catch (Exception e) {
-      e.printStackTrace();
-      return "error!";
+      StringWriter out = new StringWriter();
+      e.printStackTrace(new PrintWriter(out));
+      log.error(out.toString());
+      return new ResultMap().setStatus(FAIL);
     }
   }
 

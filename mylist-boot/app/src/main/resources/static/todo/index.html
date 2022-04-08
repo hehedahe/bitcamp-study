@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title>To-do</title>
-  <link rel="stylesheet" href="../node_modules/sweetalert2/dist/sweetalert2.min.css"> <!-- 외부 css 라이브러리 추가 link태그-->
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <style>
-  .todo-checked {
-    text-decoration: line-through;
-    color: gray;
-  }
-  </style>
-</head>
-<body>
-  <div class="container">
+<link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.min.css">
+<!--  
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+-->
+<link rel="stylesheet" href="/css/common.css">
+<link rel="stylesheet" href="/todo/index.css">
+
 <h1>To-do</h1>
 
 <p>할 일 <input id="x-todo-input" type="text"></p>
@@ -29,152 +20,10 @@
 <tbody>
 </tbody>
 </table>
-</div>
 
 <input type="text" id="x-title-input">
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="../myQuery.min.js"></script> --> <!-- 우리가 만든 myQuery 압축파일 -->
-<script src="../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-  "use strict"
-
-  var titleInput = $("#x-title-input");
-  // titleInput.style["display"] = "none";
-  titleInput.css("display", "none");
-  
-  var tbody = $("#x-todo-table tbody");
-  // console.log(typeof(tbody));
-  // console.log(tbody instanceof HTMLElement);
-
-  // titleInput.val("okok", "nono"); // => myQuery에서 arguments.length == 2
-
-  $("#x-todo-input").keyup(function(e) {
-    if (e.keyCode == 27) { // esc
-      $(e.target).val(""); // setter
-      
-    } else if (e.keyCode == 13) {
-      if ($(e.target).val() == "") {
-        // window.alert("필수 입력 항목이 비어 있습니다.");
-        Swal.fire("필수 입력 항목이 비어 있습니다.");
-        return;
-    }
-
-    fetch(`/todo/add?title=${e.target.value}`)
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(text) {
-        // console.log(text);
-        window.reload();
-      });
-    }
-  });
-
-  fetch("/todo/list")
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(todoList) {
-      // console.log(todoList);
-      for (var todo of todoList) {
-        var checkedOption = "";
-        var titleTdOption = "";
-        if (todo.done) {
-          checkedOption = "checked";
-          titleTdOption = "class='todo-checked'";
-        }
-        $("<tr>").attr("data-no", todo.no)// tr태그 생성 + 태그의 속성 값 설정
-                 .html(`<td><input type="checkbox" ${checkedOption} onchange="checkTodo(${i}, event.target.checked)"></td>
-                        <td class="todo-title"><span ${titleTdOption}>${todoList[i].title}</span></td>
-                        <td><button type="button" class="btn btn-primary btn-sm" onclick="updateTodo(${i})">변경</button></td>
-                        <td><button type="button" class="btn btn-primary btn-sm" onclick="deleteTodo(${i})">삭제</button></td>`)
-                 .appendTo(tbody); // 자식태그.appendTo(부모태그);
-      }
-      $("#x-todo-input").focus();
-    });
-
- function deleteTodo(no) {
-   fetch(`/todo/delete?index=${no}`)
-     .then(function(response) {
-       return response.json();
-     })
-     .then(function(result) {
-       if (result == 0) {
-         window.alert("삭제하지 못 했습니다!");
-       } else {
-         location.reload();
-       }
-     });
- }
-
- function checkTodo(no, checked) {
-   console.log(no, checked);
-   fetch(`/todo/check?index=${no}&done=${checked}`)
-     .then(function(response) {
-       return response.json();
-     })
-     .then(function(result) {
-       if (result == 0) {
-         window.alert("변경하지 못했습니다!");
-       } else {
-         var titleSpan = $(`tr[data-no="${no}"] > td.todo-title > span`);
-         if (checked) {
-           titleSpan.classList.add("todo-checked");
-         } else {
-           titleSpan.classList.remove("todo-checked")
-         }
-       }
-     });
- }
-
- function updateTodo(no) {
-   // 현재 Todo 항목을 편집 중인 상태에서 변경 버튼을 눌렀다면
-   if (titleInput.parent()[0] instanceof HTMLTableCellElement) { // jQuery에서는 parent()가 리턴하는 것은 배열이다!~
-     // 다른 항목을 편집하기 위해 이동하기 전에 편집 전의 상태로 되돌린다.
-     titleInput.parent().find("span").css("disply", "");
-   }
-   var titleTd = $(`tr[data-no="${no}"] > td.todo-title`);
-   var titleSpan = titleTd.find("span");
-   titleSpan.css( "display","none" );
-   titleInput.val( titleSpan.html() );
-   titleInput.attr("data-no", no);
-   titleTd.append(titleInput);
-   titleInput.css("display", "");
- }
-
- titleInput.keyup(function(e) {
-   // console.log(e.keycode);
-   var no = titleInput.attr("data-no");
-   var titleSpan = titleInput.parent().find("span");
-   var originTitle = titleSpan.html();
-
-   if (e.keyCode == 27) { // ESC 키를 눌러 편집을 취소한다면
-     cancelTodoEditing();
-   } else if (e.keyCode == 13 && titleInput.value != "" && originTitle != titleInput.value) {
-     fetch(`/todo/update?index=${no}&title=${titleInput.value}`)
-       .then(function(response) {
-         return response.json();
-       })
-       .then(function(result) {
-         if (result == 0) {
-           window.alert("변경하지 못했습니다!");
-         } else {
-           console.log("변경했습니다.");
-           titleSpan.html( titleInput.val() );
-           cnacelTodoEditing();
-         }
-       });
-   }
- });
-
- function cancelTodoEditing() {
-   titleInput.parent().find("span").css("display", "");
-   titleInput.css("display", "none");
-   $(document.body).append(titleInput);
- }
-</script>
-</body>
-</html>
+<script src="/node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/todo/index.js"></script>
