@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 
+  namespace => 인터페이스의 패키지 및 이름과 일치해야 한다.
+ -->
+<mapper namespace="com.eomcs.mylist.dao.BoardDao">
+
+<!-- 테이블의 컬럼과 객체 필드를 연결한다. -->
+  <resultMap type="board" id="boardMap">
+    <id column="board_no" property="no"/> <!-- PK => id태그 -->
+    <result column="title" property="title"/> <!-- 그외 컬럼 => result태그 -->
+    <result column="content" property="content"/>
+    <result column="created_date" property="createdDate"/>
+    <result column="view_count" property="viewCount"/>
+    <!-- 
+    <association property="writer" javaType="member">
+      <id column="no" property="no" />
+    </association>
+     -->
+  </resultMap>
+
+
+<!-- 
+  id => 인터페이스의 메서드 이름과 일치해야 한다.
+ -->
+  <select id="findAll" resultMap="boardMap">
+    select
+      board_no,
+      title,
+      created_date,
+      view_count,
+      writer
+    from
+      ml_board
+    order by
+      board_no desc
+  </select>
+  
+<!-- 
+  parameterType => 메서드의 파라미터 타입 및 개수와 일치해야 한다.
+ -->
+  <select id="findByNo" resultMap="boardMap" parameterType="int">
+    select
+      board_no,
+      title,
+      content,
+      created_date,
+      view_count,
+      writer
+    from
+      ml_board
+    where 
+      board_no=#{no}
+  </select>
+  
+  <insert id="insert" parameterType="Board">
+    insert into ml_board(title,content,writer)
+    values(#{title},#{content},#{writer})
+  </insert>
+  
+  <update id="update" parameterType="Board">
+    update ml_board set 
+      title=#{title},
+      content=#{content}
+    where
+      board_no=#{no} and writer=#{writer}
+  </update>
+  
+  <select id="countAll" resultType="int">
+    select count(*)
+    from ml_board
+  </select>
+  
+  <delete id="delete" parameterType="int">
+    delete from ml_board
+    where board_no=#{no} and writer=#{writer}
+  </delete>
+  
+  <update id="updateViewCount" parameterType="int">
+    update ml_board set
+      view_count=view_count + 1
+    where
+      board_no=#{no}
+  </update>
+  
+</mapper>

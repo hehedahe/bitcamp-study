@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- 
+  namespace => 인터페이스의 패키지 및 이름과 namespace의 이름이 일치해야 한다.
+ -->
+<mapper namespace="com.eomcs.mylist.dao.MemberDao">
+
+  <resultMap type="member" id="memberMap">
+    <id column="no" property="no"/>
+    <result column="name" property="name"/>
+    <result column="email" property="email"/>
+    <result column="regist_date" property="registDate"/>
+    <!-- DB에 있는 password는 이미 가공된 데이터이므로 꺼내봤자 필요없음 -->
+  </resultMap>
+
+  <insert id="insert" parameterType="member">
+    insert into ml_member(name,email,password) 
+    values(#{name},#{email},password(#{password}))
+  </insert>
+  
+  <select id="findByEmailAndPassword" resultMap="memberMap">
+    select 
+      no,
+      name,
+      email
+    from 
+      ml_member
+    where
+      email=#{email} and password=password(#{password}) <!-- MemberDao 인터페이스에서 @Param 으로 준 값이 들어온다. -->
+  </select>
+  
+  <select id="findByEmail" resultMap="memberMap" parameterType="string">
+    select 
+      no,
+      name,
+      email
+    from 
+      ml_member
+    where
+      email=#{email}
+  </select>
+</mapper>
