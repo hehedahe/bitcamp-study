@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import com.eomcs.mylist.domain.Member;
 
-@Mapper
+@Mapper  
 public interface MemberDao {
 
   int insert(Member member);
@@ -21,8 +21,8 @@ public interface MemberDao {
   //  int update(Member member);
   //
   //  int delete(int no);
-}
 
+}
 
 
 
