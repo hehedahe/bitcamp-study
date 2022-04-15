@@ -1,3 +1,6 @@
+<%@page import="com.eomcs.mylist.domain.Board"%>
+<%@page import="java.util.List"%>
+<%@page import="com.eomcs.mylist.service.BoardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,94 +11,88 @@
 </head>
 <body>
 <div class="container">
+
 <div id="header">
-<style>
-#login-btn {
-  position: absolute;
-  right: 10px;
-}
-#logout-btn {
-  position: absolute;
-  right: 10px;
-}
-#app-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  font-style: none;
-  color: white;
-} 
-#user-name {
-  position: absolute;
-  right: 90px;
-}
-</style>
-<a href="/index.html"><span id="app-title">MyList</span></a> 
-<button id="login-btn" type="button" class="not-login">???</button>
-<span id="user-name" class="login"></span>
-<button id="logout-btn" type="button" class="login">????</button>  
+<jsp:include page="/jsp/header.jsp"></jsp:include>
 </div>
+
 <div id="sidebar">
-<style>
-h1.sidebar {
-  font-size: 1.2em;
-}
-</style>
-<h1 class="sidebar">??</h1>
-<div class="sidebar">
-<ul>
-  <li>??1</li>
-  <li>??2</li>
-  <li>??3</li>
-</ul>
-</div>  
+<jsp:include page="/jsp/sidebar.jsp"></jsp:include>
 </div>
+
 <div id="content">
-<h1>???</h1>
-<a href="add">? ???</a>
+<h1>게시글</h1>
+<a href="form.jsp">새 게시글</a>
 <table id="x-board-table" border="1">
 <thead>
   <tr>
-    <th>??</th>
-    <th>??</th>
-    <th>???</th>
-    <th>???</th>
-    <th>???</th>
+    <th>번호</th>
+    <th>제목</th>
+    <th>작성자</th>
+    <th>조회수</th>
+    <th>등록일</th>
   </tr>
 </thead>
 <tbody>
+<%
+BoardService boardService = (BoardService) application.getAttribute("boardService");
+
+
+// =======================
+// 페이징 처리
+// =======================
+int pageNo = 1;
+int pageSize = 5;
+int totalPageSize = 0;
+
+try { // pageNo 파라미터 값이 있다면 기본 값을 변경한다.
+  pageNo = Integer.parseInt(request.getParameter("pageNo")); // => 문자가 파라미터로 들어오면 예외 발생!
+  if (pageNo < 1 || pageNo > totalPageSize) { // pageNo 유효성 검증
+    pageNo = 1;
+  }
+} catch (Exception e) {}                                     // -> 그냥 무시하겠다 => pageNo = 1
+
+try { // pageSize 파라미터 값이 있다면 기본 값을 변경한다.
+  pageSize = Integer.parseInt(request.getParameter("pageSize"));
+  if (pageSize < 5 || pageSize > 100) {
+    pageSize = 5;
+  }
+} catch (Exception e) {}
+
+//게시글 전체 개수를 알아내서 페이지 개수를 계산한다.
+int boardSize = boardService.size();
+totalPageSize = boardSize / pageSize; // 예: 게시글개수 / 페이지당개수 => 16 / 5 = 3
+if ((boardSize % pageSize) > 0) {
+totalPageSize++;
+}
+
+// pageNo 유효성 검증
+
+
+
+
+
+List<Board> boards = boardService.list(pageSize, pageNo);
+for (Board board : boards) {
+%>
   <tr>
-    <td>13</td>
-    <td><a href='detail?no=13'>ddd</a></td>
-    <td>user2</td>
-    <td>0</td>
-    <td>2022-04-13</td>
+    <td><%=board.getNo()%></td>
+    <td><a href='view.jsp?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
+    <td><%=board.getWriter().getName()%></td>
+    <td><%=board.getViewCount()%></td>
+    <td><%=board.getCreatedDate()%></td>
   </tr>
-  <tr>
-    <td>12</td>
-    <td><a href='detail?no=12'>test</a></td>
-    <td>user1</td>
-    <td>14</td>
-    <td>2022-04-12</td>
-  </tr>
+<%
+}
+%>
 </tbody>
 </table>
 </div>
+
 <div id="footer">
-<style>
-#company-title {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-#company-address {
-  display: inline-block;
-  width: calc(100% - 100px); 
-  text-align: center; 
-}
-</style>
-<span id="company-title">????</span> 
-<address id="company-address">?? ??? ????94? 20, ????</address>  
+<jsp:include page="/jsp/footer.jsp"></jsp:include>
 </div>
+
 </div>
 </body>
 </html>
-    
