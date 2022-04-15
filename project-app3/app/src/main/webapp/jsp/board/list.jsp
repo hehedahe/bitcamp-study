@@ -45,13 +45,6 @@ int pageNo = 1;
 int pageSize = 5;
 int totalPageSize = 0;
 
-try { // pageNo 파라미터 값이 있다면 기본 값을 변경한다.
-  pageNo = Integer.parseInt(request.getParameter("pageNo")); // => 문자가 파라미터로 들어오면 예외 발생!
-  if (pageNo < 1 || pageNo > totalPageSize) { // pageNo 유효성 검증
-    pageNo = 1;
-  }
-} catch (Exception e) {}                                     // -> 그냥 무시하겠다 => pageNo = 1
-
 try { // pageSize 파라미터 값이 있다면 기본 값을 변경한다.
   pageSize = Integer.parseInt(request.getParameter("pageSize"));
   if (pageSize < 5 || pageSize > 100) {
@@ -66,9 +59,12 @@ if ((boardSize % pageSize) > 0) {
 totalPageSize++;
 }
 
-// pageNo 유효성 검증
-
-
+try { // pageNo 파라미터 값이 있다면 기본 값을 변경한다.
+  pageNo = Integer.parseInt(request.getParameter("pageNo")); // => 문자가 파라미터로 들어오면 예외 발생!
+  if (pageNo < 1 || pageNo > totalPageSize) { // pageNo 유효성 검증
+    pageNo = 1;
+  }
+} catch (Exception e) {}                                     // -> 그냥 무시하겠다 => pageNo = 1
 
 
 
@@ -87,6 +83,19 @@ for (Board board : boards) {
 %>
 </tbody>
 </table>
+<div>
+<%if (pageNo > 1) {%>
+	<a href="list.jsp?pageNo=<%=pageNo - 1%>&pageSize=<%=pageSize%>">[이전]</a>
+<%} else {%>
+[이전]
+<%} %>
+<%=pageNo%>
+<%if (pageNo < totalPageSize) { %>
+  <a href="list.jsp?pageNo=<%=pageNo + 1%>&pageSize=<%=pageSize%>">[다음]</a>
+<%} else {%>
+[다음]
+<%} %>
+</div>
 </div>
 
 <div id="footer">
