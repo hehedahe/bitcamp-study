@@ -1,6 +1,7 @@
 <%@page import="com.eomcs.mylist.domain.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 </div>
 
 <div id="content">
-<h1>게시글3(+ JSP액션태그)</h1>
+<h1>게시글3(+ JSP액션태그 + JSTL + EL)</h1>
 <a href="add">새 게시글</a>
 <table id="x-board-table" border="1">
 <thead>
@@ -36,20 +37,17 @@
 <jsp:useBean id="pageNo" type="java.lang.Integer" scope="request"></jsp:useBean>
 <jsp:useBean id="pageSize" type="java.lang.Integer" scope="request"></jsp:useBean>
 <jsp:useBean id="totalPageSize" type="java.lang.Integer" scope="request"></jsp:useBean>
-<jsp:useBean id="list" type="java.util.List<Board>" scope="request"></jsp:useBean>
-<%
-for (Board board : list) {
-%>
+
+<c:forEach var="board" items="${requestScope.list}">
   <tr>
-    <td><%=board.getNo()%></td>
-    <td><a href='detail?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
-    <td><%=board.getWriter().getName()%></td>
-    <td><%=board.getViewCount()%></td>
-    <td><%=board.getCreatedDate()%></td>
+    <td>${board.getNo()}</td>
+    <td><a href='detail?no=${board.getNo()}'>${board.getTitle()}</a></td>
+    <td>${board.getWriter().getName()}</td>
+    <td>${board.getViewCount()}</td>
+    <td>${board.getCreatedDate()}</td>
   </tr>
-<%
-}
-%>
+</c:forEach> 
+
 </tbody>
 </table>
 <div>
