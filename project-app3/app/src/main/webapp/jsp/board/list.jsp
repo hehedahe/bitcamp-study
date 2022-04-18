@@ -20,7 +20,7 @@
 </div>
 
 <div id="content">
-<h1>게시글2</h1>
+<h1>게시글3(+ JSP액션태그)</h1>
 <a href="add">새 게시글</a>
 <table id="x-board-table" border="1">
 <thead>
@@ -33,14 +33,12 @@
   </tr>
 </thead>
 <tbody>
+<jsp:useBean id="pageNo" type="java.lang.Integer" scope="request"></jsp:useBean>
+<jsp:useBean id="pageSize" type="java.lang.Integer" scope="request"></jsp:useBean>
+<jsp:useBean id="totalPageSize" type="java.lang.Integer" scope="request"></jsp:useBean>
+<jsp:useBean id="list" type="java.util.List<Board>" scope="request"></jsp:useBean>
 <%
-
-int pageNo = (int) request.getAttribute("pageNo");
-int pageSize = (int) request.getAttribute("pageSize");
-int totalPageSize = (int) request.getAttribute("totalPageSize");
-List<Board> boards = (List<Board>) request.getAttribute("list");
-
-for (Board board : boards) {
+for (Board board : list) {
 %>
   <tr>
     <td><%=board.getNo()%></td>

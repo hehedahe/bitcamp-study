@@ -1,4 +1,3 @@
-<%@page import="com.eomcs.mylist.domain.Board"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,10 +18,11 @@
 </div>
 
 <div id="content">
-<%
-Board board = (Board) request.getAttribute("board"); // request.getAttribute()의 리턴값은 Object이므로 형변환 필수
-%>
-<h1>게시글 상세2</h1>
+
+<jsp:useBean id="board" type="com.eomcs.mylist.domain.Board" class="com.eomcs.mylist.domain.Board" scope="request"></jsp:useBean>
+<!-- type 속성과 class 속성 값이 같은 경우, type은 생략 가능하다 -->
+
+<h1>게시글 상세3(+ JSP 액션 태그)</h1>
 <form action='update' method='post'>
 번호: <input name="no" type="text" value='<%=board.getNo()%>' readonly><br>
 제목*: <input name="title" type="text" value='<%=board.getTitle()%>'><br>
