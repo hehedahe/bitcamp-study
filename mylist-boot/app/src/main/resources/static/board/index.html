@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <title>게시글</title>
-</head>
-<body>
 <h1>게시글</h1>
-<a href="/index.html">돌아가기</a>
-<table id="x-board-tbl" border="1">
+<a href="?content=/board/form.html">새 게시글</a>
+<table id="x-board-table" border="1">
 <thead>
   <tr>
     <th>번호</th>
@@ -21,38 +14,28 @@
 </tbody>
 </table>
 
-<button id="x-create-btn" type="button">새 게시글</button>
-
 <script type="text/javascript">
+  var tbody = document.querySelector("#x-board-table tbody")
 
-var tbody = document.querySelector("#x-board-tbl tbody");
+  fetch("/board/list")
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(result) {
+      if (result.status == "fail") {
+    	  window.alert("서버 요청 오류!");
+    	  console.log(result.data);
+    	  return;
+      }
 
-fetch("/board/list")
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(result) { // status 속성과 data 속성이 들어있음!
-    if (result.status == "fail") {
-      window.alert("서버 요청 오류!");
-      console.log(resulst.data);
-      return;
-    }
-    
-    for (var board of result.data) {
-      var tr = document.createElement("tr");
-      tr.innerHTML = `<td>${board.no}</td>
-      <td><a href="view.html?no=${board.no}">${board.title}</a></td>
-      <td>${board.writer.name}</td>
-      <td>${board.viewCount}</td>
-      <td>${board.createdDate}</td>`;
-      tbody.appendChild(tr);
-    };
-
-  })
-
-document.querySelector("#x-create-btn").onclick = function() {
-  window.location.href = "form.html"
-};
+      for (var board of result.data) {
+        var tr = document.createElement("tr");
+        tr.innerHTML = `<td>${board.no}</td>
+        <td><a href="?content=/board/view.html&no=${board.no}">${board.title}</a></td>
+        <td>${board.writer.name}</td>
+        <td>${board.viewCount}</td>
+        <td>${board.createdDate}</td>`;
+        tbody.appendChild(tr);
+      }
+    });
 </script>
-</body>
-</html>
