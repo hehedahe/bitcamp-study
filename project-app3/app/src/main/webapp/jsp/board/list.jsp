@@ -21,7 +21,7 @@
 </div>
 
 <div id="content">
-<h1>게시글4(+ JSP액션태그 + JSTL + EL)</h1>
+<h1>게시글6(+ JSP액션태그 + JSTL + EL)</h1>
 <a href="add">새 게시글</a>
 <table id="x-board-table" border="1">
 <thead>
@@ -53,18 +53,23 @@
 <div>
 
 <c:if test="${pageNo > 1}">
-	<a href="list?pageNo=<%=pageNo - 1%>&pageSize=<%=pageSize%>">[이전]</a>
+	<a href="list?pageNo=${pageNo - 1}&pageSize=${pageSize}">[이전]</a>
 </c:if>
 <c:if test="${pageNo <= 1}">
-[이전]
+  [이전]
 </c:if>
+
 ${pageNo}
-<c:if test="${pageNo < totalPageSize}">
-  <a href="list?pageNo=${pageNo + 1}&pageSize=${pageSize}">[이전]</a>
-</c:if>
-<c:if test="${pageNo >= totalPageSize}">
-[다음]
-</c:if>
+
+<c:choose>
+  <c:when test="${pageNo < totalPageSize}">
+    <a href="list?pageNo=${pageNo + 1}&pageSize=${pageSize}">[다음]</a>
+  </c:when>
+	<c:otherwise>
+	  [다음]
+	</c:otherwise>
+</c:choose>
+
 </div>
 </div>
 
