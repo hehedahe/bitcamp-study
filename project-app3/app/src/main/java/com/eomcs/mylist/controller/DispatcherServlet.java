@@ -31,7 +31,11 @@ public class DispatcherServlet extends HttpServlet {
       }
 
       String viewUrl = (String) request.getAttribute("viewUrl");
-      request.getRequestDispatcher(viewUrl).include(request, response);
+      if (viewUrl.startsWith("redirect:")) { // 예) redirect:list
+        response.sendRedirect(viewUrl.substring(9)); // 예) list => 9번째 문자부터 끝까지 추출
+      } else {
+        request.getRequestDispatcher(viewUrl).include(request, response);
+      }
 
     } catch (Exception e) { // 클라이언트가 요청한 url이 유효하지 않을 때 (예외가 발생하면)
       if (request.getAttribute("exception") == null) {

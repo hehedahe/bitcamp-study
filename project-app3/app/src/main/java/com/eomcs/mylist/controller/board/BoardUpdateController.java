@@ -39,11 +39,11 @@ public class BoardUpdateController extends HttpServlet {
 
       boardService.update(board);
 
-      response.sendRedirect("list"); // 게시물 목록 페이지를 다시 요청하라고 클라이언트에게 명령한다.
+      // 게시물 목록 페이지를 다시 요청하라고 클라이언트에게 명령한다.
+      request.setAttribute("viewUrl", "redirect:list"); // jsp가 아니라 redirect 임을 명시해준다.
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
     }
   } 
 }

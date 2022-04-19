@@ -27,7 +27,7 @@ public class BoardAddController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    request.getRequestDispatcher("/jsp/board/form.jsp").forward(request, response);
+    request.setAttribute("viewUrl", "/jsp/board/form.jsp");
   }
 
   @Override
@@ -44,11 +44,10 @@ public class BoardAddController extends HttpServlet {
 
       boardService.add(board);
 
-      response.sendRedirect("list");
+      request.setAttribute("viewUrl", "redirect:list");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
     }
   }
 }
