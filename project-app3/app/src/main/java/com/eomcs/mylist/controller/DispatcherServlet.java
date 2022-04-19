@@ -1,7 +1,7 @@
 package com.eomcs.mylist.controller;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,17 +20,13 @@ public class DispatcherServlet extends HttpServlet {
 
     try {
       response.setContentType("text/html; charset=UTF-8");
-      RequestDispatcher 요청배달자 = request.getRequestDispatcher(controllerPath);
-      // System.out.println(요청배달자); // url이 유효한지 유효하지 않은지 확인할 수 없음
-      요청배달자.include(request, response);
 
-      // page controller 에서 예외가 발생할 경우
-      Exception exception = (Exception) request.getAttribute("exception");
-      if (exception != null) {
-        throw exception; // 예외를 던져서 아래 catch에서 잡는다.
-      }
+      // 애플리케이션 보관소에서 페이지 컨트롤러를 찾는다.
+      ServletContext 애플리케이션보관소 = request.getServletContext();
+      Controller pageController = (Controller) 애플리케이션보관소.getAttribute(controllerPath); // 예) /board/list
 
-      String viewUrl = (String) request.getAttribute("viewUrl");
+      String viewUrl = pageController.execute(request, response);
+
       if (viewUrl.startsWith("redirect:")) { // 예) redirect:list
         response.sendRedirect(viewUrl.substring(9)); // 예) list => 9번째 문자부터 끝까지 추출
       } else {
