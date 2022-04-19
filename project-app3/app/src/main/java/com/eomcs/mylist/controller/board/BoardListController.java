@@ -3,10 +3,12 @@ package com.eomcs.mylist.controller.board;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.eomcs.mylist.controller.Component;
 import com.eomcs.mylist.controller.Controller;
 import com.eomcs.mylist.domain.Board;
 import com.eomcs.mylist.service.BoardService;
 
+@Component("/board/list")
 public class BoardListController implements Controller {
 
   BoardService boardService;
