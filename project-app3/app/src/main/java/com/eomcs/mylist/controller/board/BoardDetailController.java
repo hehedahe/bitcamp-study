@@ -31,11 +31,10 @@ public class BoardDetailController extends HttpServlet {
       int no = Integer.parseInt(request.getParameter("no"));
       Board board = boardService.get(no);
       request.setAttribute("board", board);
-      request.getRequestDispatcher("/jsp/board/detail.jsp").forward(request, response);
+      request.setAttribute("viewUrl", "/jsp/board/detail.jsp");
 
     } catch (Exception e) {
       request.setAttribute("exception", e);
-      request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
     }
   }
 }
