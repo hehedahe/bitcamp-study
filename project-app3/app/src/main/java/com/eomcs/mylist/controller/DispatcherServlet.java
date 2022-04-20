@@ -1,6 +1,7 @@
 package com.eomcs.mylist.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,9 +24,21 @@ public class DispatcherServlet extends HttpServlet {
 
       // 애플리케이션 보관소에서 페이지 컨트롤러를 찾는다.
       ServletContext 애플리케이션보관소 = request.getServletContext();
-      Controller pageController = (Controller) 애플리케이션보관소.getAttribute(controllerPath); // 예) /board/list
+      Object pageController = 애플리케이션보관소.getAttribute(controllerPath); // 예) /board/list
 
-      String viewUrl = pageController.execute(request, response);
+      // 페이지 컨트롤러에서 @RequestMapping이 붙은 메서드를 알아낸다.
+      Class<?> classInfo = pageController.getClass();
+      Method[] methods = classInfo.getDeclaredMethods();
+      Method requestHandler = null;
+      for (Method m : methods) {
+        RequestMapping anno = m.getAnnotation(RequestMapping.class);
+        if (anno != null) {
+          requestHandler = m;
+          break;
+        }
+      }
+
+      String viewUrl = (String) requestHandler.invoke(pageController, request, response);
 
       if (viewUrl.startsWith("redirect:")) { // 예) redirect:list
         response.sendRedirect(viewUrl.substring(9)); // 예) list => 9번째 문자부터 끝까지 추출
