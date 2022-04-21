@@ -3,6 +3,7 @@ package com.eomcs.mylist.conf;
 import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -19,10 +20,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 // => 스프링 IoC 컨테이너는 패키지를 뒤져서 @Component, @Controller, @RestController, @Service 등이 
 //    붙은 클래스를 찾아내어 객체를 생성하고 보관한다.
 @ComponentScan("com.eomcs.mylist") 
-
+//
 // 2) DB관련 설정을 할 때 DBMS 정보를 담은 properties 파일을 로딩한다.
 @PropertySource("classpath:com/eomcs/mylist/conf/jdbc.properties")
-
+//
+// 3) DAO 인터페이스 구현체를 자동 생성하도록 명령한다.
+@MapperScan("com.eomcs.mylist.dao")
 public class AppConfig {
 
   @Bean // Spring IoC 컨테이너에게 다음 메서드를 실행한 후 리턴된 객체를 보관하라는 명령이다.
@@ -45,7 +48,7 @@ public class AppConfig {
     return new DataSourceTransactionManager(dataSource);
   }
 
-  @Bean
+  @Bean // Spring IoC 컨테이너에게 다음 메서드를 실행한 후 리턴된 객체를 보관하라는 명령이다.
   public SqlSessionFactory sqlSessionFactory(
       DataSource dataSource, // DB 커넥션풀
       ApplicationContext appCtx // Spring IoC 컨테이너
